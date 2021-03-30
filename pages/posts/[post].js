@@ -95,21 +95,13 @@ const Post = ({ post }) => {
   );
 };
 
-export async function getStaticProps({ params }) {
+export async function getServerSideProps({ params }) {
   const post = posts.find((post) => post.id == params.post);
 
   return {
     props: {
       post,
     },
-  };
-}
-
-export async function getStaticPaths() {
-  const paths = posts.map((post) => `/posts/${post.id}`);
-  return {
-    paths: paths,
-    fallback: true,
   };
 }
 
