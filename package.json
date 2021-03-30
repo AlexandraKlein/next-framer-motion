@@ -17,13 +17,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://kheruc@github.com/kheruc/rt-next-motion.git"
+    "url": "git+https://alexandraklein@github.com/alexandraklein/next-framer-motion.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/kheruc/rt-next-motion/issues"
-  },
-  "homepage": "https://github.com/kheruc/rt-next-motion#readme"
+  "homepage": "https://github.com/alexandraklein/next-framer-motion"
 }
