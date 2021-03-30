@@ -87,6 +87,12 @@ const Post = ({ post }) => {
         .post p {
           margin: 40px 0;
         }
+
+        .post img {
+          width: 100%;
+          max-height: calc(300px + 25vw);
+          object-fit: cover;
+        }
       `}</style>
     </div>
   );

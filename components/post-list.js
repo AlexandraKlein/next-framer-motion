@@ -43,7 +43,7 @@ const PostList = ({ posts }) => (
                     whileHover="hover"
                     variants={{ hover: { scale: 0.96 } }}
                   >
-                    <img src={`/images/${post.id}.jpg`} />
+                    <img className="img" src={`/images/${post.id}.jpg`} />
                   </motion.div>
                   <div>{post.title}</div>
                 </a>
@@ -55,17 +55,29 @@ const PostList = ({ posts }) => (
       })}
 
       <style jsx>{`
-        .post {
-          width: 100%;
-        }
         .posts {
           display: grid;
           grid-template-columns: 1fr;
           grid-gap: 10px 20px;
         }
+
+        .post {
+          width: 100%;
+        }
+
+        .img {
+          width: 100%;
+          max-height: calc(200px + 40vw);
+          object-fit: cover;
+        }
+
         @media (min-width: 768px) {
           .posts {
             grid-template-columns: 1fr 1fr;
+          }
+
+          .img {
+            max-height: calc(200px + 10vw);
           }
         }
       `}</style>
