@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import posts from "../../data/posts";
 import { motion } from "framer-motion";
 import PostInfo from "../../components/post-info";
@@ -69,15 +68,7 @@ const Post = ({ post }) => {
     <div className="container post">
       <motion.div initial="exit" animate="enter" exit="exit">
         <motion.div variants={imageVariants}>
-          <Image
-            src={`/images/${post.id}.jpg`}
-            width={800}
-            height={575}
-            layout="responsive"
-            objectFit="cover"
-            sizes={`(min-width: 768px) 75vw, 90vw`}
-            priority
-          />
+          <img src={`/images/${post.id}.jpg`} />
         </motion.div>
 
         <motion.div variants={textVariants}>

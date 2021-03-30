@@ -1,5 +1,4 @@
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import PostInfo from "./post-info";
 
@@ -44,14 +43,7 @@ const PostList = ({ posts }) => (
                     whileHover="hover"
                     variants={{ hover: { scale: 0.96 } }}
                   >
-                    <Image
-                      src={`/images/${post.id}.jpg`}
-                      width={800}
-                      height={575}
-                      sizes={`(min-width: 768px) 33vw, 90vw`}
-                      layout="responsive"
-                      objectFit="cover"
-                    />
+                    <img src={`/images/${post.id}.jpg`} />
                   </motion.div>
                   <div>{post.title}</div>
                 </a>

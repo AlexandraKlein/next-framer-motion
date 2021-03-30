@@ -1,15 +1,9 @@
-import Image from "next/image";
-
 const PostInfo = ({ post }) => {
   return (
     <div className="post-info">
       <div className="author">
         <div className="avatar">
-          <Image
-            width={35}
-            height={35}
-            src={`/avatars/${post.author.avatar}`}
-          />
+          <img src={`/avatars/${post.author.avatar}`} />
         </div>{" "}
         <strong>{post.author.name}</strong> ({post.author.age})
       </div>
