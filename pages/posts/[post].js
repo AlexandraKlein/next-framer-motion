@@ -75,7 +75,7 @@ const Post = ({ post }) => {
             height={575}
             layout="responsive"
             objectFit="cover"
-            sizes="90vw"
+            sizes={`(min-width: 768px) 75vw, 90vw`}
             priority
           />
         </motion.div>
