@@ -61,6 +61,10 @@ const Post = ({ post }) => {
     window.scrollTo(0, 0);
   }, []);
 
+  if (!post) {
+    return null;
+  }
+
   return (
     <div className="container post">
       <motion.div initial="exit" animate="enter" exit="exit">
@@ -71,6 +75,8 @@ const Post = ({ post }) => {
             height={575}
             layout="responsive"
             objectFit="cover"
+            sizes="90vw"
+            priority
           />
         </motion.div>
 
@@ -95,13 +101,22 @@ const Post = ({ post }) => {
   );
 };
 
-export async function getServerSideProps({ params }) {
+export async function getStaticProps({ params }) {
   const post = posts.find((post) => post.id == params.post);
 
   return {
     props: {
       post,
     },
+  };
+}
+
+export async function getStaticPaths() {
+  const paths = posts.map(({ id }) => `/posts/${id}`) ?? [];
+
+  return {
+    paths,
+    fallback: true,
   };
 }
 
