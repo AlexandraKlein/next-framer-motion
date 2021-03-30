@@ -48,7 +48,7 @@ const PostList = ({ posts }) => (
                       src={`/images/${post.id}.jpg`}
                       width={800}
                       height={575}
-                      sizes={`(min-width: 768px) 100vw, 50vw`}
+                      sizes={`(min-width: 768px) 33vw, 90vw`}
                       layout="responsive"
                       objectFit="cover"
                     />
