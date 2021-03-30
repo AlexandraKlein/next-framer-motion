@@ -45,7 +45,7 @@ const PostList = ({ posts }) => (
                     variants={{ hover: { scale: 0.96 } }}
                   >
                     <Image
-                      src={`/static/images/${post.id}.jpg`}
+                      src={`/images/${post.id}.jpg`}
                       width={800}
                       height={575}
                       layout="responsive"

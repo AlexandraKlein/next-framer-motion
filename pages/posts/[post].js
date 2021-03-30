@@ -66,7 +66,7 @@ const Post = ({ post }) => {
       <motion.div initial="exit" animate="enter" exit="exit">
         <motion.div variants={imageVariants}>
           <Image
-            src={`/static/images/${post.id}.jpg`}
+            src={`/images/${post.id}.jpg`}
             width={800}
             height={575}
             layout="responsive"
