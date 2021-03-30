@@ -70,6 +70,7 @@ const Post = ({ post }) => {
             width={800}
             height={575}
             layout="responsive"
+            objectFit="cover"
           />
         </motion.div>
 

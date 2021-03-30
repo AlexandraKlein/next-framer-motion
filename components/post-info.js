@@ -1,13 +1,16 @@
+import Image from "next/image";
+
 const PostInfo = ({ post }) => {
   return (
     <div className="post-info">
       <div className="author">
-        <img
-          width={35}
-          height={35}
-          className="avatar"
-          src={`/avatars/${post.author.avatar}`}
-        />{" "}
+        <div className="avatar">
+          <Image
+            width={35}
+            height={35}
+            src={`/avatars/${post.author.avatar}`}
+          />
+        </div>{" "}
         <strong>{post.author.name}</strong> ({post.author.age})
       </div>
       <time>{post.date}</time>
@@ -20,14 +23,15 @@ const PostInfo = ({ post }) => {
           margin: 10px 0;
         }
         .author {
+          display: flex;
           color: #555;
         }
         .avatar {
-          float: left;
           width: 25px;
           height: 25px;
           margin: 0 10px 10px 0;
           border-radius: 50%;
+          overflow: hidden;
         }
       `}</style>
     </div>
