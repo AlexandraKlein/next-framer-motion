@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import Link from "next/link";
-import posts from "../../data/posts";
 import { motion } from "framer-motion";
+import styled from "@emotion/styled";
+import posts from "../../data/posts";
 import PostInfo from "../../components/post-info";
 
 const easing = [0.175, 0.85, 0.42, 0.96];
@@ -68,12 +69,12 @@ const Post = ({ post }) => {
     <div className="container post">
       <motion.div initial="exit" animate="enter" exit="exit">
         <motion.div variants={imageVariants}>
-          <img src={`/images/${post.id}.jpg`} />
+          <CoverImage src={`/images/${post.id}.jpg`} />
         </motion.div>
 
         <motion.div variants={textVariants}>
           <PostInfo post={post} />
-          <p>{post.text}</p>
+          <Paragraph>{post.text}</Paragraph>
         </motion.div>
 
         <motion.div variants={backVariants}>
@@ -82,21 +83,19 @@ const Post = ({ post }) => {
           </Link>
         </motion.div>
       </motion.div>
-
-      <style jsx>{`
-        .post p {
-          margin: 40px 0;
-        }
-
-        .post img {
-          width: 100%;
-          max-height: calc(300px + 25vw);
-          object-fit: cover;
-        }
-      `}</style>
     </div>
   );
 };
+
+const Paragraph = styled.p`
+  margin: 0px 0;
+`;
+
+const CoverImage = styled.img`
+  width: 100%;
+  max-height: calc(300px + 25vw);
+  object-fit: cover;
+`;
 
 export async function getStaticProps({ params }) {
   const post = posts.find((post) => post.id == params.post);

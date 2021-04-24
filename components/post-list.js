@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
+import styled from "@emotion/styled";
 import PostInfo from "./post-info";
 
 const postVariants = {
@@ -28,10 +29,10 @@ const PostList = ({ posts }) => (
       enter: { transition: { staggerChildren: 0.1 } },
     }}
   >
-    <div className="posts">
+    <PostsWrapper>
       {posts.map((post) => {
         return (
-          <div key={post.id} className="post">
+          <Post key={post.id}>
             <motion.div variants={postVariants}>
               <Link
                 scroll={false}
@@ -50,39 +51,35 @@ const PostList = ({ posts }) => (
               </Link>
               <PostInfo post={post} />
             </motion.div>
-          </div>
+          </Post>
         );
       })}
-
-      <style jsx>{`
-        .posts {
-          display: grid;
-          grid-template-columns: 1fr;
-          grid-gap: 10px 20px;
-        }
-
-        .post {
-          width: 100%;
-        }
-
-        .img {
-          width: 100%;
-          max-height: calc(200px + 40vw);
-          object-fit: cover;
-        }
-
-        @media (min-width: 768px) {
-          .posts {
-            grid-template-columns: 1fr 1fr;
-          }
-
-          .img {
-            max-height: calc(200px + 10vw);
-          }
-        }
-      `}</style>
-    </div>
+    </PostsWrapper>
   </motion.div>
 );
+
+const PostsWrapper = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 10px 20px;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
+`;
+
+const Post = styled.div`
+  width: 100%;
+
+  img {
+    width: 100%;
+    max-height: calc(200px + 40vw);
+    object-fit: cover;
+
+    @media (min-width: 768px) {
+      max-height: calc(200px + 10vw);
+    }
+  }
+`;
 
 export default PostList;

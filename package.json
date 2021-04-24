@@ -4,6 +4,8 @@
   "description": "Next.js + Framer Motion",
   "main": "index.js",
   "dependencies": {
+    "@emotion/react": "^11.1.5",
+    "@emotion/styled": "^11.3.0",
     "framer-motion": "^4.0.3",
     "next": "^10.1.2",
     "react": "^17.0.2",
