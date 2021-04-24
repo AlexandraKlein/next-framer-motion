@@ -37,12 +37,12 @@ export const GlobalStyles = ({ theme }) => {
         }
 
         a {
-          color: #1b789e;
+          color: ${isLightTheme ? "#1b789e" : "#add8e6"};
           text-decoration: none;
         }
 
         a:hover {
-          color: #166281;
+          color: ${isLightTheme ? "#166281" : "#99cfe0"};
         }
 
         img {

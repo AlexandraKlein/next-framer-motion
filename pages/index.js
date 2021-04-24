@@ -1,5 +1,5 @@
-import posts from '../data/posts';
-import PostList from '../components/post-list';
+import posts from "../data/posts";
+import PostList from "../components/post-list";
 
 const Homepage = () => (
   <div className="container">

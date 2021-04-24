@@ -66,7 +66,7 @@ const Post = ({ post }) => {
   }
 
   return (
-    <div className="container post">
+    <div className="container">
       <motion.div initial="exit" animate="enter" exit="exit">
         <motion.div variants={imageVariants}>
           <CoverImage src={`/images/${post.id}.jpg`} />
