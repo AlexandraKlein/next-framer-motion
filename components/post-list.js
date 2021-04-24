@@ -72,12 +72,13 @@ const Post = styled.div`
   width: 100%;
 
   img {
+    display: block;
     width: 100%;
-    max-height: calc(200px + 40vw);
+    height: calc(200px + 40vw);
     object-fit: cover;
 
     @media (min-width: 768px) {
-      max-height: calc(200px + 10vw);
+      height: calc(200px + 10vw);
     }
   }
 `;
