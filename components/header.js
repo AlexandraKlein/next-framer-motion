@@ -18,7 +18,7 @@ const Header = () => {
         </Link>
       </Logo>
       <ThemeButton theme={theme} onClick={toggleTheme}>
-        Set {theme === "light" ? "Dark" : "Light"} Theme
+        {theme === "light" ? "dark" : "light"}
       </ThemeButton>
     </HeaderWrapper>
   );
@@ -27,6 +27,7 @@ const Header = () => {
 const HeaderWrapper = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
   padding: 20px;
   background: ${({ theme }) => (theme === "light" ? "#fafafa" : "#000")};
   transition: all 0.25s ease;
@@ -47,21 +48,44 @@ const Logo = styled.div`
   }
 `;
 
+const buttonHeight = 40;
+
 const ThemeButton = styled.button`
   cursor: pointer;
+  position: relative;
+  height: ${buttonHeight}px;
+  width: ${buttonHeight * 2.75}px;
+  border-radius: ${buttonHeight}px;
+  line-height: ${buttonHeight}px;
   appearance: none;
   border: none;
   outline: none;
-  padding: 20px;
+  padding: 0 20px;
   text-transform: uppercase;
-  border-width: 2px;
-  border-style: solid;
-  border-color: ${({ theme }) =>
-    theme === "light" ? lightTheme.text : darkTheme.text};
+  text-align: ${({ theme }) => (theme === "light" ? "right" : "left")};
   color: ${({ theme }) =>
     theme === "light" ? lightTheme.text : darkTheme.text};
   background: ${({ theme }) =>
     theme === "light" ? lightTheme.background : darkTheme.background};
+  border-width: 2px;
+  border-style: solid;
+  border-color: ${({ theme }) =>
+    theme === "light" ? lightTheme.text : darkTheme.text};
+  box-sizing: border-box;
+
+  &:before {
+    content: "";
+    position: absolute;
+    height: 100%;
+    width: ${buttonHeight}px;
+    border-radius: ${buttonHeight}px;
+    top: 0;
+    left: ${({ theme }) =>
+      theme === "light" ? 0 : `calc(100% - ${buttonHeight}px)`};
+    background-color: ${({ theme }) =>
+      theme === "light" ? lightTheme.text : darkTheme.text};
+    transition: all 0.25s ease;
+  }
 `;
 
 export default Header;
