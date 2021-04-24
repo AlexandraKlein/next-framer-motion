@@ -1,55 +1,18 @@
+import React, { useContext } from "react";
 import Header from "./header";
+import { ThemeContext } from "../contexts/Theme";
+import { GlobalStyles } from "../themeConfig";
 
-const Layout = ({ children }) => (
-  <div className="page-wrapper">
-    <Header />
+const Layout = ({ children }) => {
+  const [theme] = useContext(ThemeContext);
 
-    <div className="content-wrapper">{children}</div>
-
-    <style jsx global>{`
-      *,
-      *::before,
-      *::after {
-        box-sizing: border-box;
-      }
-
-      body {
-        margin: 0;
-        font-size: 20px;
-        line-height: 1.7;
-        font-weight: 400;
-        background: #fff;
-        color: #454545;
-        font-family: -apple-system, BlinkMacSystemFont, Roboto, "Segoe UI",
-          "Fira Sans", Avenir, "Helvetica Neue", "Lucida Grande", sans-serif;
-        text-rendering: optimizeLegibility;
-      }
-
-      a {
-        color: #1b789e;
-        text-decoration: none;
-      }
-
-      a:hover {
-        color: #166281;
-      }
-
-      img {
-        max-width: 100%;
-      }
-
-      .content-wrapper {
-        text-align: center;
-        padding: 40px 20px;
-      }
-
-      .container {
-        max-width: 1024px;
-        overflow: hidden;
-        margin: 0 auto;
-      }
-    `}</style>
-  </div>
-);
+  return (
+    <div className="page-wrapper">
+      <GlobalStyles theme={theme} />
+      <Header />
+      <div className="content-wrapper">{children}</div>
+    </div>
+  );
+};
 
 export default Layout;

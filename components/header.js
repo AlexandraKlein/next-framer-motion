@@ -2,23 +2,21 @@ import React, { useContext } from "react";
 import Link from "next/link";
 import styled from "@emotion/styled";
 import { ThemeContext } from "../contexts/Theme";
-import { lightTheme, darkTheme, GlobalStyles } from "../themeConfig";
+import { lightTheme, darkTheme } from "../themeConfig";
 
 const Header = () => {
   const [theme, setTheme] = useContext(ThemeContext);
-
   const toggleTheme = () => setTheme(theme === "light" ? "dark" : "light");
 
   return (
     <HeaderWrapper theme={theme}>
-      <GlobalStyles theme={theme} />
       <Logo theme={theme}>
         <Link href="/">
           <a>Next.js &amp; Framer Motion</a>
         </Link>
       </Logo>
       <ThemeButton theme={theme} onClick={toggleTheme}>
-        {theme === "light" ? "dark" : "light"}
+        <span>{theme === "light" ? "dark" : "light"}</span>
       </ThemeButton>
     </HeaderWrapper>
   );
@@ -60,9 +58,8 @@ const ThemeButton = styled.button`
   appearance: none;
   border: none;
   outline: none;
-  padding: 0 20px;
   text-transform: uppercase;
-  text-align: ${({ theme }) => (theme === "light" ? "right" : "left")};
+  text-align: center;
   color: ${({ theme }) =>
     theme === "light" ? lightTheme.text : darkTheme.text};
   background: ${({ theme }) =>
@@ -73,15 +70,24 @@ const ThemeButton = styled.button`
     theme === "light" ? lightTheme.text : darkTheme.text};
   box-sizing: border-box;
 
+  span {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: ${({ theme }) =>
+      theme === "light" ? `calc(100% - ${buttonHeight + 10}px)` : "15px"};
+    transition: left 0.25s ease;
+  }
+
   &:before {
     content: "";
     position: absolute;
-    height: 100%;
-    width: ${buttonHeight}px;
-    border-radius: ${buttonHeight}px;
     top: 0;
     left: ${({ theme }) =>
       theme === "light" ? 0 : `calc(100% - ${buttonHeight}px)`};
+    height: 100%;
+    width: ${buttonHeight}px;
+    border-radius: ${buttonHeight}px;
     background-color: ${({ theme }) =>
       theme === "light" ? lightTheme.text : darkTheme.text};
     transition: all 0.25s ease;
