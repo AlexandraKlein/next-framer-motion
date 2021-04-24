@@ -47,6 +47,7 @@ const Logo = styled.div`
 `;
 
 const buttonHeight = 40;
+const borderWidth = 2;
 
 const ThemeButton = styled.button`
   cursor: pointer;
@@ -64,11 +65,10 @@ const ThemeButton = styled.button`
     theme === "light" ? lightTheme.text : darkTheme.text};
   background: ${({ theme }) =>
     theme === "light" ? lightTheme.background : darkTheme.background};
-  border-width: 2px;
+  border-width: ${borderWidth}px;
   border-style: solid;
   border-color: ${({ theme }) =>
     theme === "light" ? lightTheme.text : darkTheme.text};
-  box-sizing: border-box;
 
   span {
     position: absolute;
@@ -84,7 +84,7 @@ const ThemeButton = styled.button`
     position: absolute;
     top: 0;
     left: ${({ theme }) =>
-      theme === "light" ? 0 : `calc(100% - ${buttonHeight}px)`};
+      theme === "light" ? 0 : `calc(100% - ${buttonHeight - borderWidth}px)`};
     height: 100%;
     width: ${buttonHeight}px;
     border-radius: ${buttonHeight}px;
