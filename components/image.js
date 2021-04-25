@@ -18,7 +18,6 @@ const Image = (props) => {
     <ImageContainer>
       {isLoading && <Loading theme={theme} />}
       <NextImage onLoad={handleLoad} {...props} />
-      <Loading theme={theme} />
     </ImageContainer>
   );
 };
