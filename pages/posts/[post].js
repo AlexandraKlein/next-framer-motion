@@ -26,7 +26,7 @@ const imageVariants = {
 
 const textVariants = {
   exit: {
-    y: 100,
+    y: 200,
     opacity: 0,
     transition: { duration: 0.5, ease: easing },
   },
@@ -39,7 +39,7 @@ const textVariants = {
 
 const backVariants = {
   exit: {
-    x: 100,
+    x: 50,
     opacity: 0,
     transition: {
       duration: 0.5,
@@ -86,7 +86,7 @@ const Post = ({ post }) => {
 
         <motion.div variants={backVariants}>
           <Link href="/">
-            <a>Back to list</a>
+            <Anchor>Back to list</Anchor>
           </Link>
         </motion.div>
       </motion.div>
@@ -95,13 +95,19 @@ const Post = ({ post }) => {
 };
 
 const Paragraph = styled.p`
-  margin: 0px 0;
+  margin: 0;
 `;
 
 const ImageContainer = styled.div`
   position: relative;
   width: 100%;
   height: calc(300px + 25vw);
+`;
+
+const Anchor = styled.a`
+  cursor: pointer;
+  display: inline-block;
+  margin: 30px 0;
 `;
 
 export async function getStaticProps({ params }) {

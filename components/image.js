@@ -7,12 +7,11 @@ import { darkTheme, lightTheme } from "../themeConfig";
 
 const Image = (props) => {
   const [theme] = useContext(ThemeContext);
-  const [isLoading, setIsLoading] = useState(true);
-
-  const handleLoad = (e) => {
-    if (e.target.srcset) {
-      setIsLoading(false);
-    }
+  const [isLoading, setIsLoading] = useState(
+    !props.loading === "eager" || !props.priority
+  );
+  const handleLoad = () => {
+    setIsLoading(false);
   };
 
   return (
