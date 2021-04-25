@@ -20,49 +20,49 @@ const postVariants = {
   },
 };
 
-const PostList = ({ posts }) => (
-  <motion.div
-    initial="initial"
-    animate="enter"
-    exit="exit"
-    variants={{
-      exit: { transition: { staggerChildren: 0.1 } },
-      enter: { transition: { staggerChildren: 0.1 } },
-    }}
-  >
-    <PostsWrapper>
-      {posts.map((post) => {
-        return (
-          <Post key={post.id}>
-            <motion.div variants={postVariants}>
-              <Link
-                scroll={false}
-                href="/posts/[post]"
-                as={`/posts/${post.id}`}
-              >
-                <a>
-                  <motion.div
-                    whileHover="hover"
-                    variants={{ hover: { scale: 0.96 } }}
-                  >
-                    <PostImage>
-                      <Image
-                        src={`/images/${post.id}.jpg`}
-                        layout="fill"
-                        objectFit="cover"
-                      />
-                    </PostImage>
-                  </motion.div>
-                </a>
-              </Link>
-              <PostInfo post={post} />
-            </motion.div>
-          </Post>
-        );
-      })}
-    </PostsWrapper>
-  </motion.div>
-);
+const PostList = ({ posts }) => {
+  return (
+    <motion.div
+      initial="initial"
+      animate="enter"
+      exit="exit"
+      variants={{
+        exit: { transition: { staggerChildren: 0.1 } },
+        enter: { transition: { staggerChildren: 0.1 } },
+      }}
+    >
+      <PostsWrapper>
+        {posts.map((post, index) => {
+          const { title, image, slug } = post;
+          return (
+            <Post key={index}>
+              <motion.div variants={postVariants}>
+                <Link scroll={false} href="/posts/[post]" as={`/posts/${slug}`}>
+                  <a>
+                    <motion.div
+                      whileHover="hover"
+                      variants={{ hover: { scale: 0.96 } }}
+                    >
+                      <PostImage>
+                        <Image
+                          src={image.url}
+                          layout="fill"
+                          objectFit="cover"
+                        />
+                      </PostImage>
+                    </motion.div>
+                  </a>
+                </Link>
+                <Title>{title}</Title>
+                <PostInfo post={post} />
+              </motion.div>
+            </Post>
+          );
+        })}
+      </PostsWrapper>
+    </motion.div>
+  );
+};
 
 const PostsWrapper = styled.div`
   display: grid;
@@ -76,6 +76,10 @@ const PostsWrapper = styled.div`
 
 const Post = styled.div`
   width: 100%;
+`;
+
+const Title = styled.h3`
+  text-align: left;
 `;
 
 const PostImage = styled.div`

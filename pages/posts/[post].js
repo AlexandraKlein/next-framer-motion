@@ -2,8 +2,10 @@ import { useEffect } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import styled from "@emotion/styled";
+import { getPostPage, getAllPostsWithSlug } from "../../lib/api";
 import posts from "../../data/posts";
 import PostInfo from "../../components/post-info";
+import RichText from "../../components/rich-text";
 import Image from "../../components/image";
 
 const easing = [0.175, 0.85, 0.42, 0.96];
@@ -66,22 +68,21 @@ const Post = ({ post }) => {
     return null;
   }
 
+  const { title, image, content } = post;
+
   return (
     <div className="container">
       <motion.div initial="exit" animate="enter" exit="exit">
         <motion.div variants={imageVariants}>
           <ImageContainer>
-            <Image
-              src={`/images/${post.id}.jpg`}
-              layout="fill"
-              objectFit="cover"
-            />
+            <Image src={image.url} layout="fill" objectFit="cover" />
           </ImageContainer>
         </motion.div>
 
         <motion.div variants={textVariants}>
           <PostInfo post={post} />
-          <Paragraph>{post.text}</Paragraph>
+          <Title>{title}</Title>
+          <RichText text={content.json} />
         </motion.div>
 
         <motion.div variants={backVariants}>
@@ -94,9 +95,7 @@ const Post = ({ post }) => {
   );
 };
 
-const Paragraph = styled.p`
-  margin: 0;
-`;
+const Title = styled.h1``;
 
 const ImageContainer = styled.div`
   position: relative;
@@ -111,7 +110,7 @@ const Anchor = styled.a`
 `;
 
 export async function getStaticProps({ params }) {
-  const post = posts.find((post) => post.id == params.post);
+  const post = await getPostPage(params.post);
 
   return {
     props: {
@@ -121,10 +120,9 @@ export async function getStaticProps({ params }) {
 }
 
 export async function getStaticPaths() {
-  const paths = posts.map(({ id }) => `/posts/${id}`) ?? [];
-
+  const allPosts = await getAllPostsWithSlug();
   return {
-    paths,
+    paths: allPosts?.map(({ slug }) => `/posts/${slug}`) ?? [],
     fallback: true,
   };
 }

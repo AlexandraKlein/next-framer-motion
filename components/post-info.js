@@ -1,15 +1,21 @@
 import styled from "@emotion/styled";
+import Image from "./image";
 
 const PostInfo = ({ post }) => {
   return (
     <InfoContainer>
       <Author>
         <Avatar>
-          <img src={`/avatars/${post.author.avatar}`} />
+          <Image
+            src={post.author.avatar.url}
+            width={post.author.avatar.width}
+            height={post.author.avatar.height}
+            layout="responsive"
+          />
         </Avatar>{" "}
-        <strong>{post.author.name}</strong> ({post.author.age})
+        <strong>{post.author.name}</strong>
       </Author>
-      <time>{post.date}</time>
+      <time>{new Date(post.sys.firstPublishedAt).toDateString()}</time>
     </InfoContainer>
   );
 };
