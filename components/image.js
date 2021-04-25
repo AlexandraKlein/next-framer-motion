@@ -10,12 +10,13 @@ const Image = (props) => {
   const [isLoading, setIsLoading] = useState(
     !props.loading === "eager" || !props.priority
   );
+
   const handleLoad = () => {
     setIsLoading(false);
   };
 
   return (
-    <ImageContainer theme={theme} isLoading={isLoading}>
+    <ImageContainer isLoading={isLoading} theme={theme} {...props}>
       {isLoading && <Loading theme={theme} />}
       <NextImage onLoad={handleLoad} {...props} />
     </ImageContainer>
@@ -26,7 +27,7 @@ export default Image;
 
 const ImageContainer = styled.div`
   position: relative;
-  display: flex;
+  display: ${(props) => (props.layout === "fill" ? "flex" : "block")};
   width: 100%;
   height: 100%;
   background-color: ${({ theme }) =>
