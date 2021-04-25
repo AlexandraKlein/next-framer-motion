@@ -109,8 +109,9 @@ const Anchor = styled.a`
   margin: 30px 0;
 `;
 
-export async function getStaticProps({ params }) {
-  const post = await getPostPage(params.post);
+export async function getStaticProps({ params, preview = false }) {
+  console.log({ preview });
+  const post = await getPostPage(params.post, preview);
 
   return {
     props: {

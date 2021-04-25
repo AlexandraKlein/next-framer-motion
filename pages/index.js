@@ -1,4 +1,3 @@
-import posts from "../data/posts";
 import PostList from "../components/post-list";
 import { getAllPostsForHome } from "../lib/api";
 
