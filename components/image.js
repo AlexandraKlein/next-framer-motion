@@ -5,6 +5,16 @@ import { css, keyframes } from "@emotion/react";
 import { ThemeContext } from "../contexts/Theme";
 import { darkTheme, lightTheme } from "../themeConfig";
 
+const customLoader = ({ src, quality, width }) => {
+  const params = [`w=${width}`];
+
+  if (quality) {
+    params.push(`q=${quality}`);
+  }
+
+  return `${src}?${params.join("&")}`;
+};
+
 const Image = (props) => {
   const [theme] = useContext(ThemeContext);
   const [isLoading, setIsLoading] = useState(
@@ -18,7 +28,7 @@ const Image = (props) => {
   return (
     <ImageContainer isLoading={isLoading} theme={theme} {...props}>
       {isLoading && <Loading theme={theme} />}
-      <NextImage onLoad={handleLoad} {...props} />
+      <NextImage loader={customLoader} onLoad={handleLoad} {...props} />
     </ImageContainer>
   );
 };
