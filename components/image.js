@@ -8,10 +8,8 @@ const Image = (props) => {
   const [theme] = useContext(ThemeContext);
   const [isLoading, setIsLoading] = useState(true);
 
-  const handleLoad = (e) => {
-    if (e.target.srcset) {
-      setIsLoading(false);
-    }
+  const handleLoad = () => {
+    setIsLoading(false);
   };
 
   return (
