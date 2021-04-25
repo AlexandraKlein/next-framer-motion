@@ -47,8 +47,8 @@ const Loading = styled.div`
       width: 150px;
       animation: ${load} 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
       background: ${theme === "light"
-        ? "linear-gradient(to right, transparent 0%, #e8e8e8 50%, transparent 100%)"
-        : "linear-gradient(to right, transparent 0%, #404040 50%, transparent 100%)"};
+        ? "linear-gradient(to right, rgba(232, 232, 232, 0) 0%, rgba(232, 232, 232, 1) 50%, rgba(232, 232, 232, 0) 100%)"
+        : "linear-gradient(to right, rgba(64, 64, 64, 0) 0%, rgba(64, 64, 64, 1) 50%, rgba(64, 64, 64, 0) 100%)"};
     }
   `}
 `;
