@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import styled from "@emotion/styled";
 import posts from "../../data/posts";
@@ -69,7 +70,13 @@ const Post = ({ post }) => {
     <div className="container">
       <motion.div initial="exit" animate="enter" exit="exit">
         <motion.div variants={imageVariants}>
-          <CoverImage src={`/images/${post.id}.jpg`} />
+          <ImageContainer>
+            <Image
+              src={`/images/${post.id}.jpg`}
+              layout="fill"
+              objectFit="cover"
+            />
+          </ImageContainer>
         </motion.div>
 
         <motion.div variants={textVariants}>
@@ -91,10 +98,10 @@ const Paragraph = styled.p`
   margin: 0px 0;
 `;
 
-const CoverImage = styled.img`
+const ImageContainer = styled.div`
+  position: relative;
   width: 100%;
-  max-height: calc(300px + 25vw);
-  object-fit: cover;
+  height: calc(300px + 25vw);
 `;
 
 export async function getStaticProps({ params }) {

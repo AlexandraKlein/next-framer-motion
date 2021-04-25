@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import styled from "@emotion/styled";
 import PostInfo from "./post-info";
@@ -44,9 +45,14 @@ const PostList = ({ posts }) => (
                     whileHover="hover"
                     variants={{ hover: { scale: 0.96 } }}
                   >
-                    <img className="img" src={`/images/${post.id}.jpg`} />
+                    <PostImage>
+                      <Image
+                        src={`/images/${post.id}.jpg`}
+                        layout="fill"
+                        objectFit="cover"
+                      />
+                    </PostImage>
                   </motion.div>
-                  <div>{post.title}</div>
                 </a>
               </Link>
               <PostInfo post={post} />
@@ -70,16 +76,15 @@ const PostsWrapper = styled.div`
 
 const Post = styled.div`
   width: 100%;
+`;
 
-  img {
-    display: block;
-    width: 100%;
-    height: calc(200px + 40vw);
-    object-fit: cover;
+const PostImage = styled.div`
+  position: relative;
+  width: 100%;
+  height: calc(200px + 20vw);
 
-    @media (min-width: 768px) {
-      height: calc(200px + 10vw);
-    }
+  @media (min-width: 768px) {
+    height: calc(200px + 10vw);
   }
 `;
 
