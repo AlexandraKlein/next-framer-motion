@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import styled from "@emotion/styled";
 import posts from "../../data/posts";
 import PostInfo from "../../components/post-info";
+import Image from "../../components/image";
 
 const easing = [0.175, 0.85, 0.42, 0.96];
 

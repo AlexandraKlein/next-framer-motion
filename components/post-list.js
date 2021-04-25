@@ -1,8 +1,8 @@
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import styled from "@emotion/styled";
 import PostInfo from "./post-info";
+import Image from "./image";
 
 const postVariants = {
   initial: { scale: 0.9, y: 30, opacity: 0 },
