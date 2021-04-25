@@ -8,14 +8,17 @@ const Image = (props) => {
   const [theme] = useContext(ThemeContext);
   const [isLoading, setIsLoading] = useState(true);
 
-  const handleLoad = () => {
-    setIsLoading(false);
+  const handleLoad = (e) => {
+    if (e.target.srcset) {
+      setIsLoading(false);
+    }
   };
 
   return (
     <ImageContainer>
       {isLoading && <Loading theme={theme} />}
       <NextImage onLoad={handleLoad} {...props} />
+      <Loading theme={theme} />
     </ImageContainer>
   );
 };
