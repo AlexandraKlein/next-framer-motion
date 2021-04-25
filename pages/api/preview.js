@@ -2,7 +2,6 @@ import { getPreviewPostBySlug } from "../../lib/api";
 export default async function preview(req, res) {
   const { secret, slug } = req.query;
 
-  console.log(secret, slug);
   if (secret !== process.env.CONTENTFUL_PREVIEW_SECRET || !slug) {
     return res.status(401).json({ message: "Invalid token" });
   }

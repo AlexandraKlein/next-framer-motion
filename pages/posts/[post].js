@@ -3,7 +3,6 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import styled from "@emotion/styled";
 import { getPostPage, getAllPostsWithSlug } from "../../lib/api";
-import posts from "../../data/posts";
 import PostInfo from "../../components/post-info";
 import RichText from "../../components/rich-text";
 import Image from "../../components/image";
@@ -59,7 +58,7 @@ const backVariants = {
   },
 };
 
-const Post = ({ post }) => {
+const Post = ({ post, preview }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -70,8 +69,12 @@ const Post = ({ post }) => {
 
   const { title, image, content } = post;
 
+  console.log({ preview });
+
   return (
     <div className="container">
+      {preview && <h1>Preview Mode</h1>}
+
       <motion.div initial="exit" animate="enter" exit="exit">
         <motion.div variants={imageVariants}>
           <ImageContainer>
@@ -116,6 +119,7 @@ export async function getStaticProps({ params, preview = false }) {
   return {
     props: {
       post,
+      preview,
     },
   };
 }
