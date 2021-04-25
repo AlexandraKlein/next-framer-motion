@@ -3,6 +3,7 @@ import NextImage from "next/image";
 import styled from "@emotion/styled";
 import { css, keyframes } from "@emotion/react";
 import { ThemeContext } from "../contexts/Theme";
+import { darkTheme, lightTheme } from "../themeConfig";
 
 const Image = (props) => {
   const [theme] = useContext(ThemeContext);
@@ -15,7 +16,7 @@ const Image = (props) => {
   };
 
   return (
-    <ImageContainer>
+    <ImageContainer theme={theme} isLoading={isLoading}>
       {isLoading && <Loading theme={theme} />}
       <NextImage onLoad={handleLoad} {...props} />
     </ImageContainer>
@@ -29,6 +30,14 @@ const ImageContainer = styled.div`
   display: flex;
   width: 100%;
   height: 100%;
+  background-color: ${({ theme }) =>
+    theme === "light"
+      ? `rgba(${lightTheme.base}, .05)`
+      : `rgba(${darkTheme.base}, .05)`};
+  img {
+    opacity: ${({ isLoading }) => (isLoading ? 0 : 1)};
+    transition: 0.25s ease;
+  }
 `;
 
 const Loading = styled.div`
@@ -42,22 +51,26 @@ const Loading = styled.div`
       display: block;
       position: absolute;
       left: -150px;
-      top: 0;
-      height: 100%;
-      width: 150px;
-      animation: ${load} 1s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+      top: -50%;
+      height: 200%;
+      width: 25%;
+      transform: rotate(45deg);
+      animation: ${load} 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
       background: ${theme === "light"
-        ? "linear-gradient(to right, rgba(232, 232, 232, 0) 0%, rgba(232, 232, 232, 1) 50%, rgba(232, 232, 232, 0) 100%)"
-        : "linear-gradient(to right, rgba(64, 64, 64, 0) 0%, rgba(64, 64, 64, 1) 50%, rgba(64, 64, 64, 0) 100%)"};
+        ? loadingLinearGradient("240, 240, 240")
+        : loadingLinearGradient("55, 55, 55")};
     }
   `}
 `;
 
+const loadingLinearGradient = (rgb) =>
+  `linear-gradient(to right, rgba(${rgb}, 0) 0%,rgba(${rgb}, .8) 40%, rgba(${rgb}, 1) 50%, rgba(${rgb}, .8) 60%, rgba(${rgb}, 0) 100%)`;
+
 const load = keyframes`
-    from {
-        left: -150px;
+    0% {
+        left: -75%;
     }
-    to {
-        left: 100%;
+    100% {
+        left: 150%;
     }
 `;

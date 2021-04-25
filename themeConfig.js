@@ -1,17 +1,24 @@
 import { Global, css } from "@emotion/react";
 
 export const lightTheme = {
+  base: "0, 0, 0",
   text: "#363537",
   background: "#f1f1f1",
+  link: "#1b789e",
+  linkHover: "#166281",
 };
 
 export const darkTheme = {
+  base: "255, 255, 255",
   text: "#FAFAFA",
   background: "#373737",
+  link: "#add8e6",
+  linkHover: "#99cfe0",
 };
 
 export const GlobalStyles = ({ theme }) => {
   const isLightTheme = theme === "light";
+
   return (
     <Global
       styles={css`
@@ -37,12 +44,12 @@ export const GlobalStyles = ({ theme }) => {
         }
 
         a {
-          color: ${isLightTheme ? "#1b789e" : "#add8e6"};
+          color: ${isLightTheme ? lightTheme.link : darkTheme.link};
           text-decoration: none;
         }
 
         a:hover {
-          color: ${isLightTheme ? "#166281" : "#99cfe0"};
+          color: ${isLightTheme ? lightTheme.linkHover : darkTheme.linkHover};
         }
 
         img {
