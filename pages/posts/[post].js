@@ -73,12 +73,7 @@ const Post = ({ post, preview }) => {
 
   return (
     <div className="container">
-      {preview && (
-        <div>
-          <h1>Preview Mode</h1>
-          <a href="/api/exit-preview">Click here</a> to exit preview mode.
-        </div>
-      )}
+      {preview && <h1>Preview Mode</h1>}
 
       <motion.div initial="exit" animate="enter" exit="exit">
         <motion.div variants={imageVariants}>
