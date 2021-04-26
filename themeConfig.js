@@ -1,4 +1,5 @@
 import { Global, css } from "@emotion/react";
+import { THEME } from "./contexts/Theme";
 
 export const lightTheme = {
   base: "0, 0, 0",
@@ -17,7 +18,7 @@ export const darkTheme = {
 };
 
 export const GlobalStyles = ({ theme }) => {
-  const isLightTheme = theme === "light";
+  const isLightTheme = theme === THEME.LIGHT;
 
   return (
     <Global

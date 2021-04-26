@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import NextImage from "next/image";
 import styled from "@emotion/styled";
 import { css, keyframes } from "@emotion/react";
-import { ThemeContext } from "../contexts/Theme";
+import { ThemeContext, THEME } from "../contexts/Theme";
 import { darkTheme, lightTheme } from "../themeConfig";
 
 const customLoader = ({ src, quality, width }) => {
@@ -41,7 +41,7 @@ const ImageContainer = styled.div`
   width: 100%;
   height: 100%;
   background-color: ${({ theme }) =>
-    theme === "light"
+    theme === THEME.LIGHT
       ? `rgba(${lightTheme.base}, .05)`
       : `rgba(${darkTheme.base}, .05)`};
   img {
@@ -66,7 +66,7 @@ const Loading = styled.div`
       width: 25%;
       transform: rotate(45deg);
       animation: ${load} 1.5s cubic-bezier(0.4, 0, 0.2, 1) infinite;
-      background: ${theme === "light"
+      background: ${theme === THEME.LIGHT
         ? loadingLinearGradient("240, 240, 240")
         : loadingLinearGradient("55, 55, 55")};
     }

@@ -1,12 +1,11 @@
 import React, { useContext } from "react";
 import Link from "next/link";
 import styled from "@emotion/styled";
-import { ThemeContext } from "../contexts/Theme";
+import { ThemeContext, THEME } from "../contexts/Theme";
 import { lightTheme, darkTheme } from "../themeConfig";
 
 const Header = () => {
-  const [theme, setTheme] = useContext(ThemeContext);
-  const toggleTheme = () => setTheme(theme === "light" ? "dark" : "light");
+  const [theme, toggleTheme] = useContext(ThemeContext);
 
   return (
     <HeaderWrapper theme={theme}>
@@ -16,7 +15,7 @@ const Header = () => {
         </Link>
       </Logo>
       <ThemeButton theme={theme} onClick={toggleTheme}>
-        <span>{theme === "light" ? "dark" : "light"}</span>
+        <span>{theme === THEME.LIGHT ? THEME.DARK : THEME.LIGHT}</span>
       </ThemeButton>
     </HeaderWrapper>
   );
@@ -27,7 +26,7 @@ const HeaderWrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  background: ${({ theme }) => (theme === "light" ? "#fafafa" : "#000")};
+  background: ${({ theme }) => (theme === THEME.LIGHT ? "#fafafa" : "#000")};
   transition: all 0.25s ease;
 `;
 
@@ -36,12 +35,12 @@ const Logo = styled.div`
 
   a {
     font-weight: 900;
-    color: ${({ theme }) => (theme === "light" ? "#111" : "inherit")};
+    color: ${({ theme }) => (theme === THEME.LIGHT ? "#111" : "inherit")};
 
     &:hover {
       font-weight: 900;
       border-bottom: ${({ theme }) =>
-        theme === "light" ? "2px solid #111" : "2px solid #fff"};
+        theme === THEME.LIGHT ? "2px solid #111" : "2px solid #fff"};
     }
   }
 `;
@@ -62,20 +61,20 @@ const ThemeButton = styled.button`
   text-transform: uppercase;
   text-align: center;
   color: ${({ theme }) =>
-    theme === "light" ? lightTheme.text : darkTheme.text};
+    theme === THEME.LIGHT ? lightTheme.text : darkTheme.text};
   background: ${({ theme }) =>
-    theme === "light" ? lightTheme.background : darkTheme.background};
+    theme === THEME.LIGHT ? lightTheme.background : darkTheme.background};
   border-width: ${borderWidth}px;
   border-style: solid;
   border-color: ${({ theme }) =>
-    theme === "light" ? lightTheme.text : darkTheme.text};
+    theme === THEME.LIGHT ? lightTheme.text : darkTheme.text};
 
   span {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
     left: ${({ theme }) =>
-      theme === "light" ? `calc(100% - ${buttonHeight + 10}px)` : "15px"};
+      theme === THEME.LIGHT ? `calc(100% - ${buttonHeight + 10}px)` : "15px"};
     transition: left 0.25s ease;
   }
 
@@ -84,12 +83,14 @@ const ThemeButton = styled.button`
     position: absolute;
     top: 0;
     left: ${({ theme }) =>
-      theme === "light" ? 0 : `calc(100% - ${buttonHeight - borderWidth}px)`};
+      theme === THEME.LIGHT
+        ? 0
+        : `calc(100% - ${buttonHeight - borderWidth}px)`};
     height: 100%;
     width: ${buttonHeight}px;
     border-radius: ${buttonHeight}px;
     background-color: ${({ theme }) =>
-      theme === "light" ? lightTheme.text : darkTheme.text};
+      theme === THEME.LIGHT ? lightTheme.text : darkTheme.text};
     transition: all 0.25s ease;
   }
 `;
