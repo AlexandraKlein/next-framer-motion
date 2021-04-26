@@ -6,6 +6,7 @@ import { getPostPage, getAllPostsWithSlug } from "../../lib/api";
 import PostInfo from "../../components/post-info";
 import RichText from "../../components/rich-text";
 import Image from "../../components/image";
+import { lightTheme, darkTheme } from "../../themeConfig";
 
 const easing = [0.175, 0.85, 0.42, 0.96];
 
@@ -69,11 +70,16 @@ const Post = ({ post, preview }) => {
 
   const { title, image, content } = post;
 
-  console.log({ preview });
-
   return (
     <div className="container">
-      {preview && <h1>Preview Mode</h1>}
+      {preview && (
+        <PreviewBanner>
+          <h4>Preview Mode</h4>
+          <p>
+            <a href="/api/exit-preview">Click here</a> to exit preview mode.
+          </p>
+        </PreviewBanner>
+      )}
 
       <motion.div initial="exit" animate="enter" exit="exit">
         <motion.div variants={imageVariants}>
@@ -112,8 +118,19 @@ const Anchor = styled.a`
   margin: 30px 0;
 `;
 
+const PreviewBanner = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(${lightTheme.base}, 0.15);
+  padding: 20px;
+  margin-bottom: 20px;
+  > * {
+    margin: 0;
+  }
+`;
+
 export async function getStaticProps({ params, preview = false }) {
-  console.log({ preview });
   const post = await getPostPage(params.post, preview);
 
   return {

@@ -57,7 +57,6 @@ export const GlobalStyles = ({ theme }) => {
         }
 
         .content-wrapper {
-          text-align: center;
           padding: 40px 20px;
         }
 
