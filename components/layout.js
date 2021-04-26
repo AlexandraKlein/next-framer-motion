@@ -1,18 +1,39 @@
 import React, { useContext } from "react";
+import styled from "@emotion/styled";
 import Header from "./header";
 import { ThemeContext } from "../contexts/Theme";
-import { GlobalStyles } from "../themeConfig";
+import { GlobalStyles, lightTheme } from "../themeConfig";
 
-const Layout = ({ children }) => {
+const Layout = ({ children, preview }) => {
   const [theme] = useContext(ThemeContext);
 
   return (
     <div className="page-wrapper">
       <GlobalStyles theme={theme} />
       <Header />
+      {preview && (
+        <PreviewBanner>
+          <h4>Preview Mode</h4>
+          <p>
+            <a href="/api/exit-preview">Click here</a> to exit preview mode.
+          </p>
+        </PreviewBanner>
+      )}
       <div className="content-wrapper">{children}</div>
     </div>
   );
 };
 
 export default Layout;
+
+const PreviewBanner = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(${lightTheme.base}, 0.15);
+  padding: 20px;
+
+  > * {
+    margin: 0;
+  }
+`;

@@ -59,7 +59,7 @@ const backVariants = {
   },
 };
 
-const Post = ({ post, preview }) => {
+const Post = ({ post }) => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
@@ -72,15 +72,6 @@ const Post = ({ post, preview }) => {
 
   return (
     <div className="container">
-      {preview && (
-        <PreviewBanner>
-          <h4>Preview Mode</h4>
-          <p>
-            <a href="/api/exit-preview">Click here</a> to exit preview mode.
-          </p>
-        </PreviewBanner>
-      )}
-
       <motion.div initial="exit" animate="enter" exit="exit">
         <motion.div variants={imageVariants}>
           <ImageContainer>
@@ -116,18 +107,6 @@ const Anchor = styled.a`
   cursor: pointer;
   display: inline-block;
   margin: 30px 0;
-`;
-
-const PreviewBanner = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: rgba(${lightTheme.base}, 0.15);
-  padding: 20px;
-  margin-bottom: 20px;
-  > * {
-    margin: 0;
-  }
 `;
 
 export async function getStaticProps({ params, preview = false }) {
