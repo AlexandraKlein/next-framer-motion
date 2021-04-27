@@ -6,7 +6,6 @@ import { getPostPage, getAllPostsWithSlug } from "../../lib/api";
 import PostInfo from "../../components/post-info";
 import RichText from "../../components/rich-text";
 import Image from "../../components/image";
-import { lightTheme, darkTheme } from "../../themeConfig";
 
 const easing = [0.175, 0.85, 0.42, 0.96];
 
@@ -100,7 +99,11 @@ const Title = styled.h1``;
 const ImageContainer = styled.div`
   position: relative;
   width: 100%;
-  height: calc(300px + 25vw);
+  height: calc(150px + 25vw);
+
+  @media (min-width: 768px) {
+    height: calc(300px + 25vw);
+  }
 `;
 
 const Anchor = styled.a`

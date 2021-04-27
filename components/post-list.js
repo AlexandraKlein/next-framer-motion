@@ -85,7 +85,7 @@ const Title = styled.h3`
 const PostImage = styled.div`
   position: relative;
   width: 100%;
-  height: calc(200px + 20vw);
+  height: calc(150px + 25vw);
 
   @media (min-width: 768px) {
     height: calc(200px + 10vw);
