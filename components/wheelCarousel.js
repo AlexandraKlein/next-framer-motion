@@ -99,6 +99,23 @@ const WheelCarousel = () => {
         setRotate(prevRotate => prevRotate + angle * numOfRotations);
     };
 
+    const handleLeftClick = () => {
+        const currentIndex = activeSlide.index;
+        const nextIndex = currentIndex < numSlides ? currentIndex : 0;
+
+        setActiveSlide(slides[nextIndex]);
+        setRotate(prevRotate => prevRotate + angle);
+    };
+
+    const handleRightClick = () => {
+        const currentIndex = activeSlide.index;
+        console.log({ currentIndex });
+        const nextIndex = currentIndex === 1 ? numSlides - 1 : currentIndex - 2;
+
+        setActiveSlide(slides[nextIndex]);
+        setRotate(prevRotate => prevRotate - angle);
+    };
+
     return (
         <div className="container">
             <div
@@ -131,18 +148,18 @@ const WheelCarousel = () => {
             </div>
 
             <div className="arrows">
-                <button className="arrow-left">
+                <button onClick={handleLeftClick} className="arrow-left">
                     <span>&larr;</span>
                 </button>
-                <button className="arrow-right">
+                <button onClick={handleRightClick} className="arrow-right">
                     <span>&rarr;</span>
                 </button>
             </div>
 
             <style jsx>{`
                 .wheel {
-                    width: 75vmin;
-                    height: 75vmin;
+                    width: 65vmin;
+                    height: 65vmin;
                     position: absolute;
                     top: 50%;
                     left: 50%;
