@@ -21,7 +21,7 @@ const initialSlidesState = images.map((slide, index) => ({
         y: 0,
     },
     theta: 0,
-    active: index === 0 ? true : false,
+    index: index + 1,
     image: slide,
 }));
 
@@ -32,9 +32,11 @@ const WheelCarousel = () => {
     const wheelRef = useRef(null);
 
     const [slides, setSlides] = useState(initialSlidesState);
+    const [activeSlide, setActiveSlide] = useState(slides[0]);
     const [wheelWidth, setWheelWidth] = useState(0);
     const [theta, setTheta] = useState(Math.PI / (numSlides / 2));
     const [center, setCenter] = useState({ x: 0, y: 0 });
+    const [rotate, setRotate] = useState(0);
 
     const getInitialPositions = () => {
         const center = {
@@ -64,10 +66,10 @@ const WheelCarousel = () => {
         }
 
         const positionedSlides = slides.map((slide, index) => {
-            const newTheta = theta * (index + numSlides / 2);
+            const newTheta = theta * (index + numSlides);
             const wheelRadius = wheelWidth / 2;
-            const x = Math.cos(newTheta) * wheelRadius;
-            const y = -1.0 * Math.sin(newTheta) * wheelRadius;
+            const x = Math.cos(newTheta) * -wheelRadius;
+            const y = Math.sin(newTheta) * -wheelRadius;
 
             return {
                 ...slide,
@@ -78,22 +80,54 @@ const WheelCarousel = () => {
         setSlides(positionedSlides);
     }, [center, wheelWidth]);
 
+    const handleSlideClick = e => {
+        const nextIndex = parseFloat(e.target.dataset.index);
+        const currentIndex = activeSlide.index;
+
+        setActiveSlide(slides[nextIndex - 1]);
+
+        let numOfRotations = nextIndex - currentIndex;
+
+        if (numOfRotations < -numSlides / 2) {
+            numOfRotations = numOfRotations + numSlides;
+        }
+
+        if (numOfRotations > numSlides / 2) {
+            numOfRotations = numOfRotations - numSlides;
+        }
+
+        setRotate(prevRotate => prevRotate + angle * numOfRotations);
+    };
+
     return (
         <div className="container">
-            <div ref={wheelRef} className="wheel">
+            <div
+                ref={wheelRef}
+                className="wheel"
+                style={{
+                    transform: `translate(-50%, -50%) rotate(${rotate}deg)`,
+                }}
+            >
                 {slides &&
-                    slides.map((slide, index) => (
-                        <div
-                            key={index}
-                            className="card"
-                            style={{
-                                top: center.x + slide.coords.x,
-                                left: center.y + slide.coords.y,
-                            }}
-                        >
-                            <img src={slide.image} />
-                        </div>
-                    ))}
+                    slides.map((slide, index) => {
+                        return (
+                            <div
+                                onClick={handleSlideClick}
+                                key={index}
+                                data-index={index + 1}
+                                className={classnames('slide', {
+                                    active: slide.index === activeSlide.index,
+                                })}
+                                style={{
+                                    top: center.x + slide.coords.x,
+                                    left: center.y + slide.coords.y,
+                                    transform: `translate(-50%, -50%) rotate(${-rotate}deg)`,
+                                }}
+                            >
+                                <img src={slide.image} />
+                            </div>
+                        );
+                    })}
             </div>
 
             <div className="arrows">
@@ -106,11 +140,6 @@ const WheelCarousel = () => {
             </div>
 
             <style jsx>{`
-                :root {
-                    --easing: cubic-bezier(0.18, 0.89, 0.32, 1.27);
-                    --duration: 0.5s;
-                }
-
                 .wheel {
                     width: 75vmin;
                     height: 75vmin;
@@ -118,7 +147,7 @@ const WheelCarousel = () => {
                     top: 50%;
                     left: 50%;
                     transform: translate(-50%, -50%);
-                    transition: transform var(--duration) var(--easing);
+                    transition: 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.27);
                 }
 
                 .center-position {
@@ -130,7 +159,7 @@ const WheelCarousel = () => {
                     transform: translate(-50%, -50%);
                 }
 
-                .card {
+                .slide {
                     width: 15vmin;
                     height: 15vmin;
                     border-radius: 50%;
@@ -140,15 +169,15 @@ const WheelCarousel = () => {
                     left: 50%;
                     transform: translate(-50%, -50%);
                     cursor: pointer;
-                    transition: transform var(--duration) var(--easing);
+                    transition: 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.27);
                     border: 0.3vmin solid white;
                 }
 
-                .card.active {
+                .slide.active {
                     border-width: 1.3vmin;
                 }
 
-                .card img {
+                .slide img {
                     position: absolute;
                     top: 0;
                     left: 0;
@@ -190,7 +219,7 @@ const WheelCarousel = () => {
 
                 button:active {
                     transform: scale(1.5);
-                    transition: transform var(--duration) var(--easing);
+                    transition: 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.27);
                 }
             `}</style>
         </div>
