@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
+import classnames from 'classnames';
 
 const images = [
     'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZmFjZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=60',
@@ -20,37 +21,30 @@ const initialSlidesState = images.map((slide, index) => ({
         y: 0,
     },
     theta: 0,
-    active: false,
+    active: index === 0 ? true : false,
     image: slide,
 }));
+
+const numSlides = images.length;
+const angle = 360 / numSlides;
 
 const WheelCarousel = () => {
     const wheelRef = useRef(null);
     const centerPositionRef = useRef(null);
-
-    const numSlides = images.length;
 
     const [slides, setSlides] = useState(initialSlidesState);
     const [wheelWidth, setWheelWidth] = useState(0);
     const [theta, setTheta] = useState(Math.PI / (numSlides / 2));
     const [center, setCenter] = useState({ x: 0, y: 0 });
 
-    const getWheelWidth = () => {
-        setWheelWidth(parseFloat(getComputedStyle(wheelRef.current).width));
-    };
-
-    const getCenter = () => {
+    const getInitialPositions = () => {
         const center = {
-            x: parseFloat(getComputedStyle(centerPositionRef.current).left),
-            y: parseFloat(getComputedStyle(centerPositionRef.current).top),
+            x: parseFloat(getComputedStyle(wheelRef.current).width) / 2,
+            y: parseFloat(getComputedStyle(wheelRef.current).width) / 2,
         };
 
         setCenter(center);
-    };
-
-    const getInitialPositions = () => {
-        getCenter();
-        getWheelWidth();
+        setWheelWidth(parseFloat(getComputedStyle(wheelRef.current).width));
     };
 
     useEffect(() => {
@@ -70,8 +64,8 @@ const WheelCarousel = () => {
             return;
         }
 
-        const updated_slides = slides.map((slide, index) => {
-            const newTheta = theta * (index + numSlides / 4);
+        const positionedSlides = slides.map((slide, index) => {
+            const newTheta = theta * (index + numSlides / 2);
             const wheelRadius = wheelWidth / 2;
             const x = Math.cos(newTheta) * wheelRadius;
             const y = -1.0 * Math.sin(newTheta) * wheelRadius;
@@ -79,11 +73,10 @@ const WheelCarousel = () => {
             return {
                 ...slide,
                 coords: { x, y },
-                theta: newTheta * (index + numSlides / 4),
             };
         });
 
-        setSlides(updated_slides);
+        setSlides(positionedSlides);
     }, [center, wheelWidth]);
 
     return (
@@ -94,7 +87,7 @@ const WheelCarousel = () => {
                     slides.map((slide, index) => (
                         <div
                             key={index}
-                            className="card active"
+                            className="card"
                             style={{
                                 top: center.x + slide.coords.x,
                                 left: center.y + slide.coords.y,
@@ -193,7 +186,7 @@ const WheelCarousel = () => {
                     background: transparent;
                     cursor: pointer;
                     appearance: none;
-                    color: white;
+                    color: gray;
                     font-size: 2rem;
                 }
 
