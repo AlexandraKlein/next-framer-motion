@@ -221,7 +221,7 @@ const WheelCarousel = () => {
                     background: transparent;
                     cursor: pointer;
                     appearance: none;
-                    color: gray;
+                    color: white;
                     font-size: 2rem;
                 }
 
