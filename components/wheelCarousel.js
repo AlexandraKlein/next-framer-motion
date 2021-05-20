@@ -30,7 +30,6 @@ const angle = 360 / numSlides;
 
 const WheelCarousel = () => {
     const wheelRef = useRef(null);
-    const centerPositionRef = useRef(null);
 
     const [slides, setSlides] = useState(initialSlidesState);
     const [wheelWidth, setWheelWidth] = useState(0);
@@ -53,11 +52,11 @@ const WheelCarousel = () => {
     }, []);
 
     useEffect(() => {
-        if (!wheelRef.current || !centerPositionRef.current) {
+        if (!wheelRef.current) {
             return;
         }
         getInitialPositions();
-    }, [wheelRef, centerPositionRef]);
+    }, [wheelRef]);
 
     useEffect(() => {
         if (!wheelWidth) {
@@ -82,7 +81,6 @@ const WheelCarousel = () => {
     return (
         <div className="container">
             <div ref={wheelRef} className="wheel">
-                <div ref={centerPositionRef} className="center-position"></div>
                 {slides &&
                     slides.map((slide, index) => (
                         <div
