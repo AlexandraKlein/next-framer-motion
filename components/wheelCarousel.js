@@ -167,15 +167,6 @@ const WheelCarousel = () => {
                     transition: 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.27);
                 }
 
-                .center-position {
-                    width: 15vmin;
-                    height: 15vmin;
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
-                }
-
                 .slide {
                     width: 15vmin;
                     height: 15vmin;
