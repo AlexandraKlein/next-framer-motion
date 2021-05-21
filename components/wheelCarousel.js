@@ -170,9 +170,6 @@ const WheelCarousel = () => {
                     border-radius: 50%;
                     overflow: hidden;
                     position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate(-50%, -50%);
                     cursor: pointer;
                     transition: transform 0.5s
                         cubic-bezier(0.18, 0.89, 0.32, 1.27);
