@@ -18,7 +18,13 @@ const variants = {
     },
 };
 
-const BlobShape = ({ id, initialPath, animatePath, imgSrc }) => {
+const BlobShape = ({
+    id,
+    initialPath,
+    animatePath,
+    imgSrc,
+    orientation = 'landscape',
+}) => {
     return (
         <motion.div variants={variants} style={{ width: '25%' }}>
             <svg viewBox="0 0 500 500">
@@ -29,13 +35,31 @@ const BlobShape = ({ id, initialPath, animatePath, imgSrc }) => {
                         transition={{
                             repeat: Infinity,
                             repeatType: 'reverse',
-                            duration: 3,
+                            duration: 5,
                             ease: easing,
                         }}
                     />
                 </clipPath>
+                <motion.path
+                    fill="#bbb"
+                    initial={{ d: animatePath }}
+                    animate={{ d: initialPath }}
+                    transition={{
+                        repeat: Infinity,
+                        repeatType: 'reverse',
+                        duration: 5,
+                        ease: easing,
+                    }}
+                />
                 <g clipPath={`url(#${id})`}>
-                    <image xlinkHref={imgSrc}></image>
+                    <image
+                        xlinkHref={imgSrc}
+                        style={
+                            orientation === 'portrait'
+                                ? { width: '100%' }
+                                : { height: '100%' }
+                        }
+                    ></image>
                 </g>
             </svg>
         </motion.div>
