@@ -160,7 +160,8 @@ const WheelCarousel = () => {
                     top: 50%;
                     left: 50%;
                     transform: translate(-50%, -50%);
-                    transition: 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.27);
+                    transition: transform 0.5s
+                        cubic-bezier(0.18, 0.89, 0.32, 1.27);
                 }
 
                 .slide {
@@ -173,7 +174,8 @@ const WheelCarousel = () => {
                     left: 50%;
                     transform: translate(-50%, -50%);
                     cursor: pointer;
-                    transition: 0.5s cubic-bezier(0.18, 0.89, 0.32, 1.27);
+                    transition: transform 0.5s
+                        cubic-bezier(0.18, 0.89, 0.32, 1.27);
                     border: 0.3vmin solid white;
                 }
 
