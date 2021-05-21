@@ -18,13 +18,7 @@ const variants = {
     },
 };
 
-const BlobShape = ({
-    id,
-    initialPath,
-    animatePath,
-    imgSrc,
-    orientation = 'landscape',
-}) => {
+const BlobShape = ({ id, initialPath, animatePath, imgSrc }) => {
     return (
         <motion.div variants={variants} style={{ width: '25%' }}>
             <svg viewBox="0 0 500 500">
@@ -54,11 +48,9 @@ const BlobShape = ({
                 <g clipPath={`url(#${id})`}>
                     <image
                         xlinkHref={imgSrc}
-                        style={
-                            orientation === 'portrait'
-                                ? { width: '100%' }
-                                : { height: '100%' }
-                        }
+                        height="100%"
+                        width="100%"
+                        preserveAspectRatio="xMinYMin slice"
                     ></image>
                 </g>
             </svg>

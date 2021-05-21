@@ -9,7 +9,6 @@ const blobs = [
         animatePath:
             'M 189,80.37 C 232.6,46.67 352.5,67.06 350.9,124.1 349.5,173.4 311.7,168 312.4,248.1 312.9,301.1 382.5,319.2 368.5,379.1 349.4,460.6 137.7,467.5 117.6,386.3 98.68,309.7 171.5,292.2 183.6,240.1 195.7,188.2 123.8,130.7 189,80.37 Z',
         imgSrc: 'https://images.unsplash.com/photo-1558035498-265faf6ba813?ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8NTN8ODM1MjY1N3x8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
-        orientation: 'portrait',
     },
     {
         id: 'shape2',
@@ -18,7 +17,6 @@ const blobs = [
         animatePath:
             'M 418.1,159.8 C 460.9,222.9 497,321.5 452.4,383.4 417.2,432.4 371.2,405.6 271.3,420.3 137.2,440 90.45,500.6 42.16,442.8 -9.572,381 86.33,289.1 117.7,215.5 144.3,153.4 145.7,54.21 212.7,36.25 290.3,15.36 373.9,94.6 418.1,159.8 Z',
         imgSrc: 'https://images.unsplash.com/photo-1558035579-a10d04acf787?ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8NTV8ODM1MjY1N3x8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
-        orientation: 'portrait',
     },
     {
         id: 'shape3',
@@ -35,7 +33,6 @@ const blobs = [
         animatePath:
             'M 440.9,118.5 C 486.5,189.8 499,297.9 458.3,371.8 422.2,437.2 335.8,475.1 261.5,477.3 181.4,479.6 83.9,445.4 43.22,376.1 -0.2483,302.1 13.51,189.9 61.98,119.1 104.5,56.88 190.6,20.5 265.7,22.71 332.2,24.67 405,62.28 440.9,118.5 Z',
         imgSrc: 'https://images.unsplash.com/photo-1545398865-0062dafeb74d?ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MTMzfDQyODY0Nzh8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
-        orientation: 'portrait',
     },
     {
         id: 'shape5',
@@ -44,7 +41,6 @@ const blobs = [
         initialPath:
             'M 440.9,118.5 C 486.5,189.8 499,297.9 458.3,371.8 422.2,437.2 335.8,475.1 261.5,477.3 181.4,479.6 83.9,445.4 43.22,376.1 -0.2483,302.1 13.51,189.9 61.98,119.1 104.5,56.88 190.6,20.5 265.7,22.71 332.2,24.67 405,62.28 440.9,118.5 Z',
         imgSrc: 'https://images.unsplash.com/photo-1576406923149-3b613b87e3e9?ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8NTR8ODM1MjY1N3x8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
-        orientation: 'portrait',
     },
     {
         id: 'shape6',
@@ -53,7 +49,6 @@ const blobs = [
         initialPath:
             'M 193.7,217.3 C 236.4,228.3 279.7,242.7 320.9,231.8 362.6,220.9 446.8,197.1 457.6,241.5 469.3,289.8 378.7,308.3 330.2,319.2 278.5,330.8 222.3,319.2 172.1,302.2 125.2,286.4 33.08,273.2 45.14,225.2 57.22,177.1 145.7,204.8 193.7,217.3 Z',
         imgSrc: 'https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MjM1fDQyODY0Nzh8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
-        orientation: 'portrait',
     },
     {
         id: 'shape7',
