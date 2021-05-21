@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { motion, useAnimation } from 'framer-motion';
 import classnames from 'classnames';
 
 const images = [
@@ -49,16 +50,13 @@ const WheelCarousel = () => {
     };
 
     useEffect(() => {
-        window.addEventListener('resize', getInitialPositions);
-        return () => window.removeEventListener('resize', getInitialPositions);
-    }, []);
-
-    useEffect(() => {
         if (!wheelRef.current) {
             return;
         }
         getInitialPositions();
-    }, [wheelRef]);
+        window.addEventListener('resize', getInitialPositions);
+        return () => window.removeEventListener('resize', getInitialPositions);
+    }, []);
 
     useEffect(() => {
         if (!wheelWidth) {
@@ -78,7 +76,7 @@ const WheelCarousel = () => {
         });
 
         setSlides(positionedSlides);
-    }, [center, wheelWidth]);
+    }, [wheelWidth]);
 
     const handleSlideClick = e => {
         const nextIndex = parseFloat(e.target.dataset.index);
@@ -101,18 +99,17 @@ const WheelCarousel = () => {
 
     const handleLeftClick = () => {
         const currentIndex = activeSlide.index;
-        const nextIndex = currentIndex < numSlides ? currentIndex : 0;
+        const nextIndex = currentIndex < numSlides ? currentIndex + 1 : 1;
 
-        setActiveSlide(slides[nextIndex]);
+        setActiveSlide(slides[nextIndex - 1]);
         setRotate(prevRotate => prevRotate + angle);
     };
 
     const handleRightClick = () => {
         const currentIndex = activeSlide.index;
-        console.log({ currentIndex });
-        const nextIndex = currentIndex === 1 ? numSlides - 1 : currentIndex - 2;
+        const nextIndex = currentIndex === 1 ? numSlides : currentIndex - 1;
 
-        setActiveSlide(slides[nextIndex]);
+        setActiveSlide(slides[nextIndex - 1]);
         setRotate(prevRotate => prevRotate - angle);
     };
 
