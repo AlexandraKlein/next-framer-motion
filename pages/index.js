@@ -3,7 +3,6 @@ import Carousel from '../components/carousel';
 import { getAllPostsForHome } from '../lib/api';
 
 const Homepage = ({ allPosts }) => {
-    console.log({ allPosts });
     return (
         <div className="container">
             <Carousel>
