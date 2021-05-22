@@ -1,4 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
+import { useSwipeable } from 'react-swipeable';
+import { usePrevious } from 'react-use';
 import classnames from 'classnames';
 
 const images = [
@@ -37,6 +39,7 @@ const WheelCarousel = () => {
     const [theta, setTheta] = useState(Math.PI / (numSlides / 2));
     const [center, setCenter] = useState({ x: 0, y: 0 });
     const [rotate, setRotate] = useState(0);
+    const prevRotate = usePrevious(rotate);
 
     const getInitialPositions = () => {
         const center = {
@@ -96,24 +99,48 @@ const WheelCarousel = () => {
         setRotate(prevRotate => prevRotate + angle * numOfRotations);
     };
 
-    const handleLeftClick = () => {
-        const currentIndex = activeSlide.index;
-        const nextIndex = currentIndex < numSlides ? currentIndex + 1 : 1;
+    const getDesiredSlide = nextIndex => {
+        return slides[nextIndex - 1];
+    };
 
-        setActiveSlide(slides[nextIndex - 1]);
+    const handlePrevious = () => {
+        const desiredSlide = getDesiredSlide(
+            activeSlide.index < numSlides ? activeSlide.index + 1 : 1
+        );
+
+        setActiveSlide(desiredSlide);
         setRotate(prevRotate => prevRotate + angle);
     };
 
-    const handleRightClick = () => {
-        const currentIndex = activeSlide.index;
-        const nextIndex = currentIndex === 1 ? numSlides : currentIndex - 1;
+    const handleNext = () => {
+        const desiredSlide = getDesiredSlide(
+            activeSlide.index === 1 ? numSlides : activeSlide.index - 1
+        );
 
-        setActiveSlide(slides[nextIndex - 1]);
+        setActiveSlide(desiredSlide);
         setRotate(prevRotate => prevRotate - angle);
     };
 
+    const handlers = useSwipeable({
+        onSwiping(e) {
+            const { event, deltaX } = e;
+            const width = event.target.clientWidth;
+            const percentage = Math.abs(deltaX) / width;
+
+            console.log({ prevRotate, rotate });
+        },
+        onSwipedLeft(e) {
+            handleNext();
+        },
+        onSwipedRight(e) {
+            handlePrevious();
+        },
+        trackMouse: true,
+        trackTouch: true,
+    });
+
     return (
-        <div className="container">
+        <div className="wheel-container">
             <div
                 ref={wheelRef}
                 className="wheel"
@@ -125,6 +152,7 @@ const WheelCarousel = () => {
                     slides.map((slide, index) => {
                         return (
                             <div
+                                {...handlers}
                                 onClick={handleSlideClick}
                                 key={index}
                                 data-index={index + 1}
@@ -144,10 +172,10 @@ const WheelCarousel = () => {
             </div>
 
             <div className="arrows">
-                <button onClick={handleLeftClick} className="arrow-left">
+                <button onClick={handlePrevious} className="arrow-left">
                     <span>&larr;</span>
                 </button>
-                <button onClick={handleRightClick} className="arrow-right">
+                <button onClick={handleNext} className="arrow-right">
                     <span>&rarr;</span>
                 </button>
             </div>
@@ -174,6 +202,7 @@ const WheelCarousel = () => {
                     transition: transform 0.5s
                         cubic-bezier(0.18, 0.89, 0.32, 1.27);
                     border: 0.3vmin solid white;
+                    user-select: none;
                 }
 
                 .slide.active {

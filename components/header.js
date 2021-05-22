@@ -17,6 +17,9 @@ const Header = () => {
             <Link href="/wheel">
                 <a>Wheel</a>
             </Link>
+            <Link href="/carousel">
+                <a>Carousel</a>
+            </Link>
             <Link href="/blob">
                 <a>Blob</a>
             </Link>

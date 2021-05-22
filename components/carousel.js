@@ -95,7 +95,7 @@ const ArrowsContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: black;
+    color: gray;
     position: relative;
     display: inline-flex;
     width: 90px;
