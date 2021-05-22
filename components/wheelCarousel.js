@@ -16,6 +16,9 @@ const images = [
     'https://images.unsplash.com/photo-1545167622-3a6ac756afa4?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDd8fGZhY2V8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=60',
 ];
 
+const numSlides = images.length;
+const angle = 360 / numSlides;
+
 const initialSlidesState = images.map((slide, index) => ({
     coords: {
         x: 0,
@@ -24,10 +27,8 @@ const initialSlidesState = images.map((slide, index) => ({
     theta: 0,
     index: index + 1,
     image: slide,
+    rotate: (index + 1) * angle,
 }));
-
-const numSlides = images.length;
-const angle = 360 / numSlides;
 
 const WheelCarousel = () => {
     const wheelRef = useRef(null);
@@ -128,13 +129,26 @@ const WheelCarousel = () => {
     };
 
     const handlers = useSwipeable({
-        onSwiping(e) {
-            const { event, deltaX } = e;
-            const width = event.target.clientWidth;
-            const percentage = Math.abs(deltaX) / width;
+        // onSwiping(e) {
+        //     const { dir, absX } = e;
 
-            console.log({ rotate });
-        },
+        //     if (absX > wheelWidth) {
+        //         return;
+        //     }
+
+        //     const percentage = absX / wheelWidth;
+
+        //     if (dir === 'Left') {
+        //         setRotate(prevRotate => prevRotate + percentage * angle * -1);
+        //     }
+
+        //     if (dir === 'Right') {
+        //         setRotate(prevRotate => prevRotate + percentage * angle);
+        //     }
+        // },
+        // onSwiped() {
+        //     setRotate(rotate - (rotate % angle));
+        // },
         onSwipedLeft(e) {
             handleNext();
         },
@@ -146,7 +160,7 @@ const WheelCarousel = () => {
     });
 
     return (
-        <div className="wheel-container">
+        <div className="wheel-container" {...handlers}>
             <div
                 ref={wheelRef}
                 className="wheel"
@@ -158,7 +172,6 @@ const WheelCarousel = () => {
                     slides.map((slide, index) => {
                         return (
                             <div
-                                {...handlers}
                                 onClick={handleSlideClick}
                                 key={index}
                                 data-index={index + 1}
