@@ -1,6 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { useSwipeable } from 'react-swipeable';
-import { usePrevious } from 'react-use';
 import classnames from 'classnames';
 
 const images = [
@@ -39,7 +38,6 @@ const WheelCarousel = () => {
     const [theta, setTheta] = useState(Math.PI / (numSlides / 2));
     const [center, setCenter] = useState({ x: 0, y: 0 });
     const [rotate, setRotate] = useState(0);
-    const prevRotate = usePrevious(rotate);
 
     const getInitialPositions = () => {
         const center = {
@@ -99,23 +97,31 @@ const WheelCarousel = () => {
         setRotate(prevRotate => prevRotate + angle * numOfRotations);
     };
 
-    const getDesiredSlide = nextIndex => {
+    const getDesiredSlide = direction => {
+        let nextIndex;
+
+        if (direction === 'prev') {
+            nextIndex =
+                activeSlide.index < numSlides ? activeSlide.index + 1 : 1;
+        }
+
+        if (direction === 'next') {
+            nextIndex =
+                activeSlide.index === 1 ? numSlides : activeSlide.index - 1;
+        }
+
         return slides[nextIndex - 1];
     };
 
     const handlePrevious = () => {
-        const desiredSlide = getDesiredSlide(
-            activeSlide.index < numSlides ? activeSlide.index + 1 : 1
-        );
+        const desiredSlide = getDesiredSlide('prev');
 
         setActiveSlide(desiredSlide);
         setRotate(prevRotate => prevRotate + angle);
     };
 
     const handleNext = () => {
-        const desiredSlide = getDesiredSlide(
-            activeSlide.index === 1 ? numSlides : activeSlide.index - 1
-        );
+        const desiredSlide = getDesiredSlide('next');
 
         setActiveSlide(desiredSlide);
         setRotate(prevRotate => prevRotate - angle);
@@ -127,7 +133,7 @@ const WheelCarousel = () => {
             const width = event.target.clientWidth;
             const percentage = Math.abs(deltaX) / width;
 
-            console.log({ prevRotate, rotate });
+            console.log({ rotate });
         },
         onSwipedLeft(e) {
             handleNext();
