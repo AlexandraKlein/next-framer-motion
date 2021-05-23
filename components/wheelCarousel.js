@@ -11,9 +11,9 @@ const images = [
     'https://images.unsplash.com/photo-1593529467220-9d721ceb9a78?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTV8fGZhY2V8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=60',
     'https://images.unsplash.com/photo-1544348817-5f2cf14b88c8?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MjB8fGZhY2V8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=60',
     'https://images.unsplash.com/photo-1596215143922-eedeaba0d91c?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MzR8fGZhY2V8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=60',
-    'https://images.unsplash.com/photo-1560787313-5dff3307e257?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjd8fGZhY2V8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=60',
-    'https://images.unsplash.com/photo-1604426633861-11b2faead63c?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8ZmFjZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=60',
-    'https://images.unsplash.com/photo-1545167622-3a6ac756afa4?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDd8fGZhY2V8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=60',
+    // 'https://images.unsplash.com/photo-1560787313-5dff3307e257?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mjd8fGZhY2V8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=60',
+    // 'https://images.unsplash.com/photo-1604426633861-11b2faead63c?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8ZmFjZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=60',
+    // 'https://images.unsplash.com/photo-1545167622-3a6ac756afa4?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDd8fGZhY2V8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=60',
 ];
 
 const numSlides = images.length;
@@ -85,17 +85,17 @@ const WheelCarousel = () => {
 
         setActiveSlide(slides[nextIndex - 1]);
 
-        let numOfRotations = nextIndex - currentIndex;
+        let rotations = nextIndex - currentIndex;
 
-        if (numOfRotations < -numSlides / 2) {
-            numOfRotations = numOfRotations + numSlides;
+        if (rotations < -numSlides / 2) {
+            rotations = rotations + numSlides;
         }
 
-        if (numOfRotations > numSlides / 2) {
-            numOfRotations = numOfRotations - numSlides;
+        if (rotations > numSlides / 2) {
+            rotations = rotations - numSlides;
         }
 
-        setRotate(prevRotate => prevRotate + angle * numOfRotations);
+        setRotate(prevRotate => prevRotate + angle * rotations);
     };
 
     const getDesiredSlide = direction => {
@@ -137,16 +137,17 @@ const WheelCarousel = () => {
         //     }
 
         //     const percentage = absX / wheelWidth;
+        //     const rotation = percentage * angle;
 
         //     if (dir === 'Left') {
-        //         setRotate(prevRotate => prevRotate + percentage * angle * -1);
+        //         setRotate(prevRotate => prevRotate + rotation * -1);
         //     }
 
         //     if (dir === 'Right') {
-        //         setRotate(prevRotate => prevRotate + percentage * angle);
+        //         setRotate(prevRotate => prevRotate + rotation);
         //     }
         // },
-        // onSwiped() {
+        // onSwiped(e) {
         //     setRotate(rotate - (rotate % angle));
         // },
         onSwipedLeft(e) {
@@ -160,34 +161,37 @@ const WheelCarousel = () => {
     });
 
     return (
-        <div className="wheel-container" {...handlers}>
+        <div className="wheel-container">
             <div
-                ref={wheelRef}
                 className="wheel"
+                ref={wheelRef}
                 style={{
                     transform: `translate(-50%, -50%) rotate(${rotate}deg)`,
                 }}
             >
-                {slides &&
-                    slides.map((slide, index) => {
-                        return (
-                            <div
-                                onClick={handleSlideClick}
-                                key={index}
-                                data-index={index + 1}
-                                className={classnames('slide', {
-                                    active: slide.index === activeSlide.index,
-                                })}
-                                style={{
-                                    top: center.x + slide.coords.x,
-                                    left: center.y + slide.coords.y,
-                                    transform: `translate(-50%, -50%) rotate(${-rotate}deg)`,
-                                }}
-                            >
-                                <img src={slide.image} />
-                            </div>
-                        );
-                    })}
+                <div className="wheel-inner" {...handlers}>
+                    {slides &&
+                        slides.map((slide, index) => {
+                            return (
+                                <div
+                                    onClick={handleSlideClick}
+                                    key={index}
+                                    data-index={index + 1}
+                                    className={classnames('slide', {
+                                        active:
+                                            slide.index === activeSlide.index,
+                                    })}
+                                    style={{
+                                        top: center.x + slide.coords.x,
+                                        left: center.y + slide.coords.y,
+                                        transform: `translate(-50%, -50%) rotate(${-rotate}deg)`,
+                                    }}
+                                >
+                                    <img src={slide.image} />
+                                </div>
+                            );
+                        })}
+                </div>
             </div>
 
             <div className="arrows">
@@ -200,15 +204,26 @@ const WheelCarousel = () => {
             </div>
 
             <style jsx>{`
+                .wheel-container {
+                    position: relative;
+                    flex: 1;
+                }
+
                 .wheel {
+                    position: absolute;
                     width: 65vmin;
                     height: 65vmin;
-                    position: absolute;
                     top: 50%;
                     left: 50%;
                     transform: translate(-50%, -50%);
                     transition: transform 0.5s
                         cubic-bezier(0.18, 0.89, 0.32, 1.27);
+                }
+
+                .wheel-inner {
+                    // background: red;
+                    height: 100%;
+                    width: 100%;
                 }
 
                 .slide {

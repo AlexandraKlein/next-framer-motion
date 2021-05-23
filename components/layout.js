@@ -30,13 +30,15 @@ const Layout = ({ children, preview }) => {
                 }
 
                 #__next,
-                .page-wrapper {
+                .page-wrapper,
+                .content-wrapper {
+                    flex: 1;
                     display: flex;
                     flex-direction: column;
                 }
 
                 .page-wrapper {
-                    flex: 1;
+                    overflow: hidden;
                 }
             `}</style>
         </div>
