@@ -1,4 +1,4 @@
-import WheelCarousel from '../components/wheelCarousel';
+import WheelCarousel from '../components/wheelCarouselAlt';
 
 const Wheel = () => {
     return <WheelCarousel />;

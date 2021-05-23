@@ -79,25 +79,6 @@ const WheelCarousel = () => {
         setSlides(positionedSlides);
     }, [wheelWidth]);
 
-    const handleSlideClick = e => {
-        const nextIndex = parseFloat(e.target.dataset.index);
-        const currentIndex = activeSlide.index;
-
-        setActiveSlide(slides[nextIndex - 1]);
-
-        let rotations = nextIndex - currentIndex;
-
-        if (rotations < -numSlides / 2) {
-            rotations = rotations + numSlides;
-        }
-
-        if (rotations > numSlides / 2) {
-            rotations = rotations - numSlides;
-        }
-
-        setRotate(prevRotate => prevRotate + angle * rotations);
-    };
-
     const getDesiredSlide = direction => {
         let nextIndex;
 
@@ -129,11 +110,26 @@ const WheelCarousel = () => {
     };
 
     const handlers = useSwipeable({
-        onSwipedLeft(e) {
-            handleNext();
+        onSwiping(e) {
+            const { dir, absX } = e;
+
+            if (absX > wheelWidth) {
+                return;
+            }
+
+            const percentage = absX / wheelWidth;
+            const rotation = percentage * angle;
+
+            if (dir === 'Left') {
+                setRotate(prevRotate => prevRotate + rotation * -1);
+            }
+
+            if (dir === 'Right') {
+                setRotate(prevRotate => prevRotate + rotation);
+            }
         },
-        onSwipedRight(e) {
-            handlePrevious();
+        onSwiped(e) {
+            setRotate(rotate - (rotate % angle));
         },
         trackMouse: true,
         trackTouch: true,
@@ -151,21 +147,18 @@ const WheelCarousel = () => {
                 <div className="wheel-inner" {...handlers}>
                     {slides &&
                         slides.map((slide, index) => {
-                            const isActive = slide.index === activeSlide.index;
                             return (
                                 <div
-                                    onClick={handleSlideClick}
                                     key={index}
                                     data-index={index + 1}
                                     className={classnames('slide', {
-                                        active: isActive,
+                                        active:
+                                            slide.index === activeSlide.index,
                                     })}
                                     style={{
                                         top: center.x + slide.coords.x,
                                         left: center.y + slide.coords.y,
-                                        transform: `translate(-50%, -50%) rotate(${-rotate}deg) scale(${
-                                            isActive ? '1.3' : '1'
-                                        })`,
+                                        transform: `translate(-50%, -50%) rotate(${-rotate}deg)`,
                                     }}
                                 >
                                     <img src={slide.image} />
@@ -202,7 +195,6 @@ const WheelCarousel = () => {
                 }
 
                 .wheel-inner {
-                    // background: red;
                     height: 100%;
                     width: 100%;
                 }
@@ -216,14 +208,13 @@ const WheelCarousel = () => {
                     cursor: pointer;
                     transition: transform 0.5s
                         cubic-bezier(0.18, 0.89, 0.32, 1.27);
-                    border: 0.3vmin solid cadetblue;
+                    border: 0.3vmin solid white;
                     user-select: none;
                 }
 
-                .slide.active {
-                    border-width: 1vmin;
-                    border-color: white;
-                }
+                // .slide.active {
+                //     border-width: 1.3vmin;
+                // }
 
                 .slide img {
                     position: absolute;
