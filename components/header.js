@@ -20,6 +20,9 @@ const Header = () => {
             <Link href="/carousel">
                 <a>Carousel</a>
             </Link>
+            <Link href="/arc-slider">
+                <a>Arc Slider</a>
+            </Link>
             <Link href="/blob">
                 <a>Blob</a>
             </Link>

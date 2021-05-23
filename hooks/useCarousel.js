@@ -130,8 +130,6 @@ export function useCarousel(length, interval = 15000, transitionTime = 300) {
     const shift =
         (100 * (desiredDirectionOnSwipe || direction)) / lengthWithClones;
 
-    console.log(state.offset);
-
     if (state.desired !== state.active) {
         style.transition = smooth;
         style.transform = `translateX(${shift}%)`;

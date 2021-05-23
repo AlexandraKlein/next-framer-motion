@@ -1,0 +1,47 @@
+@import url('https://fonts.googleapis.com/css2?family=Muli&family=Sedgwick+Ave&display=swap');
+
+.App {
+    align-items: center;
+    background-color: #e0c5c0;
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: #fff;
+    border-radius: 16px;
+    height: 464px;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+}
+
+.persons-container {
+    display: flex;
+    justify-content: center;
+}
+
+.person {
+    position: absolute;
+    height: 100%;
+    transform-origin: 50% 1000px;
+    cursor: grab;
+    user-select: none;
+}
+
+.person:active {
+    cursor: grabbing;
+}
+
+.person img {
+    position: relative;
+    pointer-events: none;
+    width: 200px;
+    height: 300px;
+    top: 50%;
+    transform: translateY(-50%);
+    overflow: hidden;
+    border-radius: 20px;
+    object-fit: cover;
+}
