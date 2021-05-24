@@ -157,7 +157,7 @@ const WheelCarousel = () => {
                                     onClick={handleSlideClick}
                                     key={index}
                                     data-index={index + 1}
-                                    className={classnames('slide', {
+                                    className={classnames('wheel-slide', {
                                         active: isActive,
                                     })}
                                     style={{
@@ -207,7 +207,7 @@ const WheelCarousel = () => {
                     width: 100%;
                 }
 
-                .slide {
+                .wheel-slide {
                     width: 15vmin;
                     height: 15vmin;
                     border-radius: 50%;
@@ -220,12 +220,12 @@ const WheelCarousel = () => {
                     user-select: none;
                 }
 
-                .slide.active {
+                .wheel-slide.active {
                     border-width: 1vmin;
                     border-color: white;
                 }
 
-                .slide img {
+                .wheel-slide img {
                     position: absolute;
                     top: 0;
                     left: 0;
