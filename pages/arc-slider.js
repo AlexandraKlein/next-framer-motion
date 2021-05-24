@@ -24,7 +24,6 @@ const Slide = ({ style, imgSrc }) => {
     );
 };
 
-const rotateDeg = 20;
 const slideWidth = 200;
 const carouselWidth = (images.length - 1) * 2 * (slideWidth / 2);
 
@@ -60,7 +59,8 @@ function App() {
             <div className="container" {...bind()}>
                 <div className="persons-container">
                     {images.map((slide, index) => {
-                        const rotate = index * rotateDeg;
+                        const degrees = 20;
+                        const rotate = index * degrees;
                         return (
                             <Slide
                                 key={index}
@@ -81,7 +81,10 @@ function App() {
 
 export default App;
 
+// 5  : 40
 // 10 : 20
 // 20 : 10
 // 30 : 6.666666
 // 40 : 5
+// 50 : 4
+// 60 : 3.333333
