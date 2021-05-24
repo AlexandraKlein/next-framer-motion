@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { useSpring, animated, config } from 'react-spring';
 import { useDrag } from 'react-use-gesture';
 
-const images = [
+const slides = [
     'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZmFjZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=60',
     'https://images.unsplash.com/photo-1554151228-14d9def656e4?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8ZmFjZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=60',
     'https://images.unsplash.com/photo-1592124549776-a7f0cc973b24?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8ZmFjZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=60',
@@ -16,28 +16,34 @@ const images = [
     'https://images.unsplash.com/photo-1545167622-3a6ac756afa4?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDd8fGZhY2V8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=60',
 ];
 
-const Slide = ({ style, imgSrc }) => {
+const Slide = ({ style, imgSrc, isActive }) => {
     return (
         <animated.div className="slide" style={style}>
-            <img src={imgSrc} />
+            <img
+                src={imgSrc}
+                style={{ border: isActive ? '10px solid cadetblue' : 'unset' }}
+            />
         </animated.div>
     );
 };
 
 const slideWidth = 200;
-const carouselWidth = (images.length - 1) * 2 * (slideWidth / 2);
+const carouselWidth = (slides.length - 1) * 2 * (slideWidth / 2);
 
 function App() {
+    const [active, setActive] = useState(Math.round(slides.length / 2));
+
     const [{ x }, set] = useSpring(() => ({
-        x: -carouselWidth / 2,
+        x: -slideWidth * active,
     }));
 
     const bind = useDrag(
         ({ movement: [x], down }) => {
             if (!down) {
-                images.forEach((slide, index) => {
+                slides.forEach((slide, index) => {
                     const newX = -index * slideWidth;
                     if (x < newX + slideWidth / 2) {
+                        setActive(index);
                         set({ x: newX });
                         return;
                     }
@@ -58,17 +64,18 @@ function App() {
         <div className="root">
             <div className="carousel-container" {...bind()}>
                 <div className="slides-container">
-                    {images.map((slide, index) => {
+                    {slides.map((slide, index) => {
+                        const isActive = active === index;
                         const transformOriginY = 1000;
                         const degrees = 20;
                         const rotate = index * degrees;
                         return (
                             <Slide
                                 key={index}
-                                imgSrc={images[index]}
+                                isActive={isActive}
+                                imgSrc={slides[index]}
                                 style={{
                                     transformOrigin: `50% ${transformOriginY}px`,
-
                                     transform: x.to(
                                         x => `rotate(${x / 10 + rotate}deg)`
                                     ),
