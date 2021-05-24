@@ -1,4 +1,4 @@
-.App {
+.root {
     align-items: center;
     background-color: #e0c5c0;
     display: flex;
@@ -20,18 +20,18 @@
     cursor: grabbing;
 }
 
-.persons-container {
+.slides-container {
     display: flex;
     justify-content: center;
 }
 
-.person {
+.slide {
     position: absolute;
     height: 100%;
     user-select: none;
 }
 
-.person img {
+.slide img {
     position: relative;
     pointer-events: none;
     width: 200px;

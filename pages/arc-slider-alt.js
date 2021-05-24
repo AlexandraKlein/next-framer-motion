@@ -32,7 +32,7 @@ function App() {
     };
 
     return (
-        <div className="App">
+        <div className="root">
             <div className="container">
                 <motion.div
                     drag={'x'}
@@ -55,7 +55,7 @@ function App() {
                         },
                     }}
                 >
-                    <div className="persons-container">
+                    <div className="slides-container">
                         {slides.map((slide, index) => {
                             const transformOriginY = 1000;
                             const degrees = 20;
@@ -64,7 +64,7 @@ function App() {
                             return (
                                 <motion.div
                                     key={index}
-                                    className="person"
+                                    className="slide"
                                     animate={{
                                         rotate: coordX / 10 + rotate,
                                         transformOrigin: `50% ${transformOriginY}px`,

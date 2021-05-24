@@ -18,7 +18,7 @@ const images = [
 
 const Slide = ({ style, imgSrc }) => {
     return (
-        <animated.div className="person" style={style}>
+        <animated.div className="slide" style={style}>
             <img src={imgSrc} />
         </animated.div>
     );
@@ -55,9 +55,9 @@ function App() {
     );
 
     return (
-        <div className="App">
+        <div className="root">
             <div className="container" {...bind()}>
-                <div className="persons-container">
+                <div className="slides-container">
                     {images.map((slide, index) => {
                         const transformOriginY = 1000;
                         const degrees = 20;
