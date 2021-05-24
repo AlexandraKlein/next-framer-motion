@@ -57,6 +57,7 @@ function App() {
                 >
                     <div className="persons-container">
                         {slides.map((slide, index) => {
+                            const transformOriginY = 1000;
                             const degrees = 20;
                             const rotate = index * degrees;
                             const isActive = active - 1 === index;
@@ -66,7 +67,7 @@ function App() {
                                     className="person"
                                     animate={{
                                         rotate: coordX / 10 + rotate,
-                                        transformOrigin: `50% ${carouselWidth}`,
+                                        transformOrigin: `50% ${transformOriginY}px`,
                                     }}
                                 >
                                     <img src={slides[index]} />

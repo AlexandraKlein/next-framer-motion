@@ -59,6 +59,7 @@ function App() {
             <div className="container" {...bind()}>
                 <div className="persons-container">
                     {images.map((slide, index) => {
+                        const transformOriginY = 1000;
                         const degrees = 20;
                         const rotate = index * degrees;
                         return (
@@ -66,6 +67,8 @@ function App() {
                                 key={index}
                                 imgSrc={images[index]}
                                 style={{
+                                    transformOrigin: `50% ${transformOriginY}px`,
+
                                     transform: x.to(
                                         x => `rotate(${x / 10 + rotate}deg)`
                                     ),
