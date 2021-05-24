@@ -37,6 +37,7 @@ function App() {
                 <motion.div
                     drag={'x'}
                     onUpdate={onUpdate}
+                    dragElastic={0}
                     dragConstraints={{
                         right: active > 1 ? (active - 2) * -slideWidth : 0,
                         left:
@@ -47,6 +48,8 @@ function App() {
                     onDragStart={() => setIsDragging(true)}
                     onDragEnd={() => setIsDragging(false)}
                     dragTransition={{
+                        power: 0.2,
+                        timeConstant: 200,
                         modifyTarget: target => {
                             return Math.round(target / slideWidth) * slideWidth;
                         },
