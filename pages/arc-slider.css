@@ -5,7 +5,7 @@
     background-color: #e0c5c0;
     display: flex;
     justify-content: center;
-    height: 100vh;
+    flex: 1;
 }
 
 .container {
@@ -15,6 +15,11 @@
     overflow: hidden;
     position: relative;
     width: 100%;
+    cursor: grab;
+}
+
+.container:active {
+    cursor: grabbing;
 }
 
 .persons-container {
@@ -26,12 +31,8 @@
     position: absolute;
     height: 100%;
     transform-origin: 50% 1000px;
-    cursor: grab;
-    user-select: none;
-}
 
-.person:active {
-    cursor: grabbing;
+    user-select: none;
 }
 
 .person img {
