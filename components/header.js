@@ -23,6 +23,9 @@ const Header = () => {
             <Link href="/arc-slider">
                 <a>Arc Slider</a>
             </Link>
+            <Link href="/arc-slider-alt">
+                <a>Arc Slider Framer</a>
+            </Link>
             <Link href="/blob">
                 <a>Blob</a>
             </Link>

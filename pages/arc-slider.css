@@ -1,5 +1,3 @@
-@import url('https://fonts.googleapis.com/css2?family=Muli&family=Sedgwick+Ave&display=swap');
-
 .App {
     align-items: center;
     background-color: #e0c5c0;
@@ -31,7 +29,6 @@
     position: absolute;
     height: 100%;
     transform-origin: 50% 1000px;
-
     user-select: none;
 }
 

@@ -1,9 +1,7 @@
-import { useState, useEffect, useCallback } from 'react';
-import { useSpring, animated, config } from 'react-spring';
-import { useDrag } from 'react-use-gesture';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 
-const images = [
+const slides = [
     'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZmFjZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=60',
     'https://images.unsplash.com/photo-1554151228-14d9def656e4?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8ZmFjZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=60',
     'https://images.unsplash.com/photo-1592124549776-a7f0cc973b24?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8ZmFjZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=60',
@@ -17,31 +15,22 @@ const images = [
     'https://images.unsplash.com/photo-1545167622-3a6ac756afa4?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDd8fGZhY2V8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=60',
 ];
 
-const Slide = ({ style, imgSrc }) => {
-    return (
-        <div className="person" style={style}>
-            <img src={imgSrc} />
-        </div>
-    );
-};
-
 const slideWidth = 200;
-const carouselWidth = (images.length - 1) * 2 * (slideWidth / 2);
+const carouselWidth = (slides.length - 1) * 2 * (slideWidth / 2);
 
 function App() {
     const [isDragging, setIsDragging] = useState(false);
     const [active, setActive] = useState(0);
     const [coordX, setCoordX] = useState(0);
 
-    function onUpdate(latest) {
-        setCoordX(latest.x);
-    }
-
     useEffect(() => {
         setActive(Math.round(Math.abs(coordX - slideWidth) / slideWidth));
     }, [isDragging]);
 
-    console.log({ active });
+    const onUpdate = latest => {
+        setCoordX(latest.x);
+    };
+
     return (
         <div className="App">
             <div className="container">
@@ -51,35 +40,34 @@ function App() {
                     dragConstraints={{
                         right: active > 1 ? (active - 2) * -slideWidth : 0,
                         left:
-                            active < images.length
+                            active < slides.length
                                 ? active * -slideWidth
                                 : -carouselWidth,
                     }}
                     onDragStart={() => setIsDragging(true)}
                     onDragEnd={() => setIsDragging(false)}
                     dragTransition={{
-                        bounceStiffness: 250,
-                        bounceDamping: 20,
-                        timeConstant: 300,
                         modifyTarget: target => {
                             return Math.round(target / slideWidth) * slideWidth;
                         },
                     }}
                 >
                     <div className="persons-container">
-                        {images.map((slide, index) => {
+                        {slides.map((slide, index) => {
                             const degrees = 20;
                             const rotate = index * degrees;
+                            const isActive = active - 1 === index;
                             return (
-                                <Slide
+                                <motion.div
                                     key={index}
-                                    imgSrc={images[index]}
-                                    style={{
-                                        transform: `rotate(${
-                                            coordX / 10 + rotate
-                                        }deg)`,
+                                    className="person"
+                                    animate={{
+                                        rotate: coordX / 10 + rotate,
+                                        transformOrigin: `50% ${carouselWidth}`,
                                     }}
-                                />
+                                >
+                                    <img src={slides[index]} />
+                                </motion.div>
                             );
                         })}
                     </div>
