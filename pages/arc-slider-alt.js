@@ -33,7 +33,7 @@ function App() {
 
     return (
         <div className="root">
-            <div className="container">
+            <div className="carousel-container">
                 <motion.div
                     drag={'x'}
                     onUpdate={onUpdate}

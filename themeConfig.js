@@ -1,72 +1,75 @@
-import { Global, css } from "@emotion/react";
-import { THEME } from "./contexts/Theme";
+import { Global, css } from '@emotion/react';
+import { THEME } from './contexts/Theme';
 
 export const lightTheme = {
-  base: "0, 0, 0",
-  text: "#363537",
-  background: "#f1f1f1",
-  link: "#1b789e",
-  linkHover: "#166281",
+    base: '0, 0, 0',
+    text: '#363537',
+    background: '#f1f1f1',
+    link: '#1b789e',
+    linkHover: '#166281',
 };
 
 export const darkTheme = {
-  base: "255, 255, 255",
-  text: "#FAFAFA",
-  background: "#373737",
-  link: "#add8e6",
-  linkHover: "#99cfe0",
+    base: '255, 255, 255',
+    text: '#FAFAFA',
+    background: '#373737',
+    link: '#add8e6',
+    linkHover: '#99cfe0',
 };
 
 export const GlobalStyles = ({ theme }) => {
-  const isLightTheme = theme === THEME.LIGHT;
+    const isLightTheme = theme === THEME.LIGHT;
 
-  return (
-    <Global
-      styles={css`
-        *,
-        *::before,
-        *::after {
-          box-sizing: border-box;
-        }
+    return (
+        <Global
+            styles={css`
+                *,
+                *::before,
+                *::after {
+                    box-sizing: border-box;
+                }
 
-        body {
-          background-color: ${isLightTheme
-            ? lightTheme.background
-            : darkTheme.background};
-          color: ${isLightTheme ? lightTheme.text : darkTheme.text};
-          transition: all 0.25s ease;
-          margin: 0;
-          font-size: 20px;
-          line-height: 1.7;
-          font-weight: 400;
-          font-family: -apple-system, BlinkMacSystemFont, Roboto, "Segoe UI",
-            "Fira Sans", Avenir, "Helvetica Neue", "Lucida Grande", sans-serif;
-          text-rendering: optimizeLegibility;
-        }
+                body {
+                    background-color: ${isLightTheme
+                        ? lightTheme.background
+                        : darkTheme.background};
+                    color: ${isLightTheme ? lightTheme.text : darkTheme.text};
+                    transition: all 0.25s ease;
+                    margin: 0;
+                    font-size: 20px;
+                    line-height: 1.7;
+                    font-weight: 400;
+                    font-family: -apple-system, BlinkMacSystemFont, Roboto,
+                        'Segoe UI', 'Fira Sans', Avenir, 'Helvetica Neue',
+                        'Lucida Grande', sans-serif;
+                    text-rendering: optimizeLegibility;
+                }
 
-        a {
-          color: ${isLightTheme ? lightTheme.link : darkTheme.link};
-          text-decoration: none;
-        }
+                a {
+                    color: ${isLightTheme ? lightTheme.link : darkTheme.link};
+                    text-decoration: none;
+                }
 
-        a:hover {
-          color: ${isLightTheme ? lightTheme.linkHover : darkTheme.linkHover};
-        }
+                a:hover {
+                    color: ${isLightTheme
+                        ? lightTheme.linkHover
+                        : darkTheme.linkHover};
+                }
 
-        img {
-          max-width: 100%;
-        }
+                img {
+                    max-width: 100%;
+                }
 
-        .content-wrapper {
-          padding: 40px 20px;
-        }
-
-        .container {
-          max-width: 1024px;
-          overflow: hidden;
-          margin: 0 auto;
-        }
-      `}
-    />
-  );
+                .content-wrapper {
+                    padding: 40px 20px;
+                }
+                .container {
+                    width: 100%;
+                    max-width: 1024px;
+                    overflow: hidden;
+                    margin: 0 auto;
+                }
+            `}
+        />
+    );
 };

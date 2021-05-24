@@ -56,7 +56,7 @@ function App() {
 
     return (
         <div className="root">
-            <div className="container" {...bind()}>
+            <div className="carousel-container" {...bind()}>
                 <div className="slides-container">
                     {images.map((slide, index) => {
                         const transformOriginY = 1000;

@@ -5,23 +5,6 @@ import { getAllPostsForHome } from '../lib/api';
 const Homepage = ({ allPosts }) => {
     return (
         <div className="container">
-            <Carousel>
-                <div className="text-container">
-                    <h1>Slide 1</h1>
-                </div>
-                <div className="text-container">
-                    <h1>Slide 2</h1>
-                </div>
-                <div className="text-container">
-                    <h1>Slide 3</h1>
-                </div>
-                <div className="text-container">
-                    <h1>Slide 4</h1>
-                </div>
-                <div className="text-container">
-                    <h1>Slide 5</h1>
-                </div>
-            </Carousel>
             <PostList posts={allPosts} />
         </div>
     );
