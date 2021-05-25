@@ -11,24 +11,26 @@ const Header = () => {
         <HeaderWrapper theme={theme}>
             <Logo theme={theme}>
                 <Link href="/">
-                    <a>Next.js &amp; Framer Motion</a>
+                    <a>Framer Motion</a>
                 </Link>
             </Logo>
-            <Link href="/wheel">
-                <a>Wheel</a>
-            </Link>
-            <Link href="/carousel">
-                <a>Carousel</a>
-            </Link>
-            <Link href="/arc-slider">
-                <a>Arc Slider</a>
-            </Link>
-            <Link href="/arc-slider-alt">
-                <a>Arc Slider Framer</a>
-            </Link>
-            <Link href="/blob">
-                <a>Blob</a>
-            </Link>
+            <LinksContainer>
+                <Link href="/wheel">
+                    <a>Wheel</a>
+                </Link>
+                <Link href="/carousel">
+                    <a>Carousel</a>
+                </Link>
+                <Link href="/arc-slider">
+                    <a>Arc Slider</a>
+                </Link>
+                <Link href="/arc-slider-alt">
+                    <a>Arc Slider Framer</a>
+                </Link>
+                <Link href="/blob">
+                    <a>Blob</a>
+                </Link>
+            </LinksContainer>
             <ThemeButton theme={theme} onClick={toggleTheme}>
                 <span>{theme === THEME.LIGHT ? THEME.DARK : THEME.LIGHT}</span>
             </ThemeButton>
@@ -43,6 +45,12 @@ const HeaderWrapper = styled.div`
     padding: 20px;
     background: ${({ theme }) => (theme === THEME.LIGHT ? '#fafafa' : '#000')};
     transition: all 0.25s ease;
+`;
+
+const LinksContainer = styled.div`
+    a {
+        margin: 0 15px;
+    }
 `;
 
 const Logo = styled.div`

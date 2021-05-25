@@ -70,27 +70,69 @@ const blobs = [
 
 const Blob = () => {
     return (
-        <motion.div
-            style={{ display: 'flex', flexWrap: 'wrap' }}
-            initial="initial"
-            animate="enter"
-            exit="exit"
-            variants={{
-                exit: { transition: { staggerChildren: 0.1 } },
-                enter: { transition: { staggerChildren: 0.1 } },
-            }}
-        >
-            {blobs.map(blob => (
-                <BlobShape
-                    key={blob.id}
-                    id={blob.id}
-                    initialPath={blob.initialPath}
-                    animatePath={blob.animatePath}
-                    orientation={blob.orientation}
-                    imgSrc={blob.imgSrc}
-                />
-            ))}
-        </motion.div>
+        <div>
+            <motion.div
+                style={{ display: 'flex', flexWrap: 'wrap' }}
+                initial="initial"
+                animate="enter"
+                exit="exit"
+                variants={{
+                    exit: { transition: { staggerChildren: 0.1 } },
+                    enter: { transition: { staggerChildren: 0.1 } },
+                }}
+            >
+                {blobs.map(blob => (
+                    <BlobShape
+                        key={blob.id}
+                        id={blob.id}
+                        initialPath={blob.initialPath}
+                        animatePath={blob.animatePath}
+                        orientation={blob.orientation}
+                        imgSrc={blob.imgSrc}
+                    />
+                ))}
+            </motion.div>
+
+            <svg>
+                <clipPath id="wave" clipPathUnits="objectBoundingBox">
+                    <path
+                        class="st0"
+                        d="M1,0c0,0-0.3,0.1-0.5,0.1S0.3,0,0,0.1V1h1L1,0z"
+                    />
+                </clipPath>
+            </svg>
+
+            <div className="section section1">
+                <h1>Some text goes here</h1>
+            </div>
+
+            <div className="section section2">
+                <h1>Some text goes here</h1>
+            </div>
+            <style jsx>{`
+                .section {
+                    clip-path: url(#wave);
+                    padding: 300px 20px 600px;
+                }
+
+                .section1 {
+                    background: url(https://images.unsplash.com/photo-1558035498-265faf6ba813?ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8NTN8ODM1MjY1N3x8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60)
+                        no-repeat center;
+                    background-size: cover;
+                }
+
+                .section2 {
+                    background: url(https://images.unsplash.com/photo-1438183972690-6d4658e3290e?ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MjQwfDQyODY0Nzh8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60)
+                        no-repeat center;
+                    background-size: cover;
+                    margin-top: -300px;
+                }
+
+                svg {
+                    position: absolute;
+                }
+            `}</style>
+        </div>
     );
 };
 

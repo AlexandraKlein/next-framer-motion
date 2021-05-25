@@ -36,10 +36,6 @@ const Layout = ({ children, preview }) => {
                     display: flex;
                     flex-direction: column;
                 }
-
-                .page-wrapper {
-                    overflow: hidden;
-                }
             `}</style>
         </div>
     );
