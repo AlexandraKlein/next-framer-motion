@@ -15,12 +15,12 @@ const Header = () => {
                 </Link>
             </Logo>
             <LinksContainer>
-                <Link href="/wheel">
+                {/* <Link href="/wheel">
                     <a>Wheel</a>
-                </Link>
-                <Link href="/carousel">
+                </Link> */}
+                {/* <Link href="/carousel">
                     <a>Carousel</a>
-                </Link>
+                </Link> */}
                 <Link href="/arc-slider">
                     <a>Arc Slider</a>
                 </Link>
@@ -28,7 +28,7 @@ const Header = () => {
                     <a>Arc Slider Framer</a>
                 </Link>
                 <Link href="/blob">
-                    <a>Blob</a>
+                    <a>Blobbies</a>
                 </Link>
             </LinksContainer>
             <ThemeButton theme={theme} onClick={toggleTheme}>

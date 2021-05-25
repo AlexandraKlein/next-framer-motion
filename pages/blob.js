@@ -76,7 +76,7 @@ const blobs2 = [
             'M35.7,5.3C35.7,29.7,17.9,59.5,-7.4,59.5C-32.6,59.5,-65.1,29.7,-65.1,5.3C-65.1,-19.1,-32.6,-38.1,-7.4,-38.1C17.9,-38.1,35.7,-19.1,35.7,5.3Z',
         animatePath:
             'M61.9,2.5C61.9,27.4,31,54.9,-0.7,54.9C-32.5,54.9,-64.9,27.4,-64.9,2.5C-64.9,-22.4,-32.5,-44.9,-0.7,-44.9C31,-44.9,61.9,-22.4,61.9,2.5Z',
-        imgSrc: 'https://tympanus.net/Development/OrganicShapeAnimations/img/1.png',
+        imgSrc: 'https://images.unsplash.com/photo-1558693168-c370615b54e0?ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8Mjc5fDgzNTI2NTd8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
     },
     {
         id: 'shape10',
@@ -84,7 +84,7 @@ const blobs2 = [
             'M35.6,2C35.6,21.4,17.8,42.9,-6.6,42.9C-31.1,42.9,-62.1,21.4,-62.1,2C-62.1,-17.4,-31.1,-34.7,-6.6,-34.7C17.8,-34.7,35.6,-17.4,35.6,2Z',
         animatePath:
             'M51.8,-5.3C51.8,19.7,25.9,39.4,0.9,39.4C-24,39.4,-48.1,19.7,-48.1,-5.3C-48.1,-30.4,-24,-60.7,0.9,-60.7C25.9,-60.7,51.8,-30.4,51.8,-5.3Z',
-        imgSrc: 'https://tympanus.net/Development/OrganicShapeAnimations/img/2.png',
+        imgSrc: 'https://images.unsplash.com/photo-1438183972690-6d4658e3290e?ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MjQwfDQyODY0Nzh8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
     },
     {
         id: 'shape11',
@@ -92,7 +92,7 @@ const blobs2 = [
             'M41.5,-4.1C41.5,19.3,20.7,38.6,1.5,38.6C-17.7,38.6,-35.4,19.3,-35.4,-4.1C-35.4,-27.4,-17.7,-54.8,1.5,-54.8C20.7,-54.8,41.5,-27.4,41.5,-4.1Z',
         animatePath:
             'M58.9,-1.3C58.9,19.5,29.5,39,-1.8,39C-33.1,39,-66.1,19.5,-66.1,-1.3C-66.1,-22,-33.1,-44.1,-1.8,-44.1C29.5,-44.1,58.9,-22,58.9,-1.3Z',
-        imgSrc: 'https://tympanus.net/Development/OrganicShapeAnimations/img/3.png',
+        imgSrc: 'https://images.unsplash.com/photo-1497034825429-c343d7c6a68f?ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8MjM1fDQyODY0Nzh8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
     },
     {
         id: 'shape12',
@@ -100,7 +100,7 @@ const blobs2 = [
             'M44.8,-3.4C44.8,22.8,22.4,45.6,-1.1,45.6C-24.5,45.6,-49.1,22.8,-49.1,-3.4C-49.1,-29.6,-24.5,-59.1,-1.1,-59.1C22.4,-59.1,44.8,-29.6,44.8,-3.4Z',
         animatePath:
             'M37.6,2.6C37.6,23.9,18.8,47.9,-7,47.9C-32.8,47.9,-65.6,23.9,-65.6,2.6C-65.6,-18.7,-32.8,-37.4,-7,-37.4C18.8,-37.4,37.6,-18.7,37.6,2.6Z',
-        imgSrc: 'https://tympanus.net/Development/OrganicShapeAnimations/img/4.png',
+        imgSrc: 'https://images.unsplash.com/photo-1576406923149-3b613b87e3e9?ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8NTR8ODM1MjY1N3x8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
     },
     {
         id: 'shape13',
@@ -108,7 +108,7 @@ const blobs2 = [
             'M50.1,-1.3C50.1,21.5,25.1,43.1,2.3,43.1C-20.5,43.1,-41,21.5,-41,-1.3C-41,-24.2,-20.5,-48.4,2.3,-48.4C25.1,-48.4,50.1,-24.2,50.1,-1.3Z',
         initialPath:
             'M54.2,-1.8C54.2,21.4,27.1,42.9,1,42.9C-25.2,42.9,-50.4,21.4,-50.4,-1.8C-50.4,-25,-25.2,-50,1,-50C27.1,-50,54.2,-25,54.2,-1.8Z',
-        imgSrc: 'https://tympanus.net/Development/OrganicShapeAnimations/img/4.png',
+        imgSrc: 'https://images.unsplash.com/photo-1558035579-a10d04acf787?ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8NTV8ODM1MjY1N3x8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
     },
     {
         id: 'shape14',
@@ -116,7 +116,7 @@ const blobs2 = [
             'M40.3,2.8C40.3,27.3,20.2,54.5,-3.8,54.5C-27.7,54.5,-55.4,27.3,-55.4,2.8C-55.4,-21.6,-27.7,-43.2,-3.8,-43.2C20.2,-43.2,40.3,-21.6,40.3,2.8Z',
         initialPath:
             'M42.3,8C42.3,33.1,21.1,66.1,1.4,66.1C-18.3,66.1,-36.5,33.1,-36.5,8C-36.5,-17,-18.3,-33.9,1.4,-33.9C21.1,-33.9,42.3,-17,42.3,8Z',
-        imgSrc: 'https://tympanus.net/Development/OrganicShapeAnimations/img/3.png',
+        imgSrc: 'https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8Mjk0fDgzNTI2NTd8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
     },
     {
         id: 'shape15',
@@ -124,7 +124,7 @@ const blobs2 = [
             'M59.8,-4.1C59.8,18.4,29.9,36.8,-1.5,36.8C-32.9,36.8,-65.8,18.4,-65.8,-4.1C-65.8,-26.7,-32.9,-53.3,-1.5,-53.3C29.9,-53.3,59.8,-26.7,59.8,-4.1Z',
         initialPath:
             'M51.6,1.9C51.6,31.7,25.8,63.4,-1.2,63.4C-28.3,63.4,-56.5,31.7,-56.5,1.9C-56.5,-28,-28.3,-55.9,-1.2,-55.9C25.8,-55.9,51.6,-28,51.6,1.9Z',
-        imgSrc: 'https://tympanus.net/Development/OrganicShapeAnimations/img/2.png',
+        imgSrc: 'https://images.unsplash.com/photo-1558035579-a10d04acf787?ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8NTV8ODM1MjY1N3x8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
     },
     {
         id: 'shape16',
@@ -132,13 +132,14 @@ const blobs2 = [
             'M60.9,-0.9C60.9,28,30.5,56.1,5.1,56.1C-20.3,56.1,-40.7,28,-40.7,-0.9C-40.7,-29.9,-20.3,-59.7,5.1,-59.7C30.5,-59.7,60.9,-29.9,60.9,-0.9Z',
         initialPath:
             'M51.4,1C51.4,28.3,25.7,56.5,-2.3,56.5C-30.4,56.5,-60.7,28.3,-60.7,1C-60.7,-26.3,-30.4,-52.7,-2.3,-52.7C25.7,-52.7,51.4,-26.3,51.4,1Z',
-        imgSrc: 'https://tympanus.net/Development/OrganicShapeAnimations/img/1.png',
+        imgSrc: 'https://images.unsplash.com/photo-1558035498-265faf6ba813?ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8NTN8ODM1MjY1N3x8ZW58MHx8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60',
     },
 ];
 
 const Blob = () => {
     return (
         <div>
+            <h2>With XML IMAGE tag</h2>
             <motion.div
                 style={{ display: 'flex', flexWrap: 'wrap' }}
                 initial="initial"
@@ -159,7 +160,9 @@ const Blob = () => {
                         imgSrc={blob.imgSrc}
                     />
                 ))}
-
+            </motion.div>
+            <h2>With IMG tag</h2>
+            <div style={{ display: 'flex', flexWrap: 'wrap' }}>
                 {blobs2.map(blob => (
                     <BlobShapeAlt
                         key={blob.id}
@@ -170,7 +173,7 @@ const Blob = () => {
                         imgSrc={blob.imgSrc}
                     />
                 ))}
-            </motion.div>
+            </div>
 
             <svg>
                 <clipPath id="wave" clipPathUnits="objectBoundingBox">
