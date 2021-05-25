@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import React, { useState, useRef, forwardRef } from 'react';
 import { useSpring, animated, config } from 'react-spring';
+import { useMeasure } from 'react-use';
 import { useDrag } from 'react-use-gesture';
 
 const slides = [
@@ -16,22 +17,23 @@ const slides = [
     'https://images.unsplash.com/photo-1545167622-3a6ac756afa4?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDd8fGZhY2V8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=60',
 ];
 
-const Slide = ({ style, imgSrc, isActive }) => {
+const Slide = forwardRef(({ style, imgSrc, isActive }, ref) => {
     return (
-        <animated.div className="slide" style={style}>
-            <img
-                src={imgSrc}
-                style={{ border: isActive ? '10px solid cadetblue' : 'unset' }}
-            />
+        <animated.div
+            ref={ref}
+            className={`slide ${isActive ? 'active' : ''}`}
+            style={style}
+        >
+            <img src={imgSrc} />
         </animated.div>
     );
-};
-
-const slideWidth = 200;
-const carouselWidth = (slides.length - 1) * 2 * (slideWidth / 2);
+});
 
 function App() {
+    const [slideRef, { width: slideWidth }] = useMeasure();
     const [active, setActive] = useState(Math.round(slides.length / 2));
+
+    const carouselWidth = (slides.length - 1) * 2 * (slideWidth / 2);
 
     const [{ x }, set] = useSpring(() => ({
         x: -slideWidth * active,
@@ -71,6 +73,7 @@ function App() {
                         const rotate = index * degrees;
                         return (
                             <Slide
+                                ref={slideRef}
                                 key={index}
                                 isActive={isActive}
                                 imgSrc={slides[index]}
@@ -83,6 +86,14 @@ function App() {
                             />
                         );
                     })}
+                </div>
+                <div className="nav-dots">
+                    {slides.map((_, index) => (
+                        <div
+                            className={active === index ? 'active' : ''}
+                            key={index}
+                        />
+                    ))}
                 </div>
             </div>
         </div>
