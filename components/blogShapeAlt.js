@@ -19,20 +19,15 @@ const variants = {
 };
 
 const BlobShapeAlt = ({ id, initialPath, animatePath, imgSrc }) => {
-    const viewBoxWidth = 500;
-    const viewBoxHeight = 500;
+    const viewBoxWidth = 200;
+    const viewBoxHeight = 200;
     return (
-        <motion.div
-            variants={variants}
-            style={{
-                width: '25%',
-                position: 'relative',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-            }}
-        >
-            <svg viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}>
+        <div className="blob-container">
+            <svg
+                viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
+                width="0"
+                height="0"
+            >
                 <g>
                     <defs>
                         <clipPath
@@ -43,6 +38,9 @@ const BlobShapeAlt = ({ id, initialPath, animatePath, imgSrc }) => {
                             })`}
                         >
                             <motion.path
+                                transform={`translate(${viewBoxWidth / 2} ${
+                                    viewBoxHeight / 2
+                                }) scale(1.5)`}
                                 initial={{ d: initialPath }}
                                 animate={{ d: animatePath }}
                                 transition={{
@@ -56,16 +54,24 @@ const BlobShapeAlt = ({ id, initialPath, animatePath, imgSrc }) => {
                     </defs>
                 </g>
             </svg>
+
             <img
                 src={imgSrc}
                 style={{
+                    WebkitClipPath: `url(#${id})`,
                     clipPath: `url(#${id})`,
                     width: '100%',
                     objectFit: 'cover',
                 }}
-                alt=""
             />
-        </motion.div>
+            <style jsx>
+                {`
+                    .blob-container {
+                        width: 25%;
+                    }
+                `}
+            </style>
+        </div>
     );
 };
 
