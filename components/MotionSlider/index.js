@@ -16,10 +16,10 @@ const MotionSlider = ({ slides, children }) => {
     const activePrevious = usePrevious(active);
     const { width } = useWindowSize();
 
-    const slideWidth = containerWidth / slides.length;
+    const slideWidth = containerWidth / children.length;
     const offset = rootWidth / 2 - slideWidth / 2;
     const maxLeft =
-        -(slideWidth * (slides.length - 1)) + (rootWidth - slideWidth);
+        -(slideWidth * (children.length - 1)) + (rootWidth - slideWidth);
 
     let padding = 0;
 
@@ -60,25 +60,23 @@ const MotionSlider = ({ slides, children }) => {
         [isDragging]
     );
 
+    const renderChild = (child, props) => {
+        if (child instanceof Function) {
+            return child({ ...props });
+        }
+
+        return child;
+    };
+
     const renderSlides = slides => {
-        console.log({ active });
-        return slides.map((slide, i) => {
+        return children.map((child, i) => {
             return (
                 <motion.div
                     key={i}
-                    className={cx(styles.item, {
-                        [styles.active]: active === i,
-                    })}
+                    className={styles.item}
                     onClick={handleClickSlide(i)}
                 >
-                    <div
-                        className={cx(styles.slide, {
-                            [styles.active]: active === i,
-                        })}
-                    >
-                        <h6>{slide.eyebrow}</h6>
-                        <h2>{slide.headline}</h2>
-                    </div>
+                    {renderChild(child, { active })}
                 </motion.div>
             );
         });
@@ -116,7 +114,7 @@ const MotionSlider = ({ slides, children }) => {
                                         ),
                                         0
                                     ),
-                                    slides.length - 1
+                                    children.length - 1
                                 )
                             );
                             return snapTarget + offset + padding / 2;
@@ -125,12 +123,12 @@ const MotionSlider = ({ slides, children }) => {
                 >
                     <div
                         style={{
-                            width: `${slides.length * 90}%`,
+                            width: `${children.length * 90}%`,
                         }}
                         className={styles.slides}
                         ref={slideRef}
                     >
-                        {renderSlides(slides)}
+                        {renderSlides()}
                     </div>
                 </motion.div>
             </div>

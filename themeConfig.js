@@ -60,9 +60,6 @@ export const GlobalStyles = ({ theme }) => {
                     max-width: 100%;
                 }
 
-                .content-wrapper {
-                    padding: 40px 20px;
-                }
                 .container {
                     width: 100%;
                     max-width: 1024px;
