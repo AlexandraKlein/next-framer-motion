@@ -36,4 +36,10 @@
     flex-direction: column;
     flex: 1;
     padding: 0 var(--slide-spacing) 0 0;
+    user-select: none;
+
+    // If image ...
+    img {
+        pointer-events: none;
+    }
 }

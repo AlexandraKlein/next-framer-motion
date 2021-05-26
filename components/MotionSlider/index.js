@@ -16,6 +16,7 @@ const MotionSlider = ({ slides, children }) => {
 
     const [isDragging, setIsDragging] = useState(false);
     const [active, setActive] = useState(0);
+
     const activePrevious = usePrevious(active);
 
     const slideWidth = containerWidth / children.length;
