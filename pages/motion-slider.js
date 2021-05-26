@@ -1,4 +1,5 @@
 import MotionSlider from '../components/MotionSlider';
+import DrabbableSlider from '../components/DraggableSlider';
 import styled from '@emotion/styled';
 import cx from 'classnames';
 
@@ -57,18 +58,32 @@ const slides = [
 
 const MotionSliderPage = () => {
     return (
-        <MotionSlider>
-            {slides.map((slide, index) => props => (
-                <Slide
-                    key={index}
-                    className={cx({ active: props.active === index })}
-                >
-                    <img src={slide.img} />
-                    <h6>{slide.eyebrow}</h6>
-                    <h2>{slide.headline}</h2>
-                </Slide>
-            ))}
-        </MotionSlider>
+        <>
+            <DrabbableSlider>
+                {slides.map((slide, index) => props => (
+                    <Slide
+                        key={index}
+                        className={cx({ active: props.active === index })}
+                    >
+                        <img src={slide.img} />
+                        <h6>{slide.eyebrow}</h6>
+                        <h2>{slide.headline}</h2>
+                    </Slide>
+                ))}
+            </DrabbableSlider>
+            <MotionSlider>
+                {slides.map((slide, index) => props => (
+                    <Slide
+                        key={index}
+                        className={cx({ active: props.active === index })}
+                    >
+                        <img src={slide.img} />
+                        <h6>{slide.eyebrow}</h6>
+                        <h2>{slide.headline}</h2>
+                    </Slide>
+                ))}
+            </MotionSlider>
+        </>
     );
 };
 
@@ -81,6 +96,8 @@ const Slide = styled.div`
     background-color: cadetblue;
     padding: 2rem;
     transition: background-color 0.2s ease-out;
+    width: 400px;
+    margin: 20px;
 
     &.active {
         background-color: lightcoral;

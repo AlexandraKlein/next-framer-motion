@@ -1,0 +1,68 @@
+.root {
+    position: relative;
+    overflow: hidden;
+}
+
+.track {
+    cursor: grab;
+    display: flex;
+    min-width: min-content;
+
+    &:active {
+        cursor: grabbing;
+    }
+}
+
+.inner {
+    display: flex;
+    min-width: min-content;
+    user-select: none;
+
+    .isDragging & > * {
+        pointer-events: none;
+        user-select: none;
+    }
+}
+
+.slideContainer {
+    display: flex;
+}
+
+.nav {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+}
+
+.navItem {
+    position: relative;
+    width: 6rem;
+    height: 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: black;
+    background-color: lightgray;
+    cursor: pointer;
+    border: none;
+
+    @media (hover: hover) {
+        &:hover {
+            color: lightcoral;
+        }
+    }
+
+    &:disabled {
+        pointer-events: none;
+        opacity: 0.5;
+    }
+}
+
+.navItemInner {
+    display: flex;
+    justify-content: center;
+    width: 3rem;
+    font-size: 20px;
+}

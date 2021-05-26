@@ -74,13 +74,13 @@ const MotionSlider = ({ slides, children }) => {
     const renderSlides = slides => {
         return children.map((child, i) => {
             return (
-                <motion.div
+                <div
                     key={i}
                     className={styles.item}
                     onClick={handleClickSlide(i)}
                 >
                     {renderChild(child, { active })}
-                </motion.div>
+                </div>
             );
         });
     };
