@@ -45,7 +45,7 @@ const MotionSlider = ({ slides, children }) => {
         if (!isDragging && active != activePrevious) {
             controls.start({
                 x,
-                transition: { duration: 1, ease: 'anticipate' },
+                transition: { duration: 0.6, ease: 'circOut' },
             });
         }
     }, [active]);
@@ -110,9 +110,7 @@ const MotionSlider = ({ slides, children }) => {
                             setActive(
                                 Math.min(
                                     Math.max(
-                                        parseInt(
-                                            (snapTarget * -1) / slideWidth
-                                        ),
+                                        parseInt(-snapTarget / slideWidth),
                                         0
                                     ),
                                     children.length - 1
