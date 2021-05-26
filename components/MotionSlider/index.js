@@ -109,12 +109,12 @@ const MotionSlider = ({ slides, children }) => {
                             const snapTarget =
                                 Math.round(target / slideWidth) * slideWidth;
 
-                            const newActive = Math.min(
+                            const clampedActive = Math.min(
                                 Math.max(parseInt(-snapTarget / slideWidth), 0),
                                 children.length - 1
                             );
 
-                            setActive(newActive);
+                            setActive(clampedActive);
                             return snapTarget + offset + padding / 2;
                         },
                     }}
