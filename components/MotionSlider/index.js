@@ -34,8 +34,8 @@ const MotionSlider = ({ slides, children }) => {
     }
 
     const x = Math.max(
-        Math.min(-active * slideWidth + offset, 0),
-        maxLeft + padding
+        Math.min(-active * slideWidth + offset + padding / 2, 0),
+        maxLeft
     );
 
     useEffect(() => {
@@ -108,15 +108,12 @@ const MotionSlider = ({ slides, children }) => {
                             const snapTarget =
                                 Math.round(target / slideWidth) * slideWidth;
 
-                            setActive(
-                                Math.min(
-                                    Math.max(
-                                        parseInt(-snapTarget / slideWidth),
-                                        0
-                                    ),
-                                    children.length - 1
-                                )
+                            const newActive = Math.min(
+                                Math.max(parseInt(-snapTarget / slideWidth), 0),
+                                children.length - 1
                             );
+
+                            setActive(newActive);
                             return snapTarget + offset + padding / 2;
                         },
                     }}
