@@ -70,12 +70,21 @@ const MotionSliderPage = () => {
 };
 
 const Slide = styled.div`
+    flex: 1;
     background-color: cadetblue;
     padding: 2rem;
     transition: background-color 0.2s ease-out;
 
     &.active {
         background-color: lightcoral;
+    }
+
+    h6 {
+        text-transform: uppercase;
+    }
+
+    h2 {
+        line-height: 1.2;
     }
 `;
 

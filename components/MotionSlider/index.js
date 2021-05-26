@@ -1,6 +1,7 @@
 import React, { useCallback, useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
+
 import { motion, useAnimation } from 'framer-motion';
 import { useMeasure, usePrevious, useWindowSize } from 'react-use';
 

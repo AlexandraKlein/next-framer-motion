@@ -1,5 +1,5 @@
 .root {
-    --slide-spacing: 1rem;
+    --slide-spacing: 1.5rem;
     position: relative;
     width: 100%;
     display: flex;
@@ -22,6 +22,7 @@
 
 .slides {
     display: flex;
+    justify-content: center;
     cursor: grab;
 
     &:active * {
@@ -30,8 +31,9 @@
 }
 
 .item {
-    border: none;
-    background: transparent;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
     position: relative;
     width: 50%;
     padding: 0 var(--slide-spacing) 0 0;
