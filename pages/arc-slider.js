@@ -1,4 +1,4 @@
-import React, { useState, useRef, forwardRef } from 'react';
+import React, { useState, useRef, useEffect, forwardRef } from 'react';
 import { useSpring, animated } from 'react-spring';
 import { useMeasure } from 'react-use';
 import { useDrag } from 'react-use-gesture';
@@ -35,9 +35,13 @@ function App() {
 
     const carouselWidth = (slides.length - 1) * 2 * (slideWidth / 2);
 
-    const [{ x }, set] = useSpring(() => ({
-        x: -slideWidth * active,
+    const [{ x }, api] = useSpring(() => ({
+        x: 0,
     }));
+
+    useEffect(() => {
+        api.set({ x: -slideWidth * active });
+    }, [slideWidth]);
 
     const bind = useDrag(
         ({ movement: [x], down }) => {
@@ -46,14 +50,14 @@ function App() {
                     const newX = -index * slideWidth;
                     if (x < newX + slideWidth / 2) {
                         setActive(index);
-                        set({ x: newX });
+                        api.start({ x: newX });
                         return;
                     }
                 });
                 return;
             }
 
-            set({ x });
+            api.start({ x });
         },
         {
             initial: () => [x.get(), 0],
