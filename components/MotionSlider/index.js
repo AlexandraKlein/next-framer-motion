@@ -11,11 +11,12 @@ const MotionSlider = ({ slides, children }) => {
     const rootRef = useRef();
     const controls = useAnimation();
     const [containerRef, { width: rootWidth }] = useMeasure();
-    const [slideRef, { width: containerWidth }] = useMeasure();
+    const [slidesContainerRef, { width: containerWidth }] = useMeasure();
+    const { width } = useWindowSize();
+
     const [isDragging, setIsDragging] = useState(false);
     const [active, setActive] = useState(0);
     const activePrevious = usePrevious(active);
-    const { width } = useWindowSize();
 
     const slideWidth = containerWidth / children.length;
     const offset = rootWidth / 2 - slideWidth / 2;
@@ -25,11 +26,11 @@ const MotionSlider = ({ slides, children }) => {
     let padding = 0;
 
     if (rootRef.current) {
-        const paddingRaw = getComputedStyle(rootRef.current).getPropertyValue(
-            '--slide-spacing'
+        padding = parseFloat(
+            getComputedStyle(rootRef.current).getPropertyValue(
+                '--slide-spacing'
+            )
         );
-
-        padding = parseFloat(paddingRaw) * 10;
     }
 
     const x = Math.max(
@@ -39,7 +40,7 @@ const MotionSlider = ({ slides, children }) => {
 
     useEffect(() => {
         controls.set({ x });
-    }, [width]);
+    }, [containerWidth]);
 
     useEffect(() => {
         if (!isDragging && active != activePrevious) {
@@ -125,7 +126,7 @@ const MotionSlider = ({ slides, children }) => {
                             width: `${children.length * 90}%`,
                         }}
                         className={styles.slides}
-                        ref={slideRef}
+                        ref={slidesContainerRef}
                     >
                         {renderSlides()}
                     </div>
