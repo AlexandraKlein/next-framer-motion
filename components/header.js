@@ -18,9 +18,9 @@ const Header = () => {
                 {/* <Link href="/wheel">
                     <a>Wheel</a>
                 </Link> */}
-                {/* <Link href="/carousel">
+                <Link href="/motion-slider">
                     <a>Carousel</a>
-                </Link> */}
+                </Link>
                 <Link href="/arc-slider">
                     <a>Arc Slider</a>
                 </Link>
