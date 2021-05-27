@@ -1,20 +1,10 @@
-import React, {
-    useCallback,
-    useState,
-    useEffect,
-    createContext,
-    useRef,
-} from 'react';
+import React, { useCallback, useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import cx from 'classnames';
 import { useMeasure } from 'react-use';
 import { motion } from 'framer-motion';
 
 import styles from './DraggableSlider.module.scss';
-
-export const SliderContext = createContext({
-    activeIndex: 0,
-});
 
 const DraggableSlider = ({ children, navClassName }) => {
     const inViewRatio = 0.5;
@@ -102,56 +92,50 @@ const DraggableSlider = ({ children, navClassName }) => {
     };
 
     return (
-        <SliderContext.Provider
-            value={{
-                activeIndex,
-            }}
+        <div
+            ref={ref}
+            className={cx(styles.root, {
+                [styles.isDragging]: isDragging,
+            })}
         >
-            <div
-                ref={ref}
-                className={cx(styles.root, {
-                    [styles.isDragging]: isDragging,
-                })}
+            <motion.div
+                ref={trackRef}
+                className={styles.track}
+                drag="x"
+                dragConstraints={{
+                    left: -trackWidth + tileWidth,
+                    right: trackWidth - tileWidth,
+                }}
+                dragTransition={{
+                    power: 0.3,
+                    timeConstant: 200,
+                    modifyTarget: handleSnap,
+                }}
+                animate={{
+                    x: activeIndex * -1 * tileWidth + pageCenterDiff,
+                }}
+                onDragStart={() => setIsDragging(true)}
+                onDragEnd={() => setIsDragging(false)}
             >
-                <motion.div
-                    ref={trackRef}
-                    className={styles.track}
-                    drag="x"
-                    dragConstraints={{
-                        left: -trackWidth + tileWidth,
-                        right: trackWidth - tileWidth,
-                    }}
-                    dragTransition={{
-                        power: 0.3,
-                        timeConstant: 200,
-                        modifyTarget: handleSnap,
-                    }}
-                    animate={{
-                        x: activeIndex * -1 * tileWidth + pageCenterDiff,
-                    }}
-                    onDragStart={() => setIsDragging(true)}
-                    onDragEnd={() => setIsDragging(false)}
+                <div className={styles.inner}>{renderSlides()}</div>
+            </motion.div>
+            <nav className={cx(styles.nav, navClassName)}>
+                <button
+                    className={styles.navItem}
+                    onClick={showPrev}
+                    disabled={isBeginning}
                 >
-                    <div className={styles.inner}>{renderSlides()}</div>
-                </motion.div>
-                <nav className={cx(styles.nav, navClassName)}>
-                    <button
-                        className={styles.navItem}
-                        onClick={showPrev}
-                        disabled={isBeginning}
-                    >
-                        <span className={styles.navItemInner}>←</span>
-                    </button>
-                    <button
-                        className={styles.navItem}
-                        onClick={showNext}
-                        disabled={isEnd}
-                    >
-                        <span className={styles.navItemInner}>→</span>
-                    </button>
-                </nav>
-            </div>
-        </SliderContext.Provider>
+                    <span className={styles.navItemInner}>←</span>
+                </button>
+                <button
+                    className={styles.navItem}
+                    onClick={showNext}
+                    disabled={isEnd}
+                >
+                    <span className={styles.navItemInner}>→</span>
+                </button>
+            </nav>
+        </div>
     );
 };
 

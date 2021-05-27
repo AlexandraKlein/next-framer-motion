@@ -60,10 +60,10 @@ const MotionSliderPage = () => {
     return (
         <>
             <DrabbableSlider>
-                {slides.map((slide, index) => props => (
+                {slides.map((slide, index) => ({ active }) => (
                     <Slide
                         key={index}
-                        className={cx({ active: props.active === index })}
+                        className={cx({ active: active === index })}
                     >
                         <img src={slide.img} />
                         <h6>{slide.eyebrow}</h6>
@@ -72,10 +72,10 @@ const MotionSliderPage = () => {
                 ))}
             </DrabbableSlider>
             <MotionSlider>
-                {slides.map((slide, index) => props => (
+                {slides.map((slide, index) => ({ active }) => (
                     <Slide
                         key={index}
-                        className={cx({ active: props.active === index })}
+                        className={cx({ active: active === index })}
                     >
                         <img src={slide.img} />
                         <h6>{slide.eyebrow}</h6>
