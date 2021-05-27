@@ -59,7 +59,7 @@ export default function ArcSlider({ children }) {
                     onDragStart={() => setIsDragging(true)}
                     onDragEnd={() => setIsDragging(false)}
                     dragTransition={{
-                        power: isWide ? 0.001 : 1,
+                        power: isWide ? 0.001 : 0.01,
                         timeConstant: 200,
                         modifyTarget: handleModifyTarget,
                     }}
