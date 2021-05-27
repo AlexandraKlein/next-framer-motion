@@ -105,7 +105,8 @@ function App() {
 }
 
 export default App;
-
+// 1  : 180
+// 3  : 66.666
 // 5  : 40
 // 10 : 20
 // 20 : 10

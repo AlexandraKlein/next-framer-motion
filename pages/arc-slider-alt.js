@@ -18,7 +18,7 @@ export default function ArcCarousel() {
     return (
         <ArcSlider>
             {slides.map((slide, index) => (
-                <img src={slide} alt="" />
+                <img key={index} src={slide} alt="" />
             ))}
         </ArcSlider>
     );
