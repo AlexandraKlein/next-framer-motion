@@ -64,7 +64,6 @@ const MotionSliderPage = () => {
                     <Slide
                         key={index}
                         className={cx({ active: active === index })}
-                        style={{ width: 300 }}
                     >
                         <img src={slide.img} />
                         <h6>{slide.eyebrow}</h6>
@@ -72,7 +71,7 @@ const MotionSliderPage = () => {
                     </Slide>
                 ))}
             </DrabbableSlider>
-            <MotionSlider>
+            {/* <MotionSlider>
                 {slides.map((slide, index) => ({ active }) => (
                     <Slide
                         key={index}
@@ -83,7 +82,7 @@ const MotionSliderPage = () => {
                         <h2>{slide.headline}</h2>
                     </Slide>
                 ))}
-            </MotionSlider>
+            </MotionSlider> */}
         </>
     );
 };
@@ -98,6 +97,7 @@ const Slide = styled.div`
     padding: 2rem;
     transition: background-color 0.2s ease-out;
     margin: 20px;
+    width: 250px;
 
     &.active {
         background-color: lightcoral;
@@ -116,6 +116,10 @@ const Slide = styled.div`
 
     h2 {
         line-height: 1.2;
+    }
+
+    @media (min-width: 768px) {
+        width: 400px;
     }
 `;
 
