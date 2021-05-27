@@ -140,7 +140,10 @@ const DraggableSlider = ({ children, navClassName }) => {
 };
 
 DraggableSlider.propTypes = {
-    children: PropTypes.arrayOf(PropTypes.node),
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.arrayOf(PropTypes.func),
+    ]).isRequired,
     navClassName: PropTypes.string,
 };
 

@@ -64,6 +64,7 @@ const MotionSliderPage = () => {
                     <Slide
                         key={index}
                         className={cx({ active: active === index })}
+                        style={{ width: 300 }}
                     >
                         <img src={slide.img} />
                         <h6>{slide.eyebrow}</h6>
@@ -96,7 +97,6 @@ const Slide = styled.div`
     background-color: cadetblue;
     padding: 2rem;
     transition: background-color 0.2s ease-out;
-    width: 400px;
     margin: 20px;
 
     &.active {
