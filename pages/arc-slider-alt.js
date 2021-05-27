@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
+import cx from 'classnames';
 
 const slides = [
     'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZmFjZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=60',
@@ -15,20 +16,28 @@ const slides = [
     'https://images.unsplash.com/photo-1545167622-3a6ac756afa4?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NDd8fGZhY2V8ZW58MHx8MHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=60',
 ];
 
-const slideWidth = 200;
-const carouselWidth = (slides.length - 1) * 2 * (slideWidth / 2);
-
-function App() {
+export default function App() {
     const [isDragging, setIsDragging] = useState(false);
     const [active, setActive] = useState(0);
     const [coordX, setCoordX] = useState(0);
 
-    useEffect(() => {
-        setActive(Math.round(Math.abs(coordX - slideWidth) / slideWidth));
-    }, [isDragging]);
+    const slideWidth = 200;
 
     const onUpdate = latest => {
         setCoordX(latest.x);
+    };
+
+    const handleModifyTarget = target => {
+        const snapTarget = Math.round(target / slideWidth) * slideWidth;
+
+        const clampedActive = Math.min(
+            Math.max(parseInt(-snapTarget / slideWidth), 0),
+            slides.length - 1
+        );
+
+        setActive(clampedActive);
+
+        return snapTarget;
     };
 
     return (
@@ -39,20 +48,15 @@ function App() {
                     onUpdate={onUpdate}
                     dragElastic={0}
                     dragConstraints={{
-                        right: active > 1 ? (active - 2) * -slideWidth : 0,
-                        left:
-                            active < slides.length
-                                ? active * -slideWidth
-                                : -carouselWidth,
+                        right: 0,
+                        left: -(slideWidth * (slides.length - 1)),
                     }}
                     onDragStart={() => setIsDragging(true)}
                     onDragEnd={() => setIsDragging(false)}
                     dragTransition={{
-                        power: 0.2,
+                        power: 0.1,
                         timeConstant: 200,
-                        modifyTarget: target => {
-                            return Math.round(target / slideWidth) * slideWidth;
-                        },
+                        modifyTarget: handleModifyTarget,
                     }}
                 >
                     <div className="slides-container">
@@ -60,17 +64,23 @@ function App() {
                             const transformOriginY = 1000;
                             const degrees = 20;
                             const rotate = index * degrees;
-                            const isActive = active - 1 === index;
+
                             return (
                                 <motion.div
                                     key={index}
-                                    className="slide"
+                                    className={cx('slide', {
+                                        active: active === index,
+                                    })}
                                     animate={{
                                         rotate: coordX / 10 + rotate,
                                         transformOrigin: `50% ${transformOriginY}px`,
                                     }}
+                                    transition={{
+                                        ease: 'easeOut',
+                                        duration: 0.5,
+                                    }}
                                 >
-                                    <img src={slides[index]} />
+                                    <img src={slide} alt="" />
                                 </motion.div>
                             );
                         })}
@@ -80,5 +90,3 @@ function App() {
         </div>
     );
 }
-
-export default App;
