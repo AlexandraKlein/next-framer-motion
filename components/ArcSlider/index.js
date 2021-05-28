@@ -13,7 +13,6 @@ export default function ArcSlider({ degrees, diameter, children }) {
 
     const isWide = useMedia('(min-width: 768px)');
 
-    const isFullCircle = children.length * degrees === 360;
     const slideWidth = 200;
 
     const onUpdate = latest => {
@@ -40,14 +39,10 @@ export default function ArcSlider({ degrees, diameter, children }) {
                     drag="x"
                     onUpdate={onUpdate}
                     dragElastic={0}
-                    dragConstraints={
-                        isFullCircle
-                            ? null
-                            : {
-                                  right: 0,
-                                  left: -(slideWidth * (children.length - 1)),
-                              }
-                    }
+                    dragConstraints={{
+                        right: 0,
+                        left: -(slideWidth * (children.length - 1)),
+                    }}
                     onDragStart={() => setIsDragging(true)}
                     onDragEnd={() => setIsDragging(false)}
                     dragTransition={{
