@@ -174,50 +174,19 @@ const Blob = () => {
                     />
                 ))}
             </div>
-
             <svg>
                 <clipPath id="wave" clipPathUnits="objectBoundingBox">
                     <path d="M1,0c0,0-0.3,0.1-0.5,0.1S0.3,0,0,0.1V1h1L1,0z" />
                 </clipPath>
             </svg>
 
-            <svg
-                width="0"
-                height="0"
-                viewBox="0 0 1970 1480"
-                xmlns="http://www.w3.org/2000/svg"
-                xmlnsXlink="http://www.w3.org/1999/xlink"
-            >
-                <g fill="none">
-                    <defs>
-                        <clipPath
-                            id="mask"
-                            clipPathUnits="objectBoundingBox"
-                            transform="scale(0.000507614213198, 0.000675675675676)"
-                        >
-                            <path
-                                d="M1675.36269,-364.434932 C2113.86732,-327.734916 2152.98578,210.315022 1849.76772,823.436801 C1786.44006,951.488441 1704.06533,1057.87144 1610.25811,1141.53058 C1471.01269,1265.71242 1015.73754,1678.13346 1015.73754,1678.13346 C1015.73754,1678.13346 693.522403,1317.51047 531.111878,1139.05814 C508.090096,1113.76242 486.314497,1086.30557 465.963232,1056.6629 C187.894401,651.642448 282.263744,450.043803 512.952922,156.125904 C743.642099,-137.791995 885.379317,5.67652257 1126.47847,-126.917454 C1367.57763,-259.511431 1452.62654,-383.076516 1675.36269,-364.434932 Z"
-                                id="Path"
-                                transform="translate(1170.781230, 655.913211) rotate(-138.000000) translate(-1170.781230, -655.913211) "
-                            ></path>
-                        </clipPath>
-                    </defs>
-                </g>
-            </svg>
-
             <div className="section section1">
                 <h1>Some text goes here</h1>
             </div>
-
             <div className="section section2">
                 <h1>Some text goes here</h1>
             </div>
             <style jsx>{`
-                .clipping-mask {
-                    clip-path: url(#mask);
-                    object-fit: cover;
-                    width: 100%;
-                }
                 .section {
                     clip-path: url(#wave);
                     padding: 300px 20px 600px;
