@@ -6,7 +6,7 @@ import cx from 'classnames';
 
 import styles from './ArcSlider.module.scss';
 
-export default function ArcSlider({ degrees, diameter, children }) {
+export default function ArcSlider({ degrees = 20, diameter = 1000, children }) {
     const [isDragging, setIsDragging] = useState(false);
     const [active, setActive] = useState(0);
     const [coordX, setCoordX] = useState(0);
