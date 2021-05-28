@@ -9,7 +9,6 @@ import styles from './DraggableSlider.module.scss';
 const DraggableSlider = ({ children, navClassName }) => {
     const inViewRatio = 0.5;
 
-    const ref = useRef(null);
     const [trackRef, { width: trackWidth }] = useMeasure();
 
     const [tileWidth, setTileWidth] = useState(0);
@@ -93,7 +92,6 @@ const DraggableSlider = ({ children, navClassName }) => {
 
     return (
         <div
-            ref={ref}
             className={cx(styles.root, {
                 [styles.isDragging]: isDragging,
             })}
