@@ -15,9 +15,9 @@ const Header = () => {
                 </Link>
             </Logo>
             <LinksContainer>
-                {/* <Link href="/wheel">
-                    <a>Wheel</a>
-                </Link> */}
+                <Link href="/wave">
+                    <a>Wave</a>
+                </Link>
                 <Link href="/motion-slider">
                     <a>Carousel</a>
                 </Link>
