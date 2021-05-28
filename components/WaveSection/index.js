@@ -13,11 +13,15 @@ const WaveSection = ({ children, backgroundImage, lastOfType }) => {
                 className={styles.root}
                 style={{
                     clipPath: 'url(#wave)',
-                    backgroundImage: `url(${backgroundImage})`,
                     paddingBottom: lastOfType ? 200 : 400,
                     marginBottom: lastOfType ? 0 : '-400px',
                 }}
             >
+                <img
+                    className={styles.backgroundImage}
+                    src={backgroundImage}
+                    alt=""
+                />
                 <div>{children}</div>
             </section>
         </>
