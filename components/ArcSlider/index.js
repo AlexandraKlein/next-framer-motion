@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
-import { useMedia } from 'react-use';
 import cx from 'classnames';
 
 import styles from './ArcSlider.module.scss';
@@ -10,8 +9,6 @@ export default function ArcSlider({ degrees = 20, diameter = 1000, children }) {
     const [isDragging, setIsDragging] = useState(false);
     const [active, setActive] = useState(0);
     const [coordX, setCoordX] = useState(0);
-
-    const isWide = useMedia('(min-width: 768px)');
 
     const slideWidth = 200;
 
