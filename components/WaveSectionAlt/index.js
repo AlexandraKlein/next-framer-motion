@@ -1,5 +1,6 @@
-import styles from './WaveSection.module.scss';
+import { useState, useRef, useEffect } from 'react';
 import styled from '@emotion/styled';
+import styles from './WaveSection.module.scss';
 
 const WaveSection = ({
     children,
@@ -10,47 +11,35 @@ const WaveSection = ({
     const Section = styled.section`
         background-color: ${backgroundColor};
     `;
+    const waveRef = useRef(null);
+    const [waveHeight, setWaveHeight] = useState(0);
 
-    const viewWidth = 1400;
-    const viewHeight = 320;
+    const handleSetWaveHeight = () =>
+        setWaveHeight(waveRef.current.clientHeight);
+
+    useEffect(() => {
+        handleSetWaveHeight();
+
+        window.addEventListener('resize', handleSetWaveHeight);
+
+        return () => {
+            window.removeEventListener('resize', handleSetWaveHeight);
+        };
+    }, []);
 
     return (
         <Section className={styles.root}>
-            <div className={styles.waveBefore}></div>
-
             <svg
-                width="0"
-                height="0"
-                viewBox={`0 0 ${viewWidth} ${viewHeight}`}
-                class="wave"
-                fill="none"
+                ref={waveRef}
+                className={styles.wave}
+                style={{ bottom: -waveHeight + 1 }}
                 xmlns="http://www.w3.org/2000/svg"
-            >
-                <defs>
-                    <clipPath
-                        id="waveDown"
-                        clipPathUnits="objectBoundingBox"
-                        transform={`scale(${1 / viewWidth} ${1 / viewHeight})`}
-                    >
-                        <path
-                            fillRule="evenodd"
-                            clipRule="evenodd"
-                            d="M0,64L48,53.3C96,43,192,21,288,37.3C384,53,480,107,576,144C672,181,768,203,864,176C960,149,1056,75,1152,58.7C1248,43,1344,85,1392,106.7L1440,128L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z"
-                            fill="black"
-                        />
-                    </clipPath>
-                </defs>
-            </svg>
-
-            <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="0"
-                height="0"
-                viewBox="0 0 1440 320"
+                viewBox="0 0 1200 120"
+                preserveAspectRatio="none"
             >
                 <path
-                    fill="black"
-                    d="M0,64L48,53.3C96,43,192,21,288,37.3C384,53,480,107,576,144C672,181,768,203,864,176C960,149,1056,75,1152,58.7C1248,43,1344,85,1392,106.7L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+                    fill={backgroundColor}
+                    d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z"
                 ></path>
             </svg>
             <img
@@ -58,7 +47,7 @@ const WaveSection = ({
                 src={backgroundImage}
                 alt=""
             />
-            <div>{children}</div>
+            <div className={styles.content}>{children}</div>
             <div className={styles.waveAfter}></div>
         </Section>
     );

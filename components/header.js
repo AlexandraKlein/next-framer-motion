@@ -18,6 +18,9 @@ const Header = () => {
                 <Link href="/wave">
                     <a>Wave</a>
                 </Link>
+                <Link href="/wave-alt">
+                    <a>Wave Alt</a>
+                </Link>
                 <Link href="/motion-slider">
                     <a>Carousel</a>
                 </Link>
