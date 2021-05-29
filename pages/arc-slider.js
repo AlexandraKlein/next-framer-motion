@@ -35,6 +35,9 @@ function App() {
 
     const carouselWidth = (slides.length - 1) * 2 * (slideWidth / 2);
 
+    const transformOriginY = 1000;
+    const degrees = 22;
+
     const [{ x }, api] = useSpring(() => ({
         x: 0,
     }));
@@ -72,9 +75,9 @@ function App() {
                 <div className="slides-container">
                     {slides.map((slide, index) => {
                         const isActive = active === index;
-                        const transformOriginY = 1000;
-                        const degrees = 20;
+
                         const rotate = index * degrees;
+                        const divider = (slideWidth / degrees) * 1;
                         return (
                             <Slide
                                 ref={slideRef}
@@ -84,7 +87,8 @@ function App() {
                                 style={{
                                     transformOrigin: `50% ${transformOriginY}px`,
                                     transform: x.to(
-                                        x => `rotate(${x / 10 + rotate}deg)`
+                                        x =>
+                                            `rotate(${x / divider + rotate}deg)`
                                     ),
                                 }}
                             />
