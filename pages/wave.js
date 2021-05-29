@@ -1,4 +1,5 @@
 import WaveSection from '../components/WaveSection';
+import BlobShapeAlt from '../components/blogShapeAlt';
 
 const Content = () => {
     return (
@@ -41,7 +42,14 @@ export default function Waves() {
                 theme="right"
                 backgroundImage="https://images.unsplash.com/photo-1613832187362-30fbc695074d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8OTN8fHBhdHRlcm5zfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
             >
-                <Content />
+                <BlobShapeAlt
+                    id="uid1"
+                    size="50vw"
+                    initialPath="M51.6,1.9C51.6,31.7,25.8,63.4,-1.2,63.4C-28.3,63.4,-56.5,31.7,-56.5,1.9C-56.5,-28,-28.3,-55.9,-1.2,-55.9C25.8,-55.9,51.6,-28,51.6,1.9Z"
+                    animatePath="M59.8,-4.1C59.8,18.4,29.9,36.8,-1.5,36.8C-32.9,36.8,-65.8,18.4,-65.8,-4.1C-65.8,-26.7,-32.9,-53.3,-1.5,-53.3C29.9,-53.3,59.8,-26.7,59.8,-4.1Z"
+                    imgSrc="https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXBhZ2V8Mjk0fDgzNTI2NTd8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=60"
+                    hasBackdrop
+                />
             </WaveSection>
             <WaveSection
                 id="wave3"
