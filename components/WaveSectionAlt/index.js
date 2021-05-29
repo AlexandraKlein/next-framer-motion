@@ -6,6 +6,7 @@ const WaveSection = ({
     children,
     backgroundColor,
     backgroundImage,
+    backgroundPosition = 'bottom',
     lastOfType,
 }) => {
     const Section = styled.section`
@@ -45,6 +46,7 @@ const WaveSection = ({
             <img
                 className={styles.backgroundImage}
                 src={backgroundImage}
+                style={{ objectPosition: backgroundPosition }}
                 alt=""
             />
             <div className={styles.content}>{children}</div>

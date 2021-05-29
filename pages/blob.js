@@ -156,7 +156,6 @@ const Blob = () => {
                         id={blob.id}
                         initialPath={blob.initialPath}
                         animatePath={blob.animatePath}
-                        orientation={blob.orientation}
                         imgSrc={blob.imgSrc}
                     />
                 ))}
@@ -167,10 +166,11 @@ const Blob = () => {
                     <BlobShapeAlt
                         key={blob.id}
                         id={blob.id}
+                        size={'25vw'}
                         initialPath={blob.initialPath}
                         animatePath={blob.animatePath}
-                        orientation={blob.orientation}
                         imgSrc={blob.imgSrc}
+                        hasBackdrop
                     />
                 ))}
             </div>

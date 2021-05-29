@@ -18,14 +18,21 @@ const variants = {
     },
 };
 
-const BlobShapeAlt = ({ id, initialPath, animatePath, imgSrc }) => {
+const BlobShapeAlt = ({
+    id,
+    size,
+    hasBackdrop,
+    initialPath,
+    animatePath,
+    imgSrc,
+}) => {
     const viewBoxWidth = 200;
     const viewBoxHeight = 200;
 
     return (
         <motion.div
             variants={variants}
-            style={{ position: 'relative', width: '25%' }}
+            style={{ position: 'relative', width: size, height: size }}
         >
             <svg
                 viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
@@ -58,32 +65,35 @@ const BlobShapeAlt = ({ id, initialPath, animatePath, imgSrc }) => {
                     </defs>
                 </g>
             </svg>
-            <svg
-                style={{ position: 'absolute', top: 0, left: 0 }}
-                viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
-            >
-                <motion.path
-                    transform={`translate(${viewBoxWidth / 2} ${
-                        viewBoxHeight / 2
-                    }) scale(1.5)`}
-                    fill="#bbb"
-                    initial={{ d: animatePath }}
-                    animate={{ d: initialPath }}
-                    transition={{
-                        repeat: Infinity,
-                        repeatType: 'reverse',
-                        duration: 5,
-                        ease: easing,
-                    }}
-                />
-            </svg>
+            {hasBackdrop && (
+                <svg
+                    style={{ position: 'absolute', top: 0, left: 0 }}
+                    viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
+                >
+                    <motion.path
+                        transform={`translate(${viewBoxWidth / 2} ${
+                            viewBoxHeight / 2
+                        }) scale(1.5)`}
+                        fill="#bbb"
+                        initial={{ d: animatePath }}
+                        animate={{ d: initialPath }}
+                        transition={{
+                            repeat: Infinity,
+                            repeatType: 'reverse',
+                            duration: 5,
+                            ease: easing,
+                        }}
+                    />
+                </svg>
+            )}
+
             <img
                 src={imgSrc}
                 style={{
                     WebkitClipPath: `url(#${id})`,
                     clipPath: `url(#${id})`,
-                    width: '25vw',
-                    height: '25vw',
+                    width: '100%',
+                    height: '100%',
                     objectFit: 'cover',
                 }}
             />
