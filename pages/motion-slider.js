@@ -131,6 +131,7 @@ const Slide = styled.div`
     align-items: center;
     clip-path: ${({ index }) =>
         index % 2 === 0 ? 'url(#slideClip)' : 'url(#slideClip2)'};
+    color: white;
     background: radial-gradient(
             circle at 100% 50%,
             transparent 20%,

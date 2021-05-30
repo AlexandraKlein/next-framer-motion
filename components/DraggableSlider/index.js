@@ -101,7 +101,7 @@ const DraggableSlider = ({ children, navClassName }) => {
                 className={styles.track}
                 drag="x"
                 dragConstraints={{
-                    left: -trackWidth + tileWidth,
+                    left: -trackWidth,
                     right: trackWidth - tileWidth,
                 }}
                 dragTransition={{
