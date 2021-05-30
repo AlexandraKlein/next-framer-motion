@@ -83,9 +83,72 @@ const MotionSliderPage = () => {
                     </Slide>
                 ))}
             </MotionSlider> */}
+
+            <Container>
+                {slides.map(slide => (
+                    <BlobContainer>
+                        <Blob>
+                            <img src={slide.img} />
+                        </Blob>
+                    </BlobContainer>
+                ))}
+            </Container>
         </>
     );
 };
+
+const Container = styled.section`
+    margin: 60px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+`;
+
+const BlobContainer = styled.div`
+    position: relative;
+    width: 18vw;
+    height: 18vw;
+    margin: 20px;
+
+    &:before {
+        content: '';
+        position: absolute;
+        left: -5%;
+        bottom: -5%;
+        width: 100%;
+        height: 100%;
+        background-color: cadetblue;
+        border-radius: 63% 37% 42% 58% / 52% 59% 41% 48%;
+        transition: 1s cubic-bezier(0.18, 0.89, 0.32, 1.27);
+    }
+
+    &:hover {
+        &:before {
+            border-radius: 62% 38% 55% 45% / 44% 48% 52% 56%;
+        }
+    }
+`;
+
+const Blob = styled.div`
+    position: relative;
+    border-radius: 51% 49% 56% 44% / 34% 46% 54% 66%;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    transition: 1s cubic-bezier(0.18, 0.89, 0.32, 1.27);
+    user-select: none;
+
+    &:hover {
+        border-radius: 63% 37% 42% 58% / 52% 59% 41% 48%;
+    }
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        pointer-events: none;
+    }
+`;
 
 const Slide = styled.div`
     flex: 1;
@@ -95,12 +158,19 @@ const Slide = styled.div`
     border-radius: 20px;
     background-color: cadetblue;
     padding: 2rem;
-    transition: background-color 0.2s ease-out;
     margin: 20px;
     width: 250px;
+    border-radius: 39% 36% 37% 37% / 38% 43% 34% 44%;
+    transition: 1s cubic-bezier(0.18, 0.89, 0.32, 1.27);
+
+    &:hover {
+        border-radius: 39% 36% 37% 37% / 38% 43% 34% 44%;
+    }
 
     &.active {
         background-color: lightcoral;
+        border-radius: 44% 44% 57% 35% / 47% 62% 32% 49%;
+        transition-delay: 0.25s;
     }
 
     img {
