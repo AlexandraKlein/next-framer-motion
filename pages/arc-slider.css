@@ -1,20 +1,20 @@
 .root {
     align-items: center;
-    background-color: #e0c5c0;
     display: flex;
     justify-content: center;
     flex: 1;
+    overflow: hidden;
 }
 
 .carousel-container {
     position: relative;
-    background-color: #fff;
+    display: flex;
+    flex-direction: column;
     border-radius: 16px;
-    height: 464px;
-    overflow: hidden;
-    position: relative;
+    height: 100%;
     width: 100%;
-    margin: auto 20px;
+    margin: 0 auto 200px;
+    padding-top: 330px;
     cursor: grab;
 }
 
@@ -23,8 +23,13 @@
 }
 
 .slides-container {
+    position: relative;
     display: flex;
     justify-content: center;
+}
+
+.slides-container.dupe {
+    transform: translateY(350px);
 }
 
 .slide {
@@ -45,7 +50,7 @@
     border-radius: 20px;
     object-fit: cover;
     transform-origin: bottom;
-    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.25s;
     will-change: transform;
 }
 

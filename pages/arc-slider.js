@@ -35,8 +35,8 @@ function App() {
 
     const carouselWidth = (slides.length - 1) * 2 * (slideWidth / 2);
 
-    const transformOriginY = 1000;
-    const degrees = 22;
+    const diameter = 1400;
+    const degrees = 15;
 
     const [{ x }, api] = useSpring(() => ({
         x: 0,
@@ -75,9 +75,9 @@ function App() {
                 <div className="slides-container">
                     {slides.map((slide, index) => {
                         const isActive = active === index;
-
                         const rotate = index * degrees;
                         const divider = (slideWidth / degrees) * 1;
+
                         return (
                             <Slide
                                 ref={slideRef}
@@ -85,7 +85,7 @@ function App() {
                                 isActive={isActive}
                                 imgSrc={slides[index]}
                                 style={{
-                                    transformOrigin: `50% ${transformOriginY}px`,
+                                    transformOrigin: `50% ${diameter}px`,
                                     transform: x.to(
                                         x =>
                                             `rotate(${x / divider + rotate}deg)`
@@ -95,14 +95,39 @@ function App() {
                         );
                     })}
                 </div>
-                <div className="nav-dots">
+                <div className="slides-container dupe">
+                    {slides.reverse().map((slide, index) => {
+                        const isActive = active === index;
+                        const rotate = index * degrees;
+                        const divider = (slideWidth / degrees) * 1;
+
+                        return (
+                            <Slide
+                                ref={slideRef}
+                                key={index}
+                                isActive={isActive}
+                                imgSrc={slides[index]}
+                                style={{
+                                    transformOrigin: `50% ${diameter * 0.75}px`,
+                                    transform: x.to(
+                                        x =>
+                                            `rotate(${
+                                                -x / divider - rotate
+                                            }deg)`
+                                    ),
+                                }}
+                            />
+                        );
+                    })}
+                </div>
+                {/* <div className="nav-dots">
                     {slides.map((_, index) => (
                         <div
                             className={active === index ? 'active' : ''}
                             key={index}
                         />
                     ))}
-                </div>
+                </div> */}
             </div>
         </div>
     );
