@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import { useMeasure } from 'react-use';
@@ -7,11 +7,25 @@ import cx from 'classnames';
 import styles from './ArcSlider.module.scss';
 
 export default function ArcSlider({ degrees = 20, diameter = 1000, children }) {
+    const slideRef = useRef(null);
+
     const [isDragging, setIsDragging] = useState(false);
+    const [slideWidth, setSlideWidth] = useState(0);
     const [active, setActive] = useState(0);
     const [coordX, setCoordX] = useState(0);
 
-    const [slideRef, { width: slideWidth }] = useMeasure();
+    const handleSetSlideWidth = () =>
+        setSlideWidth(slideRef.current.clientHeight);
+
+    useEffect(() => {
+        handleSetSlideWidth();
+
+        window.addEventListener('resize', handleSetSlideWidth);
+
+        return () => {
+            window.removeEventListener('resize', handleSetSlideWidth);
+        };
+    }, []);
 
     const onUpdate = latest => {
         setCoordX(latest.x);
