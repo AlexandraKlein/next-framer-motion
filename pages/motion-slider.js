@@ -85,8 +85,8 @@ const MotionSliderPage = () => {
             </MotionSlider> */}
 
             <Container>
-                {slides.map(slide => (
-                    <BlobContainer>
+                {slides.map((slide, index) => (
+                    <BlobContainer key={index}>
                         <Blob>
                             <img src={slide.img} />
                         </Blob>
@@ -163,10 +163,6 @@ const Slide = styled.div`
     border-radius: 39% 36% 37% 37% / 38% 43% 34% 44%;
     transition: 1s cubic-bezier(0.18, 0.89, 0.32, 1.27);
 
-    &:hover {
-        border-radius: 39% 36% 37% 37% / 38% 43% 34% 44%;
-    }
-
     &.active {
         background-color: lightcoral;
         border-radius: 44% 44% 57% 35% / 47% 62% 32% 49%;
@@ -178,6 +174,7 @@ const Slide = styled.div`
         height: 175px;
         object-fit: cover;
         border-radius: 50%;
+        pointer-events: none;
     }
 
     h6 {
