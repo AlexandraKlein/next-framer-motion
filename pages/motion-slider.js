@@ -135,21 +135,21 @@ const Slide = styled.div`
     background: radial-gradient(
             circle at 100% 50%,
             transparent 20%,
-            cadetblue 21%,
-            cadetblue 34%,
+            #4b52a4 21%,
+            #4b52a4 34%,
             transparent 35%,
             transparent
         ),
         radial-gradient(
                 circle at 0% 50%,
                 transparent 20%,
-                cadetblue 21%,
-                cadetblue 34%,
+                #4b52a4 21%,
+                #4b52a4 34%,
                 transparent 35%,
                 transparent
             )
             0 -50px;
-    background-color: slateblue;
+    background-color: #2e6cb5;
     background-size: 75px 100px;
     padding: 3rem;
     margin: 20px;
@@ -157,13 +157,12 @@ const Slide = styled.div`
     transition: background-color 1s cubic-bezier(0.18, 0.89, 0.32, 1.27);
 
     &.active {
-        background: linear-gradient(135deg, cadetblue 25%, transparent 25%) -50px
-                0,
-            linear-gradient(225deg, cadetblue 25%, transparent 25%) -50px 0,
-            linear-gradient(315deg, cadetblue 25%, transparent 25%),
-            linear-gradient(45deg, cadetblue 25%, transparent 25%);
+        background: linear-gradient(135deg, #159a8b 25%, transparent 25%) -50px 0,
+            linear-gradient(225deg, #159a8b 25%, transparent 25%) -50px 0,
+            linear-gradient(315deg, #159a8b 25%, transparent 25%),
+            linear-gradient(45deg, #159a8b 25%, transparent 25%);
         background-size: 100px 100px;
-        background-color: lightcoral;
+        background-color: #088b6b;
     }
 
     img {
@@ -208,7 +207,7 @@ const BlobContainer = styled.div`
         bottom: -5%;
         width: 100%;
         height: 100%;
-        background-color: cadetblue;
+        background-color: #f27581;
         border-radius: 63% 37% 42% 58% / 52% 59% 41% 48%;
         transition: 1s cubic-bezier(0.18, 0.89, 0.62, 1.27);
     }
