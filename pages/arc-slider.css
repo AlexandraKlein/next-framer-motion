@@ -1,80 +1,74 @@
 .root {
-    align-items: center;
-    display: flex;
-    justify-content: center;
-    flex: 1;
-    overflow: hidden;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex: 1;
+  overflow: hidden;
 }
 
 .carousel-container {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    border-radius: 16px;
-    height: 100%;
-    width: 100%;
-    margin: 0 auto 200px;
-    padding-top: 330px;
-    cursor: grab;
+  position: relative;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  padding-top: 100px;
+  cursor: grab;
 }
 
 .container:active {
-    cursor: grabbing;
+  cursor: grabbing;
 }
 
 .slides-container {
-    position: relative;
-    display: flex;
-    justify-content: center;
-}
-
-.slides-container.dupe {
-    transform: translateY(350px);
+  position: relative;
+  height: 350px;
+  display: flex;
+  justify-content: center;
 }
 
 .slide {
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100%;
-    user-select: none;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  user-select: none;
 }
 
 .slide img {
-    position: relative;
-    pointer-events: none;
-    width: 200px;
-    height: 300px;
-    overflow: hidden;
-    border-radius: 20px;
-    object-fit: cover;
-    transform-origin: bottom;
-    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.25s;
-    will-change: transform;
+  position: relative;
+  pointer-events: none;
+  width: 200px;
+  height: 300px;
+  overflow: hidden;
+  border-radius: 20px;
+  object-fit: cover;
+  transform-origin: bottom;
+  transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) 0.25s;
+  will-change: transform;
 }
 
 .slide.active img {
-    border: 10px solid cadetblue;
-    transform: scale(1.2);
+  border: 10px solid cadetblue;
+  transform: scale(1.2);
 }
 
 .nav-dots {
-    width: 100%;
-    position: absolute;
-    bottom: 20px;
-    display: flex;
-    justify-content: center;
+  width: 100%;
+  position: absolute;
+  bottom: 20px;
+  display: flex;
+  justify-content: center;
 }
 
 .nav-dots div {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background-color: rgb(104, 104, 104);
-    margin: 0 3px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgb(104, 104, 104);
+  margin: 0 3px;
 }
 
 .nav-dots .active {
-    background-color: cadetblue;
+  background-color: cadetblue;
 }
