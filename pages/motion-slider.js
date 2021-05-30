@@ -97,6 +97,46 @@ const MotionSliderPage = () => {
     );
 };
 
+const Slide = styled.div`
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 20px;
+    background-color: cadetblue;
+    padding: 2rem;
+    margin: 20px;
+    width: 250px;
+    border-radius: 39% 36% 37% 37% / 38% 43% 34% 44%;
+    transition: 1s cubic-bezier(0.18, 0.89, 0.32, 1.27);
+
+    &.active {
+        background-color: lightcoral;
+        border-radius: 44% 44% 57% 35% / 47% 62% 32% 49%;
+        transition-delay: 0.25s;
+    }
+
+    img {
+        width: 175px;
+        height: 175px;
+        object-fit: cover;
+        border-radius: 50%;
+        pointer-events: none;
+    }
+
+    h6 {
+        text-transform: uppercase;
+    }
+
+    h2 {
+        line-height: 1.2;
+    }
+
+    @media (min-width: 768px) {
+        width: 400px;
+    }
+`;
+
 const Container = styled.section`
     margin: 60px 0;
     display: flex;
@@ -147,46 +187,6 @@ const Blob = styled.div`
         height: 100%;
         object-fit: cover;
         pointer-events: none;
-    }
-`;
-
-const Slide = styled.div`
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    border-radius: 20px;
-    background-color: cadetblue;
-    padding: 2rem;
-    margin: 20px;
-    width: 250px;
-    border-radius: 39% 36% 37% 37% / 38% 43% 34% 44%;
-    transition: 1s cubic-bezier(0.18, 0.89, 0.32, 1.27);
-
-    &.active {
-        background-color: lightcoral;
-        border-radius: 44% 44% 57% 35% / 47% 62% 32% 49%;
-        transition-delay: 0.25s;
-    }
-
-    img {
-        width: 175px;
-        height: 175px;
-        object-fit: cover;
-        border-radius: 50%;
-        pointer-events: none;
-    }
-
-    h6 {
-        text-transform: uppercase;
-    }
-
-    h2 {
-        line-height: 1.2;
-    }
-
-    @media (min-width: 768px) {
-        width: 400px;
     }
 `;
 
