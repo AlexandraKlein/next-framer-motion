@@ -57,8 +57,27 @@ const slides = [
 ];
 
 const MotionSliderPage = () => {
+    const viewBoxWidth = 619;
+    const viewBoxHeight = 659;
     return (
         <>
+            <svg
+                width="0"
+                height="0"
+                viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <clipPath
+                    id="slideClip"
+                    clipPathUnits="objectBoundingBox"
+                    transform={`scale(${1 / viewBoxWidth},${
+                        1 / viewBoxHeight
+                    })`}
+                >
+                    <path d="M22.1929 137.987C37.0601 62.7628 53.7558 23.9221 119.794 11.7919C223.06 -7.1978 411.48 -0.0545559 491.432 22.1733C558.942 40.9405 591.936 66.4908 605.391 145.433C626.497 269.097 616.679 425.094 602.656 508.654C586.813 603.06 533.491 629.519 471.884 637.423C380.768 649.114 240.927 670.508 152.69 650.587C73.7999 632.792 38.4875 608.343 19.2924 545.565C-19.4695 418.746 10.1619 198.918 22.1929 137.987Z" />
+                </clipPath>
+            </svg>
             <DrabbableSlider>
                 {slides.map((slide, index) => ({ active }) => (
                     <Slide
@@ -71,18 +90,6 @@ const MotionSliderPage = () => {
                     </Slide>
                 ))}
             </DrabbableSlider>
-            {/* <MotionSlider>
-                {slides.map((slide, index) => ({ active }) => (
-                    <Slide
-                        key={index}
-                        className={cx({ active: active === index })}
-                    >
-                        <img src={slide.img} />
-                        <h6>{slide.eyebrow}</h6>
-                        <h2>{slide.headline}</h2>
-                    </Slide>
-                ))}
-            </MotionSlider> */}
 
             <Container>
                 {slides.map((slide, index) => (
@@ -102,18 +109,15 @@ const Slide = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-radius: 20px;
+    clip-path: url(#slideClip);
     background-color: cadetblue;
-    padding: 2rem;
+    padding: 3rem;
     margin: 20px;
-    width: 250px;
-    border-radius: 39% 36% 37% 37% / 38% 43% 34% 44%;
+    width: 280px;
     transition: 1s cubic-bezier(0.18, 0.89, 0.32, 1.27);
 
     &.active {
         background-color: lightcoral;
-        border-radius: 44% 44% 57% 35% / 47% 62% 32% 49%;
-        transition-delay: 0.25s;
     }
 
     img {
@@ -130,6 +134,7 @@ const Slide = styled.div`
 
     h2 {
         line-height: 1.2;
+        margin: 0;
     }
 
     @media (min-width: 768px) {
