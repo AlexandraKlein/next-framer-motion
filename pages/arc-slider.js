@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, forwardRef } from "react";
+import React, { useState, useEffect, forwardRef } from "react";
 import { useSpring, animated } from "react-spring";
 import { useMeasure } from "react-use";
 import { useDrag } from "react-use-gesture";
@@ -31,6 +31,7 @@ const Slide = forwardRef(({ style, imgSrc, isActive }, ref) => {
 
 function App() {
   const [slideRef, { width: slideWidth }] = useMeasure();
+
   const [active, setActive] = useState(Math.round(slides.length / 2));
 
   const carouselWidth = (slides.length - 1) * 2 * (slideWidth / 2);
@@ -53,6 +54,7 @@ function App() {
           const newX = -index * slideWidth;
           if (x < newX + slideWidth / 2) {
             setActive(index);
+
             api.start({ x: newX });
             return;
           }
@@ -112,14 +114,25 @@ function App() {
             );
           })}
         </div>
-        {/* <div className="nav-dots">
-                    {slides.map((_, index) => (
-                        <div
-                            className={active === index ? 'active' : ''}
-                            key={index}
-                        />
-                    ))}
-                </div> */}
+
+        {/* <div className="nav-controls">
+          <button
+            onClick={() => {
+              setActive(active - 1);
+              api.start({ x: x.get() + slideWidth });
+            }}
+          >
+            prev
+          </button>
+          <button
+            onClick={() => {
+              setActive(active + 1);
+              api.start({ x: x.get() - slideWidth });
+            }}
+          >
+            next
+          </button>
+        </div> */}
       </div>
     </div>
   );

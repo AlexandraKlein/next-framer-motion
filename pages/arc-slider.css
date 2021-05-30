@@ -53,22 +53,10 @@
   transform: scale(1.2);
 }
 
-.nav-dots {
+.nav-controls {
   width: 100%;
   position: absolute;
   bottom: 20px;
   display: flex;
   justify-content: center;
-}
-
-.nav-dots div {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background-color: rgb(104, 104, 104);
-  margin: 0 3px;
-}
-
-.nav-dots .active {
-  background-color: cadetblue;
 }
