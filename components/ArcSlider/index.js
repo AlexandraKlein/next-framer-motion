@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useLayoutEffect } from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
 import { useMeasure } from 'react-use';
@@ -7,25 +7,10 @@ import cx from 'classnames';
 import styles from './ArcSlider.module.scss';
 
 export default function ArcSlider({ degrees = 20, diameter = 1000, children }) {
-    const slideRef = useRef(null);
+    const slideWidth = diameter / children.length;
 
-    const [isDragging, setIsDragging] = useState(false);
-    const [slideWidth, setSlideWidth] = useState(0);
     const [active, setActive] = useState(0);
     const [coordX, setCoordX] = useState(0);
-
-    const handleSetSlideWidth = () =>
-        setSlideWidth(slideRef.current.clientHeight);
-
-    useEffect(() => {
-        handleSetSlideWidth();
-
-        window.addEventListener('resize', handleSetSlideWidth);
-
-        return () => {
-            window.removeEventListener('resize', handleSetSlideWidth);
-        };
-    }, []);
 
     const onUpdate = latest => {
         setCoordX(latest.x);
@@ -55,10 +40,8 @@ export default function ArcSlider({ degrees = 20, diameter = 1000, children }) {
                         right: 0,
                         left: -(slideWidth * (children.length - 1)),
                     }}
-                    onDragStart={() => setIsDragging(true)}
-                    onDragEnd={() => setIsDragging(false)}
                     dragTransition={{
-                        power: 0.01,
+                        power: 0.03,
                         timeConstant: 200,
                         modifyTarget: handleModifyTarget,
                     }}
@@ -71,7 +54,6 @@ export default function ArcSlider({ degrees = 20, diameter = 1000, children }) {
                             return (
                                 <motion.div
                                     key={index}
-                                    ref={slideRef}
                                     className={cx(styles.slide, {
                                         [styles.active]: active === index,
                                     })}
