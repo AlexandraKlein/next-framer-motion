@@ -1,0 +1,18 @@
+.content {
+    padding: 0 20px;
+    color: black;
+}
+
+.standAloneContent {
+    padding: 200px 20px;
+}
+
+.innerContent {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-gap: 20px;
+}
+
+.whiteText {
+    color: white;
+}
