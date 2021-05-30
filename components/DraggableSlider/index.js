@@ -33,10 +33,6 @@ const DraggableSlider = ({ children, navClassName }) => {
         setActiveIndex(activeIndex + 1);
     }, [activeIndex, isEnd]);
 
-    const handleClick = index => {
-        setActiveIndex(index);
-    };
-
     const handleSnap = target => {
         const index =
             target > tileWidth
@@ -82,7 +78,7 @@ const DraggableSlider = ({ children, navClassName }) => {
                 <div
                     key={index}
                     className={styles.slideContainer}
-                    onClick={() => handleClick(index)}
+                    onClick={() => setActiveIndex(index)}
                 >
                     {renderChild(child, { active: activeIndex })}
                 </div>
