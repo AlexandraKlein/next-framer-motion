@@ -15,7 +15,7 @@ const slides = [
         img: 'https://images.unsplash.com/photo-1554151228-14d9def656e4?ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8ZmFjZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=60',
     },
     {
-        headline: 'Pretium aenean pharetra magna ac placerat',
+        headline: 'Pretium aenean pharetra magna ac placerat Pretium aenean ',
         eyebrow: 'Basil apples lingonberry sesame',
         img: 'https://images.unsplash.com/photo-1592124549776-a7f0cc973b24?ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8ZmFjZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=60',
     },
@@ -78,10 +78,29 @@ const MotionSliderPage = () => {
                     <path d="M22.1929 137.987C37.0601 62.7628 53.7558 23.9221 119.794 11.7919C223.06 -7.1978 411.48 -0.0545559 491.432 22.1733C558.942 40.9405 591.936 66.4908 605.391 145.433C626.497 269.097 616.679 425.094 602.656 508.654C586.813 603.06 533.491 629.519 471.884 637.423C380.768 649.114 240.927 670.508 152.69 650.587C73.7999 632.792 38.4875 608.343 19.2924 545.565C-19.4695 418.746 10.1619 198.918 22.1929 137.987Z" />
                 </clipPath>
             </svg>
+
+            <svg
+                width="0"
+                height="0"
+                viewBox={`0 0 ${viewBoxWidth} ${viewBoxHeight}`}
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+            >
+                <clipPath
+                    id="slideClip2"
+                    clipPathUnits="objectBoundingBox"
+                    transform={`scale(${1 / viewBoxWidth},${
+                        1 / viewBoxHeight
+                    })`}
+                >
+                    <path d="M596.14 137.986C581.272 62.7622 564.577 23.9215 498.539 11.7913C395.273 -7.19841 206.853 -0.0551662 126.9 22.1727C59.3903 40.9399 26.3966 66.4901 12.9418 145.432C-8.1648 269.096 1.65369 425.093 15.6765 508.653C31.5193 603.059 84.841 629.518 146.449 637.423C237.565 649.114 377.405 670.507 465.642 650.587C544.533 632.791 579.845 608.342 599.04 545.564C637.802 418.745 608.171 198.918 596.14 137.986Z" />
+                </clipPath>
+            </svg>
             <DrabbableSlider>
                 {slides.map((slide, index) => ({ active }) => (
                     <Slide
                         key={index}
+                        index={index}
                         className={cx({ active: active === index })}
                     >
                         <img src={slide.img} />
@@ -104,19 +123,45 @@ const MotionSliderPage = () => {
     );
 };
 
+// rgba(95,158,160 ,1 )
+
 const Slide = styled.div`
-    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
-    clip-path: url(#slideClip);
-    background-color: cadetblue;
+    clip-path: ${({ index }) =>
+        index % 2 === 0 ? 'url(#slideClip)' : 'url(#slideClip2)'};
+    background: radial-gradient(
+            circle at 100% 50%,
+            transparent 20%,
+            cadetblue 21%,
+            cadetblue 34%,
+            transparent 35%,
+            transparent
+        ),
+        radial-gradient(
+                circle at 0% 50%,
+                transparent 20%,
+                cadetblue 21%,
+                cadetblue 34%,
+                transparent 35%,
+                transparent
+            )
+            0 -50px;
+    background-color: slateblue;
+    background-size: 75px 100px;
     padding: 3rem;
     margin: 20px;
     width: 280px;
-    transition: 1s cubic-bezier(0.18, 0.89, 0.32, 1.27);
+    transition: background-color 1s cubic-bezier(0.18, 0.89, 0.32, 1.27);
 
     &.active {
+        background: linear-gradient(135deg, cadetblue 25%, transparent 25%) -50px
+                0,
+            linear-gradient(225deg, cadetblue 25%, transparent 25%) -50px 0,
+            linear-gradient(315deg, cadetblue 25%, transparent 25%),
+            linear-gradient(45deg, cadetblue 25%, transparent 25%);
+        background-size: 100px 100px;
         background-color: lightcoral;
     }
 
@@ -164,7 +209,7 @@ const BlobContainer = styled.div`
         height: 100%;
         background-color: cadetblue;
         border-radius: 63% 37% 42% 58% / 52% 59% 41% 48%;
-        transition: 1s cubic-bezier(0.18, 0.89, 0.32, 1.27);
+        transition: 1s cubic-bezier(0.18, 0.89, 0.62, 1.27);
     }
 
     &:hover {
@@ -180,7 +225,7 @@ const Blob = styled.div`
     overflow: hidden;
     width: 100%;
     height: 100%;
-    transition: 1s cubic-bezier(0.18, 0.89, 0.32, 1.27);
+    transition: 1s cubic-bezier(0.18, 0.89, 0.62, 1.27);
     user-select: none;
 
     &:hover {
