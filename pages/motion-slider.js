@@ -78,7 +78,6 @@ const MotionSliderPage = () => {
                     <path d="M22.1929 137.987C37.0601 62.7628 53.7558 23.9221 119.794 11.7919C223.06 -7.1978 411.48 -0.0545559 491.432 22.1733C558.942 40.9405 591.936 66.4908 605.391 145.433C626.497 269.097 616.679 425.094 602.656 508.654C586.813 603.06 533.491 629.519 471.884 637.423C380.768 649.114 240.927 670.508 152.69 650.587C73.7999 632.792 38.4875 608.343 19.2924 545.565C-19.4695 418.746 10.1619 198.918 22.1929 137.987Z" />
                 </clipPath>
             </svg>
-
             <svg
                 width="0"
                 height="0"
@@ -96,7 +95,7 @@ const MotionSliderPage = () => {
                     <path d="M596.14 137.986C581.272 62.7622 564.577 23.9215 498.539 11.7913C395.273 -7.19841 206.853 -0.0551662 126.9 22.1727C59.3903 40.9399 26.3966 66.4901 12.9418 145.432C-8.1648 269.096 1.65369 425.093 15.6765 508.653C31.5193 603.059 84.841 629.518 146.449 637.423C237.565 649.114 377.405 670.507 465.642 650.587C544.533 632.791 579.845 608.342 599.04 545.564C637.802 418.745 608.171 198.918 596.14 137.986Z" />
                 </clipPath>
             </svg>
-            <DrabbableSlider>
+            <DrabbableSlider isCentered>
                 {slides.map((slide, index) => ({ active }) => (
                     <Slide
                         key={index}
@@ -107,6 +106,14 @@ const MotionSliderPage = () => {
                         <h6>{slide.eyebrow}</h6>
                         <h2>{slide.headline}</h2>
                     </Slide>
+                ))}
+            </DrabbableSlider>
+
+            <DrabbableSlider>
+                {slides.map((slide, index) => ({ active }) => (
+                    <ImageSlide index={index}>
+                        <BackgroundImage src={slide.img} />
+                    </ImageSlide>
                 ))}
             </DrabbableSlider>
 
@@ -123,9 +130,8 @@ const MotionSliderPage = () => {
     );
 };
 
-// rgba(95,158,160 ,1 )
-
 const Slide = styled.div`
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -185,6 +191,31 @@ const Slide = styled.div`
     @media (min-width: 768px) {
         width: 400px;
     }
+`;
+
+const ImageSlide = styled.div`
+    position: relative;
+    width: 280px;
+    height: ${({ index }) => (index % 2 === 0 ? '400px' : '350px')};
+    margin: 20px;
+    clip-path: ${({ index }) =>
+        index % 2 === 0 ? 'url(#slideClip)' : 'url(#slideClip2)'};
+
+    @media (min-width: 768px) {
+        width: 400px;
+        height: ${({ index }) => (index % 2 === 0 ? '500px' : '450px')};
+    }
+`;
+
+const BackgroundImage = styled.img`
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+    user-select: none;
 `;
 
 const Container = styled.section`
