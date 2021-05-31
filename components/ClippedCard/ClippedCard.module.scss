@@ -1,0 +1,11 @@
+.root {
+    clip-path: url(#clippedLeft);
+
+    &.right {
+        clip-path: url(#clippedRight);
+    }
+
+    svg {
+        position: absolute;
+    }
+}
