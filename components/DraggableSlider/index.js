@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 
 import styles from './DraggableSlider.module.scss';
 
-const DraggableSlider = ({ children, navClassName, isCentered }) => {
+const DraggableSlider = ({ children, navClassName }) => {
     const inViewRatio = 0.5;
 
     const [trackRef, { width: trackWidth }] = useMeasure();
@@ -49,7 +49,7 @@ const DraggableSlider = ({ children, navClassName, isCentered }) => {
         const resizeHandler = () => {
             // split track size in tiles
             const size = trackWidth / children.length;
-            const diff = isCentered ? window.innerWidth / 2 - size / 2 : 0;
+            const diff = window.innerWidth / 2 - size / 2;
 
             setTileWidth(size);
             setPageCenterDiff(diff);

@@ -59,6 +59,7 @@ const slides = [
 const MotionSliderPage = () => {
     const viewBoxWidth = 619;
     const viewBoxHeight = 659;
+
     return (
         <>
             <svg
@@ -95,7 +96,7 @@ const MotionSliderPage = () => {
                     <path d="M596.14 137.986C581.272 62.7622 564.577 23.9215 498.539 11.7913C395.273 -7.19841 206.853 -0.0551662 126.9 22.1727C59.3903 40.9399 26.3966 66.4901 12.9418 145.432C-8.1648 269.096 1.65369 425.093 15.6765 508.653C31.5193 603.059 84.841 629.518 146.449 637.423C237.565 649.114 377.405 670.507 465.642 650.587C544.533 632.791 579.845 608.342 599.04 545.564C637.802 418.745 608.171 198.918 596.14 137.986Z" />
                 </clipPath>
             </svg>
-            <DrabbableSlider isCentered>
+            <DrabbableSlider>
                 {slides.map((slide, index) => ({ active }) => (
                     <Slide
                         key={index}
@@ -138,6 +139,7 @@ const Slide = styled.div`
     clip-path: ${({ index }) =>
         index % 2 === 0 ? 'url(#slideClip)' : 'url(#slideClip2)'};
     color: white;
+    text-align: center;
     background: radial-gradient(
             circle at 100% 50%,
             transparent 20%,
@@ -157,7 +159,7 @@ const Slide = styled.div`
             0 -50px;
     background-color: #2e6cb5;
     background-size: 75px 100px;
-    padding: 3rem;
+    padding: 2.5rem;
     margin: 20px;
     width: 280px;
     transition: background-color 1s cubic-bezier(0.18, 0.89, 0.32, 1.27);
@@ -184,12 +186,18 @@ const Slide = styled.div`
     }
 
     h2 {
+        font-size: 22px;
         line-height: 1.2;
         margin: 0;
     }
 
     @media (min-width: 768px) {
         width: 400px;
+        padding: 3rem;
+
+        h2 {
+            font-size: 28px;
+        }
     }
 `;
 
