@@ -1,39 +1,47 @@
 import React, { useContext } from 'react';
 import Link from 'next/link';
 import styled from '@emotion/styled';
+import Nav from '../components/Nav';
 import { ThemeContext, THEME } from '../contexts/Theme';
 import { lightTheme, darkTheme } from '../themeConfig';
+
+const navItems = [
+    {
+        label: 'Wave',
+        route: '/wave',
+    },
+    {
+        label: 'Wave Alt',
+        route: '/wave-alt',
+    },
+    {
+        label: 'Carousel',
+        route: '/motion-slider',
+    },
+    {
+        label: 'Double Arc Slider',
+        route: '/arc-slider',
+    },
+    {
+        label: 'Framer Arc Slider',
+        route: '/arc-slider-alt',
+    },
+    {
+        label: 'Blobbies',
+        route: '/blob',
+    },
+    {
+        label: 'Test Wave Sections',
+        route: '/test',
+    },
+];
 
 const Header = () => {
     const [theme, toggleTheme] = useContext(ThemeContext);
 
     return (
         <HeaderWrapper theme={theme}>
-            <Logo theme={theme}>
-                <Link href="/">
-                    <a>Framer Motion</a>
-                </Link>
-            </Logo>
-            <LinksContainer>
-                <Link href="/wave">
-                    <a>Wave</a>
-                </Link>
-                <Link href="/wave-alt">
-                    <a>Wave Alt</a>
-                </Link>
-                <Link href="/motion-slider">
-                    <a>Carousel</a>
-                </Link>
-                <Link href="/arc-slider">
-                    <a>Arc Slider</a>
-                </Link>
-                <Link href="/arc-slider-alt">
-                    <a>Arc Slider Framer</a>
-                </Link>
-                <Link href="/blob">
-                    <a>Blobbies</a>
-                </Link>
-            </LinksContainer>
+            <Nav navItems={navItems} />
             <ThemeButton theme={theme} onClick={toggleTheme}>
                 <span>{theme === THEME.LIGHT ? THEME.DARK : THEME.LIGHT}</span>
             </ThemeButton>
@@ -43,7 +51,7 @@ const Header = () => {
 
 const HeaderWrapper = styled.div`
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     align-items: center;
     padding: 20px;
     background: ${({ theme }) => (theme === THEME.LIGHT ? '#fafafa' : '#000')};
