@@ -7,7 +7,7 @@ $nav-width: 300px;
     bottom: calc(100vh - 80px);
     width: $nav-width;
     z-index: 2;
-    transition: bottom 0.1s ease-out 0.5s;
+    transition: bottom 0.1s ease-out 1s;
 
     &.open {
         bottom: 0;
