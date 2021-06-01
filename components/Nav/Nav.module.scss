@@ -4,18 +4,14 @@ $nav-width: 300px;
     position: absolute;
     top: 0;
     left: 0;
-    bottom: 0;
+    bottom: calc(100vh - 80px);
     width: $nav-width;
     z-index: 2;
-
-    nav *:not(button) {
-        pointer-events: none;
-    }
+    transition: bottom 0.1s ease-out 0.5s;
 
     &.open {
-        nav * {
-            pointer-events: all;
-        }
+        bottom: 0;
+        transition-delay: 0s;
     }
 
     button {
