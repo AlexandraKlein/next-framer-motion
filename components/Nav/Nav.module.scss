@@ -12,6 +12,10 @@ $nav-width: 300px;
     &.open {
         bottom: 0;
         transition-delay: 0s;
+
+        ul {
+            pointer-events: all;
+        }
     }
 
     button {
@@ -32,6 +36,7 @@ $nav-width: 300px;
         padding: 25px;
         position: absolute;
         top: 40px;
+        pointer-events: none;
     }
 
     li {
