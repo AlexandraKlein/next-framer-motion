@@ -8,6 +8,16 @@ $nav-width: 300px;
     width: $nav-width;
     z-index: 2;
 
+    nav *:not(button) {
+        pointer-events: none;
+    }
+
+    &.open {
+        nav * {
+            pointer-events: all;
+        }
+    }
+
     button {
         outline: none;
         border: none;
@@ -25,7 +35,7 @@ $nav-width: 300px;
     ul {
         padding: 25px;
         position: absolute;
-        top: 100px;
+        top: 40px;
     }
 
     li {
@@ -39,7 +49,7 @@ $nav-width: 300px;
         a {
             display: block;
             color: white;
-            padding: 10px 20px;
+            padding: 7px 20px;
         }
     }
 }

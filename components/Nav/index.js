@@ -1,6 +1,7 @@
 import { useRef, useEffect, useState } from 'react';
+import cx from 'classnames';
 import { motion } from 'framer-motion';
-import { useMeasure } from 'react-use';
+import { useMeasure, useLockBodyScroll } from 'react-use';
 import { useRouter } from 'next/router';
 import { MenuToggle } from './MenuToggle';
 import { MenuItem } from './MenuItem';
@@ -18,6 +19,8 @@ const navVariants = {
 const Nav = ({ navItems }) => {
     const [isOpen, setIsOpen] = useState(false);
     const [containerRef, { height }] = useMeasure();
+
+    useLockBodyScroll(isOpen);
 
     const toggleOpen = () => setIsOpen(prevIsOpen => !prevIsOpen);
     const router = useRouter();
@@ -53,10 +56,11 @@ const Nav = ({ navItems }) => {
     };
 
     return (
-        <div className={styles.root}>
+        <div className={cx(styles.root, { [styles.open]: isOpen })}>
             <motion.nav
                 initial={false}
                 animate={isOpen ? 'open' : 'closed'}
+                custom={height}
                 custom={height}
                 ref={containerRef}
             >
@@ -67,7 +71,7 @@ const Nav = ({ navItems }) => {
                     ))}
                 </motion.ul>
                 <MenuToggle toggle={toggleOpen} />
-            </motion.nav>
+            </motion.nav>{' '}
         </div>
     );
 };
