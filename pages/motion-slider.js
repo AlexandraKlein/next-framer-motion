@@ -58,9 +58,6 @@ const slides = [
 ];
 
 const MotionSliderPage = () => {
-    const viewBoxWidth = 619;
-    const viewBoxHeight = 659;
-
     return (
         <>
             <DrabbableSlider>
