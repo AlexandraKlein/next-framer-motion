@@ -7,14 +7,13 @@ import styles from './ArcSlider.module.scss';
 
 export default function ArcSlider({ degrees = 20, diameter = 1000, children }) {
     const slideWidth = diameter / children.length;
+    const centerIndex = Math.round(children.length / 2);
 
     const slidesRef = useRef([]);
 
     const [isDragging, setIsDragging] = useState(false);
-    const [activeIndex, setActiveIndex] = useState(0);
+    const [activeIndex, setActiveIndex] = useState(centerIndex);
     const [coordX, setCoordX] = useState(0);
-
-    const centerIndex = Math.round(children.length / 2);
 
     const onUpdate = latest => {
         setCoordX(latest.x);
