@@ -11,6 +11,7 @@ export default function ArcSlider({ degrees = 20, diameter = 1000, children }) {
 
     const slidesRef = useRef([]);
 
+    const [isDragging, setIsDragging] = useState(false);
     const [activeIndex, setActiveIndex] = useState(0);
     const [coordX, setCoordX] = useState(0);
 
@@ -31,23 +32,19 @@ export default function ArcSlider({ degrees = 20, diameter = 1000, children }) {
     }, [children]);
 
     useEffect(() => {
-        if (coordX % 100 !== 0) {
+        if (coordX % slideWidth !== 0) {
             return;
         }
 
-        const getActiveIndex = () => {
-            const activeIndex = slidesRef.current.findIndex((slide, index) => {
-                return (
-                    getComputedStyle(slide).getPropertyValue('transform') ===
-                    'none'
-                );
-            });
+        const activeIndex = slidesRef.current.findIndex(
+            (slide, index) =>
+                getComputedStyle(slide).getPropertyValue('transform') === 'none'
+        );
 
+        if (!isDragging) {
             setActiveIndex(activeIndex);
-        };
-
-        setTimeout(getActiveIndex, 750);
-    }, [coordX]);
+        }
+    }, [isDragging]);
 
     return (
         <div className={styles.root}>
@@ -89,6 +86,10 @@ export default function ArcSlider({ degrees = 20, diameter = 1000, children }) {
                                         ease: 'easeOut',
                                         duration: 0.5,
                                     }}
+                                    onAnimationStart={() => setIsDragging(true)}
+                                    onAnimationComplete={() =>
+                                        setIsDragging(false)
+                                    }
                                 >
                                     {child}
                                 </motion.div>

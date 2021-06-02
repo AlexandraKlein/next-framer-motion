@@ -6,7 +6,7 @@
 }
 
 .carouselContainer {
-    background-color: white;
+    background-color: cornsilk;
     position: relative;
     height: 500px;
     overflow: hidden;
@@ -47,6 +47,6 @@
 
     &.active img {
         border: 10px solid cadetblue;
-        transform: scale(1.15);
+        transform: scale(1.3);
     }
 }
