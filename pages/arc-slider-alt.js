@@ -1,4 +1,5 @@
 import ArcSlider from '../components/ArcSlider';
+import ArcSliderCentered from '../components/ArcSliderCentered';
 
 const slides = [
     'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8ZmFjZXxlbnwwfHwwfHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=300&q=60',
@@ -17,10 +18,18 @@ const slides = [
 
 export default function ArcCarousel() {
     return (
-        <ArcSlider degrees={18} diameter={1200}>
-            {slides.map((slide, index) => (
-                <img key={index} src={slide} alt="" />
-            ))}
-        </ArcSlider>
+        <div>
+            <ArcSliderCentered degrees={18} diameter={1200}>
+                {slides.map((slide, index) => (
+                    <img key={index} src={slide} alt="" />
+                ))}
+            </ArcSliderCentered>
+
+            <ArcSlider degrees={18} diameter={1200}>
+                {slides.map((slide, index) => (
+                    <img key={index} src={slide} alt="" />
+                ))}
+            </ArcSlider>
+        </div>
     );
 }
