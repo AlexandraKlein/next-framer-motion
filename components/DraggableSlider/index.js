@@ -6,14 +6,14 @@ import { motion } from 'framer-motion';
 
 import styles from './DraggableSlider.module.scss';
 
-const DraggableSlider = ({ children, navClassName }) => {
+const DraggableSlider = ({ children, navClassName, shouldSnap }) => {
     const inViewRatio = 0.5;
 
     const [trackRef, { width: trackWidth }] = useMeasure();
 
     const [tileWidth, setTileWidth] = useState(0);
     const [pageCenterDiff, setPageCenterDiff] = useState(0);
-    const [activeIndex, setActiveIndex] = useState(0);
+    const [activeIndex, setActiveIndex] = useState(shouldSnap ? 0 : 1);
     const [isDragging, setIsDragging] = useState(false);
 
     const isBeginning = activeIndex === 0;
@@ -34,6 +34,10 @@ const DraggableSlider = ({ children, navClassName }) => {
     }, [activeIndex, isEnd]);
 
     const handleSnap = target => {
+        if (!shouldSnap) {
+            return target;
+        }
+
         const index =
             target > tileWidth
                 ? 0 // dont go beyond first item
@@ -42,7 +46,9 @@ const DraggableSlider = ({ children, navClassName }) => {
                 : Math.floor(target / tileWidth) * -1;
 
         setActiveIndex(index);
-        return index * -1 * tileWidth + pageCenterDiff;
+
+        const snapTarget = index * -1 * tileWidth + pageCenterDiff;
+        return snapTarget;
     };
 
     useEffect(() => {
@@ -78,7 +84,7 @@ const DraggableSlider = ({ children, navClassName }) => {
                 <div
                     key={index}
                     className={styles.slideContainer}
-                    onClick={() => setActiveIndex(index)}
+                    onClick={shouldSnap ? () => setActiveIndex(index) : null}
                 >
                     {renderChild(child, { active: activeIndex })}
                 </div>
@@ -97,8 +103,8 @@ const DraggableSlider = ({ children, navClassName }) => {
                 className={styles.track}
                 drag="x"
                 dragConstraints={{
-                    left: -trackWidth,
-                    right: trackWidth - tileWidth,
+                    left: -trackWidth + tileWidth * 2,
+                    right: tileWidth,
                 }}
                 dragTransition={{
                     power: 0.3,
@@ -113,22 +119,24 @@ const DraggableSlider = ({ children, navClassName }) => {
             >
                 <div className={styles.inner}>{renderSlides()}</div>
             </motion.div>
-            <nav className={cx(styles.nav, navClassName)}>
-                <button
-                    className={styles.navItem}
-                    onClick={showPrev}
-                    disabled={isBeginning}
-                >
-                    <span className={styles.navItemInner}>←</span>
-                </button>
-                <button
-                    className={styles.navItem}
-                    onClick={showNext}
-                    disabled={isEnd}
-                >
-                    <span className={styles.navItemInner}>→</span>
-                </button>
-            </nav>
+            {shouldSnap && (
+                <nav className={cx(styles.nav, navClassName)}>
+                    <button
+                        className={styles.navItem}
+                        onClick={showPrev}
+                        disabled={isBeginning}
+                    >
+                        <span className={styles.navItemInner}>←</span>
+                    </button>
+                    <button
+                        className={styles.navItem}
+                        onClick={showNext}
+                        disabled={isEnd}
+                    >
+                        <span className={styles.navItemInner}>→</span>
+                    </button>
+                </nav>
+            )}
         </div>
     );
 };

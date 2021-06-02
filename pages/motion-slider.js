@@ -62,6 +62,17 @@ const MotionSliderPage = () => {
         <>
             <DrabbableSlider>
                 {slides.map((slide, index) => ({ active }) => (
+                    <ImageSlide
+                        orientation={index % 2 === 0 ? 'right' : 'left'}
+                        index={index}
+                    >
+                        <BackgroundImage src={slide.img} />
+                    </ImageSlide>
+                ))}
+            </DrabbableSlider>
+
+            <DrabbableSlider shouldSnap>
+                {slides.map((slide, index) => ({ active }) => (
                     <Slide
                         key={index}
                         index={index}
@@ -72,17 +83,6 @@ const MotionSliderPage = () => {
                         <h6>{slide.eyebrow}</h6>
                         <h2>{slide.headline}</h2>
                     </Slide>
-                ))}
-            </DrabbableSlider>
-
-            <DrabbableSlider>
-                {slides.map((slide, index) => ({ active }) => (
-                    <ImageSlide
-                        orientation={index % 2 === 0 ? 'right' : 'left'}
-                        index={index}
-                    >
-                        <BackgroundImage src={slide.img} />
-                    </ImageSlide>
                 ))}
             </DrabbableSlider>
 
@@ -166,12 +166,12 @@ const Slide = styled(ClippedCard)`
 const ImageSlide = styled(ClippedCard)`
     position: relative;
     width: 280px;
-    height: ${({ index }) => (index % 2 === 0 ? '400px' : '350px')};
+    height: ${({ index }) => (index % 2 === 0 ? '375px' : '325px')};
     margin: 20px;
 
     @media (min-width: 768px) {
-        width: 400px;
-        height: ${({ index }) => (index % 2 === 0 ? '500px' : '450px')};
+        width: 27.5vw;
+        height: ${({ index }) => (index % 2 === 0 ? '35vw' : '30vw')};
     }
 `;
 
