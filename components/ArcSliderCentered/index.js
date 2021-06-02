@@ -1,7 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { motion } from 'framer-motion';
-import { useMeasure } from 'react-use';
 import cx from 'classnames';
 
 import styles from './ArcSlider.module.scss';
@@ -32,10 +31,6 @@ export default function ArcSlider({ degrees = 20, diameter = 1000, children }) {
     }, [children]);
 
     useEffect(() => {
-        if (coordX % slideWidth !== 0) {
-            return;
-        }
-
         const activeIndex = slidesRef.current.findIndex(
             (slide, index) =>
                 getComputedStyle(slide).getPropertyValue('transform') === 'none'
