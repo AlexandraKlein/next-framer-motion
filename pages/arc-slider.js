@@ -78,7 +78,7 @@ function App() {
                     {slides.map((slide, index) => {
                         const isActive = active === index;
                         const rotate = index * degrees;
-                        const divider = (slideWidth / degrees) * 1;
+                        const divider = slideWidth / degrees;
 
                         return (
                             <Slide
@@ -101,7 +101,7 @@ function App() {
                     {slides.map((slide, index) => {
                         const isActive = active === index;
                         const rotate = index * degrees;
-                        const divider = (slideWidth / degrees) * 1;
+                        const divider = slideWidth / degrees;
 
                         return (
                             <Slide

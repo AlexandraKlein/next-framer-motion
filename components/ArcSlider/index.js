@@ -49,7 +49,7 @@ export default function ArcSlider({ degrees = 20, diameter = 1000, children }) {
                     <div className={styles.slidesContainer}>
                         {children.map((child, index) => {
                             const rotate = index * degrees;
-                            const divider = (slideWidth / degrees) * 1;
+                            const divider = slideWidth / degrees;
 
                             return (
                                 <motion.div
