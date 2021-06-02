@@ -104,5 +104,6 @@ export default function ArcSlider({ degrees = 20, diameter = 1000, children }) {
 
 ArcSlider.propTypes = {
     children: PropTypes.arrayOf(PropTypes.node).isRequired,
+    diameter: PropTypes.number,
     degrees: PropTypes.number,
 };
