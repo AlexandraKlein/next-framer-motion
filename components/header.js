@@ -48,20 +48,18 @@ const Header = () => {
         router.events.on('routeChangeComplete', () => {
             setIsOpen(false);
         });
-        return () => {
-            router.events.off();
-        };
+        return () => router.events.off();
     }, [router.events]);
 
     return (
-        <HeaderWrapper theme={theme}>
+        <HeaderWrapper theme={theme} isOpen={isOpen}>
             {/* <Nav navItems={navItems} /> */}
             <NavButton theme={theme} onClick={() => setIsOpen(prev => !prev)}>
-                {isOpen ? 'close' : 'open'}
+                {isOpen ? '+' : '='}
             </NavButton>
-            <NavItems>
+            <NavItems isOpen={isOpen}>
                 {navItems.map((item, index) => (
-                    <NavItem isOpen={isOpen}>
+                    <NavItem>
                         <Link href={item.route}>
                             <a>{item.label}</a>
                         </Link>
@@ -84,6 +82,9 @@ const HeaderWrapper = styled.div`
     align-items: flex-start;
     padding: 40px 20px;
     z-index: 2;
+    height: ${({ isOpen }) => (isOpen ? '518px' : '120px')};
+    overflow: hidden;
+    transition: 0.6s cubic-bezier(0.69, -0.38, 0.55, 1.54);
 
     &:before {
         content: '';
@@ -101,6 +102,7 @@ const HeaderWrapper = styled.div`
 `;
 
 const NavButton = styled.button`
+    font-size: 40px;
     appearance: none;
     border: none;
     outline: none;
@@ -108,19 +110,26 @@ const NavButton = styled.button`
     color: ${({ theme }) =>
         theme === THEME.LIGHT ? lightTheme.text : darkTheme.text};
     text-transform: uppercase;
-    padding: 20px;
+    line-height: 1;
     cursor: pointer;
 `;
 
-const NavItems = styled.div``;
+const NavItems = styled.div`
+    position: absolute;
+    top: 80px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
 
-const NavItem = styled.p`
-    opacity: ${({ isOpen }) => (isOpen ? 1 : 0)};
-    line-height: ${({ isOpen }) => (isOpen ? 1 : 0)};
-    margin: ${({ isOpen }) => (isOpen ? 10 : 0)};
-    pointer-events: ${({ isOpen }) => (isOpen ? 'all' : 'none')};
-    transition: 0.6s cubic-bezier(0.69, -0.38, 0.55, 1.54); ;
+    p {
+        transition: 0.6s cubic-bezier(0.69, -0.38, 0.55, 1.54);
+        opacity: ${({ isOpen }) => (isOpen ? 1 : 0)};
+        transform: ${({ isOpen }) =>
+            isOpen ? `translateY(0)` : `translateY(20px)`};
+    }
 `;
+
+const NavItem = styled.p``;
 
 const buttonHeight = 40;
 const borderWidth = 2;
