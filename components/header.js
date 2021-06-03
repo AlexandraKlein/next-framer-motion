@@ -59,7 +59,7 @@ const Header = () => {
             </NavButton>
             <NavItems isOpen={isOpen}>
                 {navItems.map((item, index) => (
-                    <NavItem>
+                    <NavItem key={index}>
                         <Link href={item.route}>
                             <a>{item.label}</a>
                         </Link>

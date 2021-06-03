@@ -18,7 +18,7 @@ const slides = [
 
 export default function ArcCarousel() {
     return (
-        <div>
+        <div style={{ paddingTop: 200 }}>
             <ArcSliderCentered degrees={18} diameter={1200}>
                 {slides.map((slide, index) => (
                     <img key={index} src={slide} alt="" />
