@@ -59,7 +59,7 @@ const slides = [
 
 const MotionSliderPage = () => {
     return (
-        <>
+        <div style={{ paddingTop: 200 }}>
             <DrabbableSlider>
                 {slides.map((slide, index) => ({ active }) => (
                     <ImageSlide
@@ -95,7 +95,7 @@ const MotionSliderPage = () => {
                     </BlobContainer>
                 ))}
             </Container>
-        </>
+        </div>
     );
 };
 
