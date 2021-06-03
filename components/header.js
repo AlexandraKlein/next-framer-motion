@@ -118,7 +118,8 @@ const NavItem = styled.p`
     opacity: ${({ isOpen }) => (isOpen ? 1 : 0)};
     line-height: ${({ isOpen }) => (isOpen ? 1 : 0)};
     margin: ${({ isOpen }) => (isOpen ? 10 : 0)};
-    transition: 0.25s cubic-bezier(0.18, 0.89, 0.62, 1.27);
+    pointer-events: ${({ isOpen }) => (isOpen ? 'all' : 'none')};
+    transition: 0.6s cubic-bezier(0.69, -0.38, 0.55, 1.54); ;
 `;
 
 const buttonHeight = 40;
