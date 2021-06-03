@@ -27,7 +27,6 @@ const Nav = ({ navItems }) => {
 
     useEffect(() => {
         router.events.on('routeChangeComplete', () => {
-            console.log('COMPLETE');
             setIsOpen(false);
         });
         return () => {

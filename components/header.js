@@ -1,5 +1,7 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState, useEffect } from 'react';
+import cx from 'classnames';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import styled from '@emotion/styled';
 import Nav from '../components/Nav';
 import { ThemeContext, THEME } from '../contexts/Theme';
@@ -38,10 +40,34 @@ const navItems = [
 
 const Header = () => {
     const [theme, toggleTheme] = useContext(ThemeContext);
+    const [isOpen, setIsOpen] = useState(false);
+
+    const router = useRouter();
+
+    useEffect(() => {
+        router.events.on('routeChangeComplete', () => {
+            setIsOpen(false);
+        });
+        return () => {
+            router.events.off();
+        };
+    }, [router.events]);
 
     return (
         <HeaderWrapper theme={theme}>
-            <Nav navItems={navItems} />
+            {/* <Nav navItems={navItems} /> */}
+            <NavButton theme={theme} onClick={() => setIsOpen(prev => !prev)}>
+                {isOpen ? 'close' : 'open'}
+            </NavButton>
+            <NavItems>
+                {navItems.map((item, index) => (
+                    <NavItem isOpen={isOpen}>
+                        <Link href={item.route}>
+                            <a>{item.label}</a>
+                        </Link>
+                    </NavItem>
+                ))}
+            </NavItems>
             <ThemeButton theme={theme} onClick={toggleTheme}>
                 <span>{theme === THEME.LIGHT ? THEME.DARK : THEME.LIGHT}</span>
             </ThemeButton>
@@ -50,33 +76,49 @@ const Header = () => {
 };
 
 const HeaderWrapper = styled.div`
+    position: fixed;
+    left: 0;
+    right: 0;
     display: flex;
-    justify-content: flex-end;
-    align-items: center;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 40px 20px;
+    z-index: 2;
+
+    &:before {
+        content: '';
+        background: ${({ theme }) =>
+            theme === THEME.LIGHT ? '#fafafa' : '#000'};
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 110%;
+        height: 100%;
+        border-radius: 10% 10% 47% 47% / 0% 0% 40% 40%;
+        z-index: -1;
+    }
+`;
+
+const NavButton = styled.button`
+    appearance: none;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: ${({ theme }) =>
+        theme === THEME.LIGHT ? lightTheme.text : darkTheme.text};
+    text-transform: uppercase;
     padding: 20px;
-    background: ${({ theme }) => (theme === THEME.LIGHT ? '#fafafa' : '#000')};
-    transition: all 0.25s ease;
+    cursor: pointer;
 `;
 
-const LinksContainer = styled.div`
-    a {
-        margin: 0 15px;
-    }
-`;
+const NavItems = styled.div``;
 
-const Logo = styled.div`
-    padding: 10px 0;
-
-    a {
-        font-weight: 900;
-        color: ${({ theme }) => (theme === THEME.LIGHT ? '#111' : 'inherit')};
-
-        &:hover {
-            font-weight: 900;
-            border-bottom: ${({ theme }) =>
-                theme === THEME.LIGHT ? '2px solid #111' : '2px solid #fff'};
-        }
-    }
+const NavItem = styled.p`
+    opacity: ${({ isOpen }) => (isOpen ? 1 : 0)};
+    line-height: ${({ isOpen }) => (isOpen ? 1 : 0)};
+    margin: ${({ isOpen }) => (isOpen ? 10 : 0)};
+    transition: 0.25s cubic-bezier(0.18, 0.89, 0.62, 1.27);
 `;
 
 const buttonHeight = 40;
