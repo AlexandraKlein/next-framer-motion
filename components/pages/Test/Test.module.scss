@@ -16,3 +16,30 @@
 .whiteText {
     color: white;
 }
+
+.backgroundImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.section {
+    --clip-offset: 120px;
+    --block-padding-y: 200px;
+
+    position: relative;
+    position: relative;
+    padding: calc(var(--clip-offset) + var(--block-padding-y)) 30px;
+    margin-bottom: calc(-1 * var(--clip-offset));
+    clip-path: url(#waveClip);
+    overflow: hidden;
+
+    &.last {
+        padding-bottom: var(--block-padding-y);
+        margin-bottom: 0;
+    }
+}

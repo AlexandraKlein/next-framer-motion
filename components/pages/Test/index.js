@@ -1,11 +1,22 @@
 import WaveSectionAlt from '../../WaveSectionAlt';
 import WaveSection from '../../WaveSection';
+import WaveClip from '../../WaveClip';
 import cx from 'classnames';
 import styles from './Test.module.scss';
 
 export default function Test() {
     return (
         <div>
+            <div className={styles.standAloneContent}>
+                <h1>Added SVG wave below content</h1>
+                <p>
+                    Every piece is made to foster confidence + self-expression,
+                    while helping parents to affordably + adorably dress their
+                    kiddos, from newborn to 5 years old. Lorem ipsum potenti
+                    nullam ac tortor vitae purus faucibus ornare. Tortor at
+                    risus viverra adipiscing at.
+                </p>
+            </div>
             <WaveSectionAlt
                 backgroundColor="#D2F6FD"
                 backgroundPosition="bottom"
@@ -86,7 +97,7 @@ export default function Test() {
                 </div>
             </WaveSectionAlt>
             <div className={styles.standAloneContent}>
-                <h1>Below here is clip path</h1>
+                <h1>Responsive clip path</h1>
                 <p>
                     Every piece is made to foster confidence + self-expression,
                     while helping parents to affordably + adorably dress their
@@ -233,6 +244,112 @@ export default function Test() {
                     </div>
                 </div>
             </WaveSection>
+            <div className={styles.standAloneContent}>
+                <h1>Unresponsive clip path</h1>
+                <p>
+                    Every piece is made to foster confidence + self-expression,
+                    while helping parents to affordably + adorably dress their
+                    kiddos, from newborn to 5 years old. Lorem ipsum potenti
+                    nullam ac tortor vitae purus faucibus ornare. Tortor at
+                    risus viverra adipiscing at.
+                </p>
+            </div>
+            <WaveClip />
+            <section className={styles.section}>
+                <img
+                    className={styles.backgroundImage}
+                    src="https://images.unsplash.com/photo-1622702637362-92e3122dcb90?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw1OXx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1200"
+                />
+                <div className={cx(styles.content, styles.whiteText)}>
+                    <h1>We go together</h1>
+                    <h2>
+                        Garanimals is a collection of playful mix + match
+                        children’s clothing that goes together.{' '}
+                    </h2>
+                    <div className={styles.innerContent}>
+                        <p>
+                            Every piece is made to foster confidence +
+                            self-expression, while helping parents to affordably
+                            + adorably dress their kiddos, from newborn to 5
+                            years old. Lorem ipsum potenti nullam ac tortor
+                            vitae purus faucibus ornare. Tortor at risus viverra
+                            adipiscing at.
+                        </p>
+                        <p>
+                            Every piece is made to foster confidence +
+                            self-expression, while helping parents to affordably
+                            + adorably dress their kiddos, from newborn to 5
+                            years old. Lorem ipsum potenti nullam ac tortor
+                            vitae purus faucibus ornare. Tortor at risus viverra
+                            adipiscing at.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section className={styles.section}>
+                <img
+                    className={styles.backgroundImage}
+                    src="https://images.unsplash.com/photo-1585399000684-d2f72660f092?ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw2Nnx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1200"
+                />
+                <div className={cx(styles.content, styles.whiteText)}>
+                    <h1>We go together</h1>
+                    <h2>
+                        Garanimals is a collection of playful mix + match
+                        children’s clothing that goes together.{' '}
+                    </h2>
+                    <div className={styles.innerContent}>
+                        <p>
+                            Every piece is made to foster confidence +
+                            self-expression, while helping parents to affordably
+                            + adorably dress their kiddos, from newborn to 5
+                            years old. Lorem ipsum potenti nullam ac tortor
+                            vitae purus faucibus ornare. Tortor at risus viverra
+                            adipiscing at.
+                        </p>
+                        <p>
+                            Every piece is made to foster confidence +
+                            self-expression, while helping parents to affordably
+                            + adorably dress their kiddos, from newborn to 5
+                            years old. Lorem ipsum potenti nullam ac tortor
+                            vitae purus faucibus ornare. Tortor at risus viverra
+                            adipiscing at.
+                        </p>
+                    </div>
+                </div>
+            </section>
+
+            <section className={cx(styles.section, styles.last)}>
+                <img
+                    className={styles.backgroundImage}
+                    src="https://images.unsplash.com/photo-1622645789620-452e764960f4?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw3NXx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1200"
+                />
+                <div className={styles.content}>
+                    <h1>We go together</h1>
+                    <h2>
+                        Garanimals is a collection of playful mix + match
+                        children’s clothing that goes together.{' '}
+                    </h2>
+                    <div className={styles.innerContent}>
+                        <p>
+                            Every piece is made to foster confidence +
+                            self-expression, while helping parents to affordably
+                            + adorably dress their kiddos, from newborn to 5
+                            years old. Lorem ipsum potenti nullam ac tortor
+                            vitae purus faucibus ornare. Tortor at risus viverra
+                            adipiscing at.
+                        </p>
+                        <p>
+                            Every piece is made to foster confidence +
+                            self-expression, while helping parents to affordably
+                            + adorably dress their kiddos, from newborn to 5
+                            years old. Lorem ipsum potenti nullam ac tortor
+                            vitae purus faucibus ornare. Tortor at risus viverra
+                            adipiscing at.
+                        </p>
+                    </div>
+                </div>
+            </section>
         </div>
     );
 }
