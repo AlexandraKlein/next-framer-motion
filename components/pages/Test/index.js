@@ -56,7 +56,7 @@ export default function Test() {
                     <h1>We go together</h1>
                     <h2>
                         Garanimals is a collection of playful mix + match
-                        children’s clothing that goes together.{' '}
+                        children’s clothing that goes together.
                     </h2>
                     <div className={styles.innerContent}>
                         <p>
@@ -141,7 +141,7 @@ export default function Test() {
                     <h1>We go together</h1>
                     <h2>
                         Garanimals is a collection of playful mix + match
-                        children’s clothing that goes together.{' '}
+                        children’s clothing that goes together.
                     </h2>
                     <div className={styles.innerContent}>
                         <p>
@@ -190,7 +190,7 @@ export default function Test() {
                     <h1>We go together</h1>
                     <h2>
                         Garanimals is a collection of playful mix + match
-                        children’s clothing that goes together.{' '}
+                        children’s clothing that goes together.
                     </h2>
                     <div className={styles.innerContent}>
                         <p>
@@ -222,7 +222,7 @@ export default function Test() {
                     <h1>We go together</h1>
                     <h2>
                         Garanimals is a collection of playful mix + match
-                        children’s clothing that goes together.{' '}
+                        children’s clothing that goes together.
                     </h2>
                     <div className={styles.innerContent}>
                         <p>
@@ -258,13 +258,13 @@ export default function Test() {
             <section className={styles.section}>
                 <img
                     className={styles.backgroundImage}
-                    src="https://images.unsplash.com/photo-1622702637362-92e3122dcb90?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw1OXx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1200"
+                    src="https://images.unsplash.com/photo-1622409808007-5a376672c92a?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw1ODN8fHxlbnwwfHx8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1200"
                 />
                 <div className={cx(styles.content, styles.whiteText)}>
                     <h1>We go together</h1>
                     <h2>
                         Garanimals is a collection of playful mix + match
-                        children’s clothing that goes together.{' '}
+                        children’s clothing that goes together.
                     </h2>
                     <div className={styles.innerContent}>
                         <p>
@@ -290,13 +290,13 @@ export default function Test() {
             <section className={styles.section}>
                 <img
                     className={styles.backgroundImage}
-                    src="https://images.unsplash.com/photo-1585399000684-d2f72660f092?ixid=MnwxMjA3fDF8MHxlZGl0b3JpYWwtZmVlZHw2Nnx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1200"
+                    src="https://images.unsplash.com/photo-1541689221361-ad95003448dc?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTU3fHxhbmltYWxzfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1200"
                 />
-                <div className={cx(styles.content, styles.whiteText)}>
+                <div className={styles.content}>
                     <h1>We go together</h1>
                     <h2>
                         Garanimals is a collection of playful mix + match
-                        children’s clothing that goes together.{' '}
+                        children’s clothing that goes together.
                     </h2>
                     <div className={styles.innerContent}>
                         <p>
@@ -322,13 +322,13 @@ export default function Test() {
             <section className={cx(styles.section, styles.last)}>
                 <img
                     className={styles.backgroundImage}
-                    src="https://images.unsplash.com/photo-1622645789620-452e764960f4?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw3NXx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1200"
+                    src="https://images.unsplash.com/photo-1622335087135-45210c28494f?ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHw3NTd8fHxlbnwwfHx8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1200"
                 />
-                <div className={styles.content}>
+                <div className={cx(styles.content, styles.whiteText)}>
                     <h1>We go together</h1>
                     <h2>
                         Garanimals is a collection of playful mix + match
-                        children’s clothing that goes together.{' '}
+                        children’s clothing that goes together.
                     </h2>
                     <div className={styles.innerContent}>
                         <p>
