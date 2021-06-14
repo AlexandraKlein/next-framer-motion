@@ -19,7 +19,6 @@
 .marker {
     width: 120px;
     background-color: lightcoral;
-
     color: white;
     text-align: center;
     text-transform: uppercase;
@@ -29,6 +28,14 @@
         padding: 10px;
         margin: 0;
     }
+}
+
+.autocomplete {
+    position: absolute;
+    top: 130px;
+    left: 0;
+    padding: 10px;
+    z-index: 1;
 }
 
 .aside {

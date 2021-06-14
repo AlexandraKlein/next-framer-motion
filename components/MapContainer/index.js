@@ -1,5 +1,6 @@
 import React from 'react';
 import GoogleMapReact from 'google-map-react';
+import Autocomplete from 'react-google-autocomplete';
 
 import styles from './MapContainer.module.scss';
 
@@ -68,6 +69,7 @@ const Place = ({ name, address, photo }) => {
 class MapContainer extends React.Component {
     constructor(props) {
         super(props);
+
         this.state = {
             loading: false,
             mapsLoaded: false,
@@ -97,7 +99,7 @@ class MapContainer extends React.Component {
         navigator.geolocation.getCurrentPosition(position => {
             const lat = position.coords.latitude;
             const lng = position.coords.longitude;
-            this.setState({ center: { lat, lng } });
+            this.handleSetCenter(lat, lng);
         });
     }
 
@@ -117,6 +119,10 @@ class MapContainer extends React.Component {
             mapsApi,
             placesService: new mapsApi.places.PlacesService(map),
         });
+    };
+
+    handleSetCenter = (lat, lng) => {
+        this.setState({ center: { lat, lng } });
     };
 
     handleFindPlaces = () => {
@@ -142,6 +148,20 @@ class MapContainer extends React.Component {
 
         return (
             <section className={styles.root}>
+                <Autocomplete
+                    className={styles.autocomplete}
+                    apiKey="AIzaSyDSIZ0_V9gUYR8l-4W7tvmihmasBK869Bg"
+                    onPlaceSelected={place => {
+                        if (!place?.geometry) {
+                            return;
+                        }
+                        const lat = place.geometry.location.lat();
+                        const lng = place.geometry.location.lng();
+                        this.handleSetCenter(lat, lng);
+                        console.log(place);
+                    }}
+                />
+
                 <GoogleMapReact
                     options={this.createMapOptions}
                     bootstrapURLKeys={{
@@ -171,12 +191,6 @@ class MapContainer extends React.Component {
                         <h2>Loading...</h2>
                     </div>
                 )}
-                <button
-                    onClick={this.handleFindPlaces}
-                    className={styles.button}
-                >
-                    find places
-                </button>
                 {/* 
                 {places.length && !loading && (
                     <aside className={styles.aside}>
