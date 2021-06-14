@@ -158,7 +158,6 @@ class MapContainer extends React.Component {
                         const lat = place.geometry.location.lat();
                         const lng = place.geometry.location.lng();
                         this.handleSetCenter(lat, lng);
-                        console.log(place);
                     }}
                 />
 
