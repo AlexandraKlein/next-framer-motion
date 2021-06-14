@@ -6,10 +6,61 @@ import styles from './MapContainer.module.scss';
 const DEFAULT_CENTER = { lat: 34.024212, lng: -118.496475 };
 const DEFAULT_ZOOM = 13;
 
-const Marker = props => {
+const mapStyles = [
+    {
+        featureType: 'administrative',
+        elementType: 'geometry',
+        stylers: [
+            {
+                visibility: 'off',
+            },
+        ],
+    },
+    {
+        featureType: 'administrative.land_parcel',
+        elementType: 'labels',
+        stylers: [
+            {
+                visibility: 'off',
+            },
+        ],
+    },
+    {
+        featureType: 'poi',
+        stylers: [
+            {
+                visibility: 'off',
+            },
+        ],
+    },
+    {
+        featureType: 'poi',
+        elementType: 'labels.text',
+        stylers: [
+            {
+                visibility: 'off',
+            },
+        ],
+    },
+];
+
+const Marker = ({ lat, lng, name }) => {
     return (
-        <div className={styles.marker} lat={props.lat} lng={props.lng}>
-            <p>{props.name}</p>
+        <div className={styles.marker} lat={lat} lng={lng}>
+            <h3>{name}</h3>
+        </div>
+    );
+};
+
+const Place = ({ name, address, photo }) => {
+    return (
+        <div className={styles.place}>
+            {photo && <img src={photo} alt={name} />}
+
+            <div className={styles.placeContent}>
+                <h3>{name}</h3>
+                <p>{address}</p>
+            </div>
         </div>
     );
 };
@@ -33,33 +84,29 @@ class MapContainer extends React.Component {
         if (!this.state.mapsLoaded) {
             return;
         }
+
+        if (
+            (!prevState.mapsLoaded && this.state.mapsLoaded) ||
+            prevState.center !== this.state.center
+        ) {
+            this.handleFindPlaces();
+        }
     }
 
     componentDidMount() {
-        const {
-            markers,
-            constraints,
-            placesService,
-            directionService,
-            mapsApi,
-        } = this.state;
+        navigator.geolocation.getCurrentPosition(position => {
+            const lat = position.coords.latitude;
+            const lng = position.coords.longitude;
+            this.setState({ center: { lat, lng } });
+        });
     }
 
     createMapOptions = maps => {
         return {
-            panControl: false,
-            mapTypeControl: false,
-            scrollwheel: false,
-            styles: [
-                {
-                    stylers: [
-                        { saturation: -100 },
-                        { gamma: 0.8 },
-                        { lightness: 4 },
-                        { visibility: 'on' },
-                    ],
-                },
-            ],
+            // panControl: false,
+            // mapTypeControl: false,
+            // scrollwheel: false,
+            styles: mapStyles,
         };
     };
 
@@ -77,9 +124,8 @@ class MapContainer extends React.Component {
         this.state.placesService.textSearch(
             {
                 location: this.state.center,
-
-                type: ['pharmacy'], // List of types: https://developers.google.com/places/supported_types
-                query: 'cvs',
+                // type: ['store'], // List of types: https://developers.google.com/places/supported_types
+                query: 'frozen yogurt',
             },
             response => {
                 this.setState({ places: response, loading: false });
@@ -110,7 +156,7 @@ class MapContainer extends React.Component {
                     }
                     yesIWantToUseGoogleMapApiInternals
                 >
-                    {places &&
+                    {places.length &&
                         places.map((place, index) => (
                             <Marker
                                 key={index}
@@ -131,6 +177,21 @@ class MapContainer extends React.Component {
                 >
                     find places
                 </button>
+                {/* 
+                {places.length && !loading && (
+                    <aside className={styles.aside}>
+                        {places.map((place, index) => {
+                            return (
+                                <Place
+                                    key={index}
+                                    address={place.formatted_address}
+                                    name={place.name}
+                                    photo={place.photos?.[0].getUrl()}
+                                />
+                            );
+                        })}
+                    </aside>
+                )} */}
             </section>
         );
     }
