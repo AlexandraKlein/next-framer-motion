@@ -3,7 +3,8 @@ import GoogleMapReact from 'google-map-react';
 
 import styles from './MapContainer.module.scss';
 
-const CENTER = { lat: 34.024212, lng: -118.496475 };
+const DEFAULT_CENTER = { lat: 34.024212, lng: -118.496475 };
+const DEFAULT_ZOOM = 13;
 
 const Marker = props => {
     return (
@@ -17,11 +18,14 @@ class MapContainer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            loading: false,
             mapsLoaded: false,
             map: {},
             mapsApi: {},
             placesService: {},
             places: [],
+            center: DEFAULT_CENTER,
+            zoom: DEFAULT_ZOOM,
         };
     }
 
@@ -30,20 +34,6 @@ class MapContainer extends React.Component {
             return;
         }
     }
-
-    handleFindPlaces = () => {
-        this.state.placesService.textSearch(
-            {
-                location: CENTER,
-
-                type: ['pharmacy'], // List of types: https://developers.google.com/places/supported_types
-                query: 'cvs',
-            },
-            response => {
-                this.setState({ places: response });
-            }
-        );
-    };
 
     componentDidMount() {
         const {
@@ -82,10 +72,27 @@ class MapContainer extends React.Component {
         });
     };
 
-    render() {
-        const { places } = this.state;
+    handleFindPlaces = () => {
+        this.setState({ loading: true });
+        this.state.placesService.textSearch(
+            {
+                location: this.state.center,
 
-        console.log({ places });
+                type: ['pharmacy'], // List of types: https://developers.google.com/places/supported_types
+                query: 'cvs',
+            },
+            response => {
+                this.setState({ places: response, loading: false });
+            }
+        );
+    };
+
+    handleOnBoundsChange = (center, zoom) => {
+        this.setState({ center, zoom });
+    };
+
+    render() {
+        const { places, loading } = this.state;
 
         return (
             <section className={styles.root}>
@@ -95,12 +102,13 @@ class MapContainer extends React.Component {
                         key: 'AIzaSyDSIZ0_V9gUYR8l-4W7tvmihmasBK869Bg',
                         libraries: ['places'],
                     }}
-                    defaultZoom={13}
-                    defaultCenter={CENTER}
-                    yesIWantToUseGoogleMapApiInternals={true}
+                    onBoundsChange={this.handleOnBoundsChange}
+                    center={this.state.center}
+                    zoom={this.state.zoom}
                     onGoogleApiLoaded={({ map, maps }) =>
                         this.apiHasLoaded(map, maps)
                     }
+                    yesIWantToUseGoogleMapApiInternals
                 >
                     {places &&
                         places.map((place, index) => (
@@ -112,6 +120,11 @@ class MapContainer extends React.Component {
                             />
                         ))}
                 </GoogleMapReact>
+                {loading && (
+                    <div className={styles.loading}>
+                        <h2>Loading...</h2>
+                    </div>
+                )}
                 <button
                     onClick={this.handleFindPlaces}
                     className={styles.button}
