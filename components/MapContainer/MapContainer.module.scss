@@ -1,15 +1,28 @@
+$teal: #00a998;
+
 .root {
     width: 100%;
     height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr;
+
+    @media (min-width: 768px) {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.innerContainer {
+    position: relative;
+    min-height: 100vh;
 }
 
 .loading {
-    position: fixed;
+    position: absolute;
     width: 100%;
     height: 100%;
     left: 0;
     top: 0;
-    background-color: rgba(cadetblue, 0.7);
+    background-color: rgba($teal, 0.5);
     color: white;
     display: flex;
     align-items: center;
@@ -20,7 +33,7 @@
     width: 35px;
     height: 35px;
     border-radius: 50%;
-    background-color: #00a998;
+    background-color: $teal;
     color: white;
     display: flex;
     justify-content: center;
@@ -41,46 +54,41 @@
     color: black;
     padding: 12px;
     top: 35px;
-    border: 2px solid #00a998;
+    border: 2px solid $teal;
     z-index: 1;
+}
+
+.content {
+    padding: 200px 0 0;
 }
 
 .autocomplete {
-    position: absolute;
-    top: 130px;
-    left: 20px;
-    padding: 10px;
-    z-index: 1;
-}
+    padding: 0 20px 60px;
+    width: 100%;
 
-.aside {
-    display: none;
-    position: fixed;
-    right: 0;
-    top: 100px;
-    width: 320px;
-    height: 100%;
-    background-color: white;
-    padding-bottom: 100px;
-    overflow-y: scroll;
-
-    @media (min-width: 768px) {
-        display: block;
+    input {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-bottom: 1px solid gray;
+        appearance: none;
+        background-color: transparent;
     }
 }
 
-.place {
-    margin-bottom: 60px;
+.aside {
+    position: relative;
+}
 
-    img {
-        width: 100%;
-        height: 200px;
-        object-fit: cover;
+.place {
+    &.activePlace {
+        background-color: $teal;
+        color: white;
     }
 }
 
 .placeContent {
-    padding: 0 20px;
+    padding: 10px 20px;
 
     p,
     h3 {

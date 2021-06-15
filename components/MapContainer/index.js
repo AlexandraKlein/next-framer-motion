@@ -1,6 +1,7 @@
 import React from 'react';
 import GoogleMapReact from 'google-map-react';
 import Autocomplete from 'react-google-autocomplete';
+import cx from 'classnames';
 
 import styles from './MapContainer.module.scss';
 
@@ -45,25 +46,23 @@ const mapStyles = [
     },
 ];
 
-const Marker = ({ lat, lng, name, address, index }) => {
+const Marker = ({ lat, lng, uid, index, onMouseEnter, onMouseLeave }) => {
     return (
-        <div className={styles.marker}>
+        <div
+            className={styles.marker}
+            onMouseEnter={onMouseEnter}
+            onMouseLeave={onMouseLeave}
+        >
             <div className={styles.marker} lat={lat} lng={lng}>
                 <span>{index + 1}</span>
-            </div>
-            <div className={styles.markerContent}>
-                <h3>{name}</h3>
-                <p>{address}</p>
             </div>
         </div>
     );
 };
 
-const Place = ({ name, address, photo }) => {
+const Place = ({ name, address, isActive }) => {
     return (
-        <div className={styles.place}>
-            {photo && <img src={photo} alt={name} />}
-
+        <div className={cx(styles.place, { [styles.activePlace]: isActive })}>
             <div className={styles.placeContent}>
                 <h3>{name}</h3>
                 <p>{address}</p>
@@ -83,6 +82,7 @@ class MapContainer extends React.Component {
             mapsApi: {},
             placesService: {},
             places: [],
+            activePlaceId: null,
             center: DEFAULT_CENTER,
             zoom: DEFAULT_ZOOM,
         };
@@ -140,7 +140,8 @@ class MapContainer extends React.Component {
                 query: 'frozen yogurt',
             },
             response => {
-                this.setState({ places: response, loading: false });
+                const places = response.slice(0, 5);
+                this.setState({ places, loading: false });
             }
         );
     };
@@ -149,70 +150,101 @@ class MapContainer extends React.Component {
         this.setState({ center, zoom });
     };
 
+    handleMouseEnterMarker = id => {
+        this.setState({ activePlaceId: id });
+    };
+
+    handleMouseLeaveMarker = () => {
+        this.setState({ activePlaceId: null });
+    };
+
     render() {
-        const { places, loading } = this.state;
+        const { places, loading, activePlaceId } = this.state;
+
+        console.log({ activePlaceId });
 
         return (
             <section className={styles.root}>
-                <Autocomplete
-                    className={styles.autocomplete}
-                    apiKey="AIzaSyDSIZ0_V9gUYR8l-4W7tvmihmasBK869Bg"
-                    onPlaceSelected={place => {
-                        if (!place?.geometry) {
-                            return;
-                        }
-                        const lat = place.geometry.location.lat();
-                        const lng = place.geometry.location.lng();
-                        this.handleSetCenter(lat, lng);
-                    }}
-                />
-
-                <GoogleMapReact
-                    options={this.createMapOptions}
-                    bootstrapURLKeys={{
-                        key: 'AIzaSyDSIZ0_V9gUYR8l-4W7tvmihmasBK869Bg',
-                        libraries: ['places'],
-                    }}
-                    onBoundsChange={this.handleOnBoundsChange}
-                    center={this.state.center}
-                    zoom={this.state.zoom}
-                    onGoogleApiLoaded={({ map, maps }) =>
-                        this.apiHasLoaded(map, maps)
-                    }
-                    yesIWantToUseGoogleMapApiInternals
-                >
-                    {places.length &&
-                        places.map((place, index) => (
-                            <Marker
-                                key={index}
-                                index={index}
-                                address={place.formatted_address}
-                                name={place.name}
-                                lat={place.geometry.location.lat()}
-                                lng={place.geometry.location.lng()}
-                            />
-                        ))}
-                </GoogleMapReact>
-                {loading && (
-                    <div className={styles.loading}>
-                        <h2>Loading...</h2>
+                <div className={styles.content}>
+                    <div className={styles.autocomplete}>
+                        <Autocomplete
+                            apiKey="AIzaSyDSIZ0_V9gUYR8l-4W7tvmihmasBK869Bg"
+                            onPlaceSelected={place => {
+                                if (!place?.geometry) {
+                                    return;
+                                }
+                                const lat = place.geometry.location.lat();
+                                const lng = place.geometry.location.lng();
+                                this.handleSetCenter(lat, lng);
+                            }}
+                        />
                     </div>
-                )}
-                {/* 
-                {places.length && !loading && (
-                    <aside className={styles.aside}>
-                        {places.map((place, index) => {
-                            return (
-                                <Place
-                                    key={index}
-                                    address={place.formatted_address}
-                                    name={place.name}
-                                    photo={place.photos?.[0].getUrl()}
-                                />
-                            );
-                        })}
-                    </aside>
-                )} */}
+
+                    {places.length > 0 && !loading && (
+                        <aside className={styles.aside}>
+                            {places.map((place, index) => {
+                                return (
+                                    <Place
+                                        isActive={
+                                            place.place_id ===
+                                            this.state.activePlaceId
+                                        }
+                                        key={index}
+                                        address={place.formatted_address}
+                                        name={place.name}
+                                        photo={place.photos?.[0].getUrl()}
+                                    />
+                                );
+                            })}
+                        </aside>
+                    )}
+                </div>
+
+                <div className={styles.innerContainer}>
+                    <GoogleMapReact
+                        options={this.createMapOptions}
+                        bootstrapURLKeys={{
+                            key: 'AIzaSyDSIZ0_V9gUYR8l-4W7tvmihmasBK869Bg',
+                            libraries: ['places'],
+                        }}
+                        onBoundsChange={this.handleOnBoundsChange}
+                        center={this.state.center}
+                        zoom={this.state.zoom}
+                        onGoogleApiLoaded={({ map, maps }) =>
+                            this.apiHasLoaded(map, maps)
+                        }
+                        yesIWantToUseGoogleMapApiInternals
+                    >
+                        {places.length &&
+                            places.map(
+                                (place, index) =>
+                                    console.log({ place }) || (
+                                        <Marker
+                                            key={place.place_id + index}
+                                            index={index}
+                                            uid={place.place_id}
+                                            address={place.formatted_address}
+                                            name={place.name}
+                                            lat={place.geometry.location.lat()}
+                                            lng={place.geometry.location.lng()}
+                                            onMouseEnter={() =>
+                                                this.handleMouseEnterMarker(
+                                                    place.place_id
+                                                )
+                                            }
+                                            onMouseLeave={
+                                                this.handleMouseLeaveMarker
+                                            }
+                                        />
+                                    )
+                            )}
+                    </GoogleMapReact>
+                    {loading && (
+                        <div className={styles.loading}>
+                            <h2>Loading...</h2>
+                        </div>
+                    )}
+                </div>
             </section>
         );
     }
