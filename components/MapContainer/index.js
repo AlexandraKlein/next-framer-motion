@@ -5,7 +5,7 @@ import Autocomplete from 'react-google-autocomplete';
 import styles from './MapContainer.module.scss';
 
 const DEFAULT_CENTER = { lat: 34.024212, lng: -118.496475 };
-const DEFAULT_ZOOM = 13;
+const DEFAULT_ZOOM = 12;
 
 const mapStyles = [
     {
@@ -45,10 +45,16 @@ const mapStyles = [
     },
 ];
 
-const Marker = ({ lat, lng, name }) => {
+const Marker = ({ lat, lng, name, address, index }) => {
     return (
-        <div className={styles.marker} lat={lat} lng={lng}>
-            <h3>{name}</h3>
+        <div className={styles.marker}>
+            <div className={styles.marker} lat={lat} lng={lng}>
+                <span>{index + 1}</span>
+            </div>
+            <div className={styles.markerContent}>
+                <h3>{name}</h3>
+                <p>{address}</p>
+            </div>
         </div>
     );
 };
@@ -179,6 +185,8 @@ class MapContainer extends React.Component {
                         places.map((place, index) => (
                             <Marker
                                 key={index}
+                                index={index}
+                                address={place.formatted_address}
                                 name={place.name}
                                 lat={place.geometry.location.lat()}
                                 lng={place.geometry.location.lng()}

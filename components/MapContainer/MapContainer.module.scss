@@ -17,17 +17,32 @@
 }
 
 .marker {
-    width: 120px;
-    background-color: lightcoral;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: #00a998;
     color: white;
-    text-align: center;
-    text-transform: uppercase;
-    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    h3 {
-        padding: 10px;
-        margin: 0;
+    &:hover {
+        .markerContent {
+            display: block;
+        }
     }
+}
+
+.markerContent {
+    display: none;
+    position: absolute;
+    width: 170px;
+    background-color: white;
+    color: black;
+    padding: 12px;
+    top: 35px;
+    border: 2px solid #00a998;
+    z-index: 1;
 }
 
 .autocomplete {
