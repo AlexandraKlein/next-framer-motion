@@ -156,11 +156,29 @@ class MapContainer extends React.Component {
 
     handleFindPlaces = () => {
         this.setState({ places: null, loading: true });
+
+        // const request = {
+        //     location: this.state.center,
+        //     radius: '10000',
+        //     name: 'garanimals',
+        //     query: 'garanimals',
+        // };
+
+        // this.state.placesService.nearbySearch(request, (results, status) => {
+        //     if (
+        //         status === google.maps.places.PlacesServiceStatus.OK &&
+        //         results
+        //     ) {
+        //         console.log(results);
+        //         this.setState({ places: results, loading: false });
+        //     }
+        // });
+
         this.state.placesService.textSearch(
             {
                 location: this.state.center,
-                // type: ['store'], // List of types: https://developers.google.com/places/supported_types
-                query: 'walmart',
+                type: ['store'], // List of types: https://developers.google.com/places/supported_types
+                query: 'garanimals',
             },
             response => {
                 this.setState({ places: response, loading: false });
