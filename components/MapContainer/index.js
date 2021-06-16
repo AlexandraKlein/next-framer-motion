@@ -81,33 +81,56 @@ class MapContainer extends React.Component {
             map: {},
             mapsApi: {},
             placesService: {},
-            places: [],
+            places: null,
+            placeId: null,
             activePlaceId: null,
             center: DEFAULT_CENTER,
             zoom: DEFAULT_ZOOM,
         };
     }
 
+    componentDidMount() {
+        // navigator.geolocation.getCurrentPosition(position => {
+        //     const lat = position.coords.latitude;
+        //     const lng = position.coords.longitude;
+        //     this.handleSetCenter(lat, lng);
+        // });
+    }
+
     componentDidUpdate(prevProps, prevState) {
-        if (!this.state.mapsLoaded) {
-            return;
+        // On Map Load
+        if (!prevState.mapsLoaded && this.state.mapsLoaded) {
+            this.handleFindPlaces();
         }
 
-        if (
-            (!prevState.mapsLoaded && this.state.mapsLoaded) ||
-            prevState.center !== this.state.center
-        ) {
+        if (prevState.places === null && this.state.places !== null) {
+            const bounds = this.getMapBounds(
+                this.state.mapsApi,
+                this.state.places
+            );
+
+            this.state.map.fitBounds(bounds);
+        }
+
+        if (prevState.placeId !== this.state.placeId) {
             this.handleFindPlaces();
         }
     }
 
-    componentDidMount() {
-        navigator.geolocation.getCurrentPosition(position => {
-            const lat = position.coords.latitude;
-            const lng = position.coords.longitude;
-            this.handleSetCenter(lat, lng);
+    getMapBounds = (mapsApi, places) => {
+        const bounds = new mapsApi.LatLngBounds();
+
+        places.forEach(place => {
+            bounds.extend(
+                new mapsApi.LatLng(
+                    place.geometry.location.lat(),
+                    place.geometry.location.lng()
+                )
+            );
         });
-    }
+
+        return bounds;
+    };
 
     createMapOptions = maps => {
         return {
@@ -132,21 +155,20 @@ class MapContainer extends React.Component {
     };
 
     handleFindPlaces = () => {
-        this.setState({ loading: true });
+        this.setState({ places: null, loading: true });
         this.state.placesService.textSearch(
             {
                 location: this.state.center,
                 // type: ['store'], // List of types: https://developers.google.com/places/supported_types
-                query: 'frozen yogurt',
+                query: 'walmart',
             },
             response => {
-                const places = response.slice(0, 5);
-                this.setState({ places, loading: false });
+                this.setState({ places: response, loading: false });
             }
         );
     };
 
-    handleOnBoundsChange = (center, zoom) => {
+    handleOnChange = (center, zoom) => {
         this.setState({ center, zoom });
     };
 
@@ -161,8 +183,6 @@ class MapContainer extends React.Component {
     render() {
         const { places, loading, activePlaceId } = this.state;
 
-        console.log({ activePlaceId });
-
         return (
             <section className={styles.root}>
                 <div className={styles.content}>
@@ -173,14 +193,18 @@ class MapContainer extends React.Component {
                                 if (!place?.geometry) {
                                     return;
                                 }
+
                                 const lat = place.geometry.location.lat();
                                 const lng = place.geometry.location.lng();
-                                this.handleSetCenter(lat, lng);
+
+                                this.setState({ center: { lat, lng } }, () =>
+                                    this.setState({ placeId: place.place_id })
+                                );
                             }}
                         />
                     </div>
 
-                    {places.length > 0 && !loading && (
+                    {places?.length > 0 && !loading && (
                         <aside className={styles.aside}>
                             {places.map((place, index) => {
                                 return (
@@ -207,7 +231,7 @@ class MapContainer extends React.Component {
                             key: 'AIzaSyDSIZ0_V9gUYR8l-4W7tvmihmasBK869Bg',
                             libraries: ['places'],
                         }}
-                        onBoundsChange={this.handleOnBoundsChange}
+                        onBoundsChange={this.handleOnChange}
                         center={this.state.center}
                         zoom={this.state.zoom}
                         onGoogleApiLoaded={({ map, maps }) =>
@@ -215,29 +239,24 @@ class MapContainer extends React.Component {
                         }
                         yesIWantToUseGoogleMapApiInternals
                     >
-                        {places.length &&
-                            places.map(
-                                (place, index) =>
-                                    console.log({ place }) || (
-                                        <Marker
-                                            key={place.place_id + index}
-                                            index={index}
-                                            uid={place.place_id}
-                                            address={place.formatted_address}
-                                            name={place.name}
-                                            lat={place.geometry.location.lat()}
-                                            lng={place.geometry.location.lng()}
-                                            onMouseEnter={() =>
-                                                this.handleMouseEnterMarker(
-                                                    place.place_id
-                                                )
-                                            }
-                                            onMouseLeave={
-                                                this.handleMouseLeaveMarker
-                                            }
-                                        />
-                                    )
-                            )}
+                        {places?.length > 0 &&
+                            places.map((place, index) => (
+                                <Marker
+                                    key={place.place_id + index}
+                                    index={index}
+                                    uid={place.place_id}
+                                    address={place.formatted_address}
+                                    name={place.name}
+                                    lat={place.geometry.location.lat()}
+                                    lng={place.geometry.location.lng()}
+                                    onMouseEnter={() =>
+                                        this.handleMouseEnterMarker(
+                                            place.place_id
+                                        )
+                                    }
+                                    onMouseLeave={this.handleMouseLeaveMarker}
+                                />
+                            ))}
                     </GoogleMapReact>
                     {loading && (
                         <div className={styles.loading}>

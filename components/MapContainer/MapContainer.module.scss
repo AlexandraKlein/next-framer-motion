@@ -3,17 +3,25 @@ $teal: #00a998;
 .root {
     width: 100%;
     height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr;
+    display: flex;
+    flex-direction: column;
 
     @media (min-width: 768px) {
-        grid-template-columns: 1fr 1fr;
+        flex-direction: row;
     }
 }
 
 .innerContainer {
     position: relative;
     min-height: 100vh;
+    flex-basis: 50%;
+}
+
+.content {
+    padding: 200px 0 0;
+    flex-basis: 50%;
+    height: 100vh;
+    overflow: scroll;
 }
 
 .loading {
@@ -56,10 +64,6 @@ $teal: #00a998;
     top: 35px;
     border: 2px solid $teal;
     z-index: 1;
-}
-
-.content {
-    padding: 200px 0 0;
 }
 
 .autocomplete {
