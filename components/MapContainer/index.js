@@ -82,7 +82,7 @@ class MapContainer extends React.Component {
             mapsApi: {},
             placesService: {},
             places: null,
-            placeId: null,
+            locationId: null,
             activePlaceId: null,
             center: DEFAULT_CENTER,
             zoom: DEFAULT_ZOOM,
@@ -112,7 +112,7 @@ class MapContainer extends React.Component {
             this.state.map.fitBounds(bounds);
         }
 
-        if (prevState.placeId !== this.state.placeId) {
+        if (prevState.locationId !== this.state.locationId) {
             this.handleFindPlaces();
         }
     }
@@ -198,7 +198,9 @@ class MapContainer extends React.Component {
                                 const lng = place.geometry.location.lng();
 
                                 this.setState({ center: { lat, lng } }, () =>
-                                    this.setState({ placeId: place.place_id })
+                                    this.setState({
+                                        locationId: place.place_id,
+                                    })
                                 );
                             }}
                         />
