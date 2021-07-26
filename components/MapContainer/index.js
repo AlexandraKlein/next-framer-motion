@@ -221,6 +221,9 @@ class MapContainer extends React.Component {
                                     })
                                 );
                             }}
+                            options={{
+                                types: ['(regions)'],
+                            }}
                         />
                     </div>
 
